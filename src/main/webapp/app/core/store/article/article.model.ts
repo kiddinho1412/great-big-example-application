@@ -25,5 +25,5 @@ export const initialArticle = {
     updatedAt: '',
     favorited: false,
     favoritesCount: 0,
-    authorId: null
+    author: null
 };

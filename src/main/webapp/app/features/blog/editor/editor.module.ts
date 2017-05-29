@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { EditorComponent } from './editor.component';
-import { EditableArticleResolver } from './editable-article-resolver.service';
+import { EditorGuard } from './editor.guard';
 import { SharedModule } from '../shared/shared.module';
 import { EditorRouting } from './editor.routing';
 
@@ -15,7 +15,7 @@ import { EditorRouting } from './editor.routing';
         EditorComponent
     ],
     providers: [
-        EditableArticleResolver
+        EditorGuard
     ]
 })
 export class EditorModule { }

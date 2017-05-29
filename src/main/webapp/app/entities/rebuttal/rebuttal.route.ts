@@ -9,8 +9,6 @@ import { RebuttalDetailComponent } from './rebuttal-detail.component';
 import { RebuttalPopupComponent } from './rebuttal-dialog.component';
 import { RebuttalDeletePopupComponent } from './rebuttal-delete-dialog.component';
 
-import { Principal } from '../../shared';
-
 export const rebuttalRoute: Routes = [
     {
         path: 'rebuttal',

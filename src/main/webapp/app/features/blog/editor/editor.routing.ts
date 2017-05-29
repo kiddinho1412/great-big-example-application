@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { EditorComponent } from './editor.component';
-import { EditableArticleGuard } from './editable-article.guard';
+import { EditorGuard } from './editor.guard';
 import { UserRouteAccessService } from '../../../shared';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
             source: 'https://angular2.realworld.io',
             tags: []
         },
-        canActivate: [UserRouteAccessService, EditableArticleGuard]
+        canActivate: [UserRouteAccessService, EditorGuard]
     },
     {
         path: 'editor/:slug',
@@ -26,7 +26,7 @@ const routes: Routes = [
             source: 'https://angular2.realworld.io',
             tags: []
         },
-        canActivate: [UserRouteAccessService, EditableArticleGuard]
+        canActivate: [UserRouteAccessService, EditorGuard]
     }
 ];
 

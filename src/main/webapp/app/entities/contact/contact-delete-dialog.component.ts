@@ -31,7 +31,7 @@ export class ContactDeleteDialogComponent {
         this.contactService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'contactListModification',
-                content: 'Deleted an contact'
+                content: 'Deleted a contact'
             });
             this.activeModal.dismiss(true);
         });
@@ -50,7 +50,7 @@ export class ContactDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private contactPopupService: ContactPopupService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

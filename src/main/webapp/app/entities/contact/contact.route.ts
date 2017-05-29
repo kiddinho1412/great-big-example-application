@@ -9,8 +9,6 @@ import { ContactDetailComponent } from './contact-detail.component';
 import { ContactPopupComponent } from './contact-dialog.component';
 import { ContactDeletePopupComponent } from './contact-delete-dialog.component';
 
-import { Principal } from '../../shared';
-
 export const contactRoute: Routes = [
     {
         path: 'contact',

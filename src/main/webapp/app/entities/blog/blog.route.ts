@@ -9,8 +9,6 @@ import { BlogDetailComponent } from './blog-detail.component';
 import { BlogPopupComponent } from './blog-dialog.component';
 import { BlogDeletePopupComponent } from './blog-delete-dialog.component';
 
-import { Principal } from '../../shared';
-
 export const blogRoute: Routes = [
     {
         path: 'blog',

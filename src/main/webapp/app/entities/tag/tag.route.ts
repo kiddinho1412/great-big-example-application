@@ -9,8 +9,6 @@ import { TagDetailComponent } from './tag-detail.component';
 import { TagPopupComponent } from './tag-dialog.component';
 import { TagDeletePopupComponent } from './tag-delete-dialog.component';
 
-import { Principal } from '../../shared';
-
 export const tagRoute: Routes = [
     {
         path: 'tag',

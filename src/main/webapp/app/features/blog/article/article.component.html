@@ -1,12 +1,12 @@
 <div class="jhi-article-component">
 
-  <div class="banner">
-    <div class="container">
-      <h1>{{ article.title }}</h1>
+    <div class="banner">
+        <div class="container">
+            <h1>{{ article.title }}</h1>
 
-      <article-meta [article]="article">
+            <article-meta [article]="article">
 
-        <span [hidden]="!canModify">
+                <span [hidden]="!canModify">
           <a class="btn btn-sm btn-outline-secondary"
              [routerLink]="['/editor', article.slug]">
             <i class="ion-edit"></i> Edit Article
@@ -19,45 +19,45 @@
           </button>
         </span>
 
-        <span [hidden]="canModify">
-          <follow-button
+                <span [hidden]="canModify">
+          <jhi-follow-button
             [profile]="article.author"
             (onToggle)="onToggleFollowing($event)">
-          </follow-button>
+          </jhi-follow-button>
 
           <favorite-button
             [article]="article"
             (onToggle)="onToggleFavorite($event)">
             {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
-        </favorite-button>
-        </span>
+                </favorite-button>
+                </span>
 
-      </article-meta>
-    </div>
-  </div>
-
-  <div class="container page">
-
-    <div class="row article-content">
-      <div class="col-md-12">
-
-        <div [innerHTML]="article.body | markdown"></div>
-
-        <ul class="tag-list">
-          <li *ngFor="let tag of article.tagList" class="tag-default tag-pill tag-outline">
-            {{ tag }}
-          </li>
-        </ul>
-
-      </div>
+            </article-meta>
+        </div>
     </div>
 
-    <hr />
+    <div class="container page">
 
-    <div class="article-actions">
-      <article-meta [article]="article">
+        <div class="row article-content">
+            <div class="col-md-12">
 
-        <span [hidden]="!canModify">
+                <div [innerHTML]="article.body | markdown"></div>
+
+                <ul class="tag-list">
+                    <li *ngFor="let tag of article.tagList" class="tag-default tag-pill tag-outline">
+                        {{ tag }}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="article-actions">
+            <article-meta [article]="article">
+
+                <span [hidden]="!canModify">
           <a class="btn btn-sm btn-outline-secondary"
              [routerLink]="['/editor', article.slug]">
             <i class="ion-edit"></i> Edit Article
@@ -70,52 +70,52 @@
           </button>
         </span>
 
-        <span [hidden]="canModify">
-          <follow-button
+                <span [hidden]="canModify">
+          <jhi-follow-button
             [profile]="article.author"
             (onToggle)="onToggleFollowing($event)">
-          </follow-button>
+          </jhi-follow-button>
 
           <favorite-button
             [article]="article"
             (onToggle)="onToggleFavorite($event)">
             {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
-        </favorite-button>
-        </span>
+                </favorite-button>
+                </span>
 
-      </article-meta>
-    </div>
+            </article-meta>
+        </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2">
 
-        <div *showAuthed="true">
-          <list-errors [errors]="commentFormErrors"></list-errors>
-          <form class="card comment-form" (ngSubmit)="addComment()">
-            <fieldset [disabled]="isSubmitting">
-              <div class="card-block">
-                <textarea class="form-control" placeholder="Write a comment..." rows="3" [formControl]="commentControl"></textarea>
-              </div>
-              <div class="card-footer">
-                <img [src]="currentUser.image" class="comment-author-img" />
-                <button class="btn btn-sm btn-primary" type="submit">
+                <div *showAuthed="true">
+                    <jhi-alert-error></jhi-alert-error>
+                    <form class="card comment-form" (ngSubmit)="addComment()">
+                        <fieldset [disabled]="isSubmitting">
+                            <div class="card-block">
+                                <textarea class="form-control" placeholder="Write a comment..." rows="3" [formControl]="commentControl"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <img [src]="currentUser.image" class="comment-author-img" />
+                                <button class="btn btn-sm btn-primary" type="submit">
                  Post Comment
                 </button>
-              </div>
-            </fieldset>
-          </form>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div *showAuthed="false">
+                    <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments
+                    on this article.
+                </div>
+
+                <jhi-article-comment *ngFor="let comment of comments" [comment]="comment" (deleteComment)="onDeleteComment(comment)">
+                </jhi-article-comment>
+
+            </div>
         </div>
 
-        <div *showAuthed="false">
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
-          article.
-        </div>
-
-        <jhi-article-comment *ngFor="let comment of comments" [comment]="comment" (deleteComment)="onDeleteComment(comment)">
-        </jhi-article-comment>
-
-      </div>
     </div>
-
-  </div>
 </div>

@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromRoot from '../../../core/store';
-import { Article } from '../../../core/store/article/article.model';
-import { Comment } from '../../../core/store/comment/comment.model';
-import { User } from '../../../core/store/user/user.model';
+import * as fromRoot from '../../../../core/store';
+import { Article } from '../../../../core/store/article/article.model';
+import { Comment } from '../../../../core/store/comment/comment.model';
+import { User } from '../../../../core/store/user/user.model';
 
 @Component({
     selector: 'jhi-article-comment',

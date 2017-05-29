@@ -8,6 +8,7 @@ import 'rxjs/add/operator/filter';
 import { Article } from './article/article.model';
 import { Book } from './book/book.model';
 import { Claim } from './claim/claim.model';
+import { Comment } from './comment/comment.model';
 import { Crisis } from './crisis/crisis.model';
 import { ClaimRebuttal } from './claim-rebuttal/claim-rebuttal.model';
 import { Contact } from './contact/contact.model';

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { EventManager } from 'ng-jhipster';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -11,6 +12,7 @@ import { Comment } from '../../../core/store/comment/comment.model';
 import { User } from '../../../core/store/user/user.model';
 import { slices } from '../../../core/store/util';
 import * as EntityActions from '../../../core/store/entity/entity.actions';
+import { AlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-article-component',
@@ -30,7 +32,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     isDeleting = false;
 
     constructor(
+        private eventManager: EventManager,
         private store: Store<fromRoot.RootState>,
+        private alertService: AlertService,
         private route: ActivatedRoute,
         private router: Router
     ) { }
@@ -89,13 +93,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.isSubmitting = true;
         this.commentFormErrors = {};
 
-
-
-
-
-        const commentBody = this.commentControl.value;
-        this.store.dispatch(new EntityActions.Add(slices.COMMENT, commentBody));
-
+        const comment = Object.assign({}, { articleId: this.article.id }, this.commentControl.value);
+        this.store.dispatch(new EntityActions.Add(slices.COMMENT, comment));
+        // this.commentControl.reset(''); // TODO: clear control on success
 
         this.commentsService
             .add(this.article.slug, commentBody)
@@ -119,6 +119,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 this.comments = this.comments.filter((item) => item !== comment);
             }
             );
+    }
+
+    private onError(error) {
+        this.alertService.error(error.message, null, null);
     }
 
     ngOnDestroy() {

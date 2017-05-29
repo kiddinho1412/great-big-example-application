@@ -1,35 +1,15 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ProfileArticlesComponent } from './profile-articles.component';
+import { ProfileArticlesComponent } from './profile-articles/profile-articles.component';
 import { ProfileComponent } from './profile.component';
-import { ProfileFavoritesComponent } from './profile-favorites.component';
-import { ProfileResolver } from './profile-resolver.service';
+import { ProfileFavoritesComponent } from './profile-favorites/profile-favorites.component';
+import { ProfileRouting } from './profile.routing';
 import { SharedModule } from '../shared/shared.module';
-
-const profileRouting: ModuleWithProviders = RouterModule.forChild([
-    {
-        path: 'profile/:username',
-        component: ProfileComponent,
-        resolve: {
-            profile: ProfileResolver
-        },
-        children: [
-            {
-                path: '',
-                component: ProfileArticlesComponent
-            },
-            {
-                path: 'favorites',
-                component: ProfileFavoritesComponent
-            }
-        ]
-    }
-]);
 
 @NgModule({
     imports: [
-        profileRouting,
+        ProfileRouting,
         SharedModule
     ],
     declarations: [
@@ -39,7 +19,6 @@ const profileRouting: ModuleWithProviders = RouterModule.forChild([
     ],
 
     providers: [
-        ProfileResolver
     ]
 })
 export class ProfileModule { }

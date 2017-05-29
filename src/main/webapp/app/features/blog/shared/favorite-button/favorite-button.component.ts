@@ -1,25 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { Profile } from '../../../../core/store/profile/profile.model';
-import { ProfilesService, UserService } from '../services';
+import * as fromRoot from '../../../../core/store';
+import { Article } from '../../../../core/store/article/article.model';
 
 @Component({
-    selector: 'follow-button',
-    templateUrl: './follow-button.component.html'
+    selector: 'favorite-button',
+    templateUrl: './favorite-button.component.html'
 })
-export class FollowButtonComponent {
+export class FavoriteButtonComponent implements OnInit {
     constructor(
-        private profilesService: ProfilesService,
-        private router: Router,
-        private userService: UserService
+        private store: Store<fromRoot.RootState>,
+        private router: Router
     ) { }
 
-    @Input() profile: Profile;
+    @Input() article: Article;
     @Output() onToggle = new EventEmitter<boolean>();
     isSubmitting = false;
 
-    toggleFollowing() {
+    ngOnInit() {
+
+    }
+
+    toggleFavorite() {
         this.isSubmitting = true;
 
         this.userService.isAuthenticated.subscribe(
@@ -30,9 +35,9 @@ export class FollowButtonComponent {
                     return;
                 }
 
-                // Follow this profile if we aren't already
-                if (!this.profile.following) {
-                    this.profilesService.follow(this.profile.username)
+                // Favorite the article if it isn't favorited yet
+                if (!this.article.favorited) {
+                    this.articlesService.favorite(this.article.slug)
                         .subscribe(
                         data => {
                             this.isSubmitting = false;
@@ -41,9 +46,9 @@ export class FollowButtonComponent {
                         err => this.isSubmitting = false
                         );
 
-                    // Otherwise, unfollow this profile
+                    // Otherwise, unfavorite the article
                 } else {
-                    this.profilesService.unfollow(this.profile.username)
+                    this.articlesService.unfavorite(this.article.slug)
                         .subscribe(
                         data => {
                             this.isSubmitting = false;

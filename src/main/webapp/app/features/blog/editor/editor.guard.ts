@@ -9,7 +9,7 @@ import { Article } from '../../../core/store/article/article.model';
 import { User } from '../../../core/store/user/user.model';
 
 @Injectable()
-export class EditableArticleGuard implements CanActivate {
+export class EditorGuard implements CanActivate {
     articles$: Observable<Article[]>;
     user$: Observable<User>;
 

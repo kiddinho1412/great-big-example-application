@@ -30,6 +30,7 @@ import { RESTService } from './services/rest.service';
 import { SocketService } from './services/socket.service';
 import { UserService } from './services/user.service';
 import { customHttpProvider } from '../blocks/interceptor/http.provider';
+import { StoreRouterConnectingModule } from './store-router-connecting.module';
 
 // Reset the root state for HMR
 function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -71,7 +72,8 @@ const imports = [
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
      */
-    RouterStoreModule.connectRouter(),
+    // RouterStoreModule.connectRouter(),
+    StoreRouterConnectingModule,
 
     /**
      * Store devtools instrument the store retaining past versions of state
