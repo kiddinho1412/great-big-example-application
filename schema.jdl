@@ -76,3 +76,14 @@ entity Message {
 }
 
 paginate Message with infinite-scroll
+
+entity Profile {
+    username String,
+    bio Clob,
+    image String,
+    following Boolean
+}
+
+relationship OneToOne {
+	Profile{user(username)} to User
+}
