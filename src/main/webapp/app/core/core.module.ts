@@ -34,7 +34,7 @@ import { StoreRouterConnectingModule } from './store-router-connecting.module';
 
 // Reset the root state for HMR
 function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-    return function (state, action) {
+    return function(state, action) {
         if (action.type === 'SET_ROOT_STATE') {
             return action.payload;
         }

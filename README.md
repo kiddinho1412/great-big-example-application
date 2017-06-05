@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/dancancro/great-big-example-application.svg?branch=master)](https://travis-ci.org/dancancro/great-big-example-application)
 [![Greenkeeper badge](https://badges.greenkeeper.io/dancancro/great-big-example-application.svg)](https://greenkeeper.io/)
 [![Dependency Status](https://david-dm.org/dancancro/great-big-example-application.svg)](https://david-dm.org/dancancro/great-big-example-application)
+[![Join the chat at https://gitter.im/app-examples/Lobby](https://badges.gitter.im/app-examples/Lobby.svg)](https://gitter.im/app-examples/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## [Live Demo on Heroku](https://great-big-example-application.herokuapp.com/)
 
@@ -22,7 +23,7 @@ just work with it. To this end I have made, over the course of the past 4 years,
 [the world's biggest, most detailed database of web technology selling points](https://docs.google.com/spreadsheets/d/1nMv8TqUx3gUoC3M6BRPB4E4FMTSYGT_OLERguXGjePc/edit#gid=1404564369)
 so things could be compared easily in broad daylight without the hype and selective disclosure of
 a typical product/project sales page. Use it to determine what's best. Then help make it better. See 
-[below](https://github.com/dancancro/great-big-example-application#demonstrations-and-features) 
+[below](https://github.com/dancancro/great-big-example-application#demonstrations-features-and-selling-points) 
 for a sample slice of it.
 
 
