@@ -9,7 +9,6 @@ import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { ArticlePreviewComponent } from './article-preview/article-preview.component';
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
-import { ListErrorsComponent } from './list-errors/list-errors.component';
 import { ShowAuthedDirective } from './show-authed/show-authed.directive';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { ShowAuthedDirective } from './show-authed/show-authed.directive';
         ArticlePreviewComponent,
         FavoriteButtonComponent,
         FollowButtonComponent,
-        ListErrorsComponent,
         ShowAuthedDirective
     ],
     exports: [
@@ -39,7 +37,6 @@ import { ShowAuthedDirective } from './show-authed/show-authed.directive';
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        ListErrorsComponent,
         RouterModule,
         ShowAuthedDirective
     ]

@@ -41,7 +41,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.user$ = this.store.select(fromRoot.getUserState);
-        this.comments$ = this.store.select(fromRoot.getComments);
+        this.comments$ = this.store.select(fromRoot.getCommensForSelectedArticle);
         this.commentsSub = this.comments$.subscribe((comments) => this.comments = comments);
 
         // Retreive the prefetched article
@@ -50,7 +50,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 this.article = data.article;
 
                 // Load the comments on this article
-                this.populateComments();
+                // this.populateComments();
             }
         );
 
@@ -84,41 +84,42 @@ export class ArticleComponent implements OnInit, OnDestroy {
         // this.router.navigateByUrl('/');  // TODO handle routing after an update
     }
 
-    populateComments() {
-        this.commentsService.getAll(this.article.slug)
-            .subscribe((comments) => this.comments = comments);
-    }
+    // populateComments() {
+    //     this.commentsService.getAll(this.article.slug)
+    //         .subscribe((comments) => this.comments = comments);
+    // }
 
     addComment() {
         this.isSubmitting = true;
         this.commentFormErrors = {};
 
-        const comment = Object.assign({}, { articleId: this.article.id }, this.commentControl.value);
+        const comment = { articleId: this.article.id, ...this.commentControl.value };
         this.store.dispatch(new EntityActions.Add(slices.COMMENT, comment));
         // this.commentControl.reset(''); // TODO: clear control on success
 
-        this.commentsService
-            .add(this.article.slug, commentBody)
-            .subscribe(
-            (comment) => {
-                this.comments.unshift(comment);
-                this.commentControl.reset('');
-                this.isSubmitting = false;
-            },
-            (errors) => {
-                this.isSubmitting = false;
-                this.commentFormErrors = errors;
-            }
-            );
+        // this.commentsService
+        //     .add(this.article.slug, commentBody)
+        //     .subscribe(
+        //     (comment) => {
+        //         this.comments.unshift(comment);
+        //         this.commentControl.reset('');
+        //         this.isSubmitting = false;
+        //     },
+        //     (errors) => {
+        //         this.isSubmitting = false;
+        //         this.commentFormErrors = errors;
+        //     }
+        //     );
     }
 
     onDeleteComment(comment) {
-        this.commentsService.destroy(comment.id, this.article.slug)
-            .subscribe(
-            (success) => {
-                this.comments = this.comments.filter((item) => item !== comment);
-            }
-            );
+        this.store.dispatch(new EntityActions.Delete(slices.COMMENT, comment.id));
+        // this.commentsService.destroy(comment.id, this.article.slug)
+        //     .subscribe(
+        //     (success) => {
+        //         this.comments = this.comments.filter((item) => item !== comment);
+        //     }
+        //     );
     }
 
     private onError(error) {

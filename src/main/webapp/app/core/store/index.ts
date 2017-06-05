@@ -221,7 +221,6 @@ export const isSelectedBookInCollection = createSelector(getCollectionBookIds, g
  * Layout Selectors
  */
 export const getLayoutState = (state: RootState) => state.layout;
-export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav);
 export const getMsg = createSelector(getLayoutState, fromLayout.getMsg);
 export const getBerniePageState = createSelector(getLayoutState, fromLayout.getBerniePageState);
 export const getHeroSearchTerm = createSelector(getLayoutState, fromLayout.getHeroSearchTerm);
@@ -395,7 +394,11 @@ export const getArticlesState = (state: RootState): Entities<Article> => state.a
 export const getArticleEntities = createSelector(getArticlesState, fromArticles.getEntities);
 export const getArticleIds = createSelector(getArticlesState, fromArticles.getIds);
 export const getSelectedArticleId = createSelector(getArticlesState, fromArticles.getSelectedId);
-export const getSelectedArticle = createSelector(getArticlesState, fromBooks.getSelected);
+export const getSelectedArticle = createSelector(getArticlesState, fromArticles.getSelected);
 export const getArticles = createSelector(getArticleEntities, getArticleIds, (entities, ids) => {
     return ids.map((id) => entities[id]);
 });
+
+export const getCommensForSelectedArticle = createSelector(getComments, getSelectedArticleId, (comments, articleId) => {
+    return comments.filter((comment) => comment.articleId === articleId)
+})

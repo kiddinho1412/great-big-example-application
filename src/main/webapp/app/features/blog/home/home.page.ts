@@ -12,10 +12,10 @@ import { Tag } from '../../../core/store/tag/tag.model';
 
 @Component({
     selector: 'home-page',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomePage implements OnInit, OnDestroy {
     user$: Observable<User>;
     userSub: Subscription;
     isAuthenticated: boolean;

@@ -32,11 +32,11 @@ export function reducer(state: Entities<Article> = initialEntities<Article>({}, 
     }
 };
 
-export const getEntities = (state: Entities<Article>) => state.entities;
+export const getEntities = (state: Entities<Article>): { [id: string]: Article } => state.entities;
 
-export const getIds = (state: Entities<Article>) => state.ids;
+export const getIds = (state: Entities<Article>): string[] => state.ids;
 
-export const getSelectedId = (state: Entities<Article>) => state.selectedEntityId;
+export const getSelectedId = (state: Entities<Article>): string => state.selectedEntityId;
 
 export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
     return entities[selectedId];
