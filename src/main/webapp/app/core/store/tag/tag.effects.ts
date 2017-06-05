@@ -9,15 +9,8 @@ import * as functions from '../slice/slice.functions';
 @Injectable()
 export class TagEffects {
     @Effect()
-    private loadFromRemote$ = functions.loadFromRemote$(this.actions$, slices.TAG, this.dataService, 'getTags');
-    @Effect()
-    private updateToRemote$ = functions.updateToRemote$(this.actions$, slices.TAG, this.dataService, this.store);
-    @Effect()
-    private addToRemote$ = functions.addToRemote$(this.actions$, slices.TAG, this.dataService, this.store);
+    private loadFromRemote$ = functions.loadFromRemote$(this.actions$, slices.TAG, this.dataService, 'getEntities');
 
-    constructor(
-        private store: Store<Tag>,
-        private actions$: Actions,
-        private dataService: RESTService
-    ) { }
+    constructor(private actions$: Actions,
+        private dataService: RESTService) { }
 }

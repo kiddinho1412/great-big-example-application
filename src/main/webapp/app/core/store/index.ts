@@ -70,6 +70,7 @@ import * as fromNotes from './note/note.reducer';
 import * as fromRebuttals from './rebuttal/rebuttal.reducer';
 import * as fromSearch from './search/search.reducer';
 import * as fromSession from './session/session.reducer';
+import * as fromTags from './tag/tag.reducer';
 import { gameReducer, gamesReducer, p2pGameReducer } from './game/game.reducer';
 import { Entities } from './entity/entity.model';
 import { IDs } from './id/id.model';
@@ -96,6 +97,7 @@ export interface RootState {
     router: fromRouter.RouterState;
     search: IDs;
     session: Session;
+    tag: string[];
 }
 
 /**
@@ -120,13 +122,14 @@ const reducers = {
     games: gamesReducer,
     hero: fromHeroes.reducer,
     layout: fromLayout.reducer,
+    message: fromMessages.reducer,
     note: fromNotes.reducer,
+    p2pGame: p2pGameReducer,
     rebuttal: fromRebuttals.reducer,
     router: fromRouter.routerReducer,
     search: fromSearch.reducer,
     session: fromSession.reducer,
-    message: fromMessages.reducer,
-    p2pGame: p2pGameReducer
+    tags: fromTags.reducer,
 };
 
 const developmentReducer = compose(
@@ -402,3 +405,8 @@ export const getArticles = createSelector(getArticleEntities, getArticleIds, (en
 export const getCommensForSelectedArticle = createSelector(getComments, getSelectedArticleId, (comments, articleId) => {
     return comments.filter((comment) => comment.articleId === articleId)
 })
+
+/**
+ * Tags Selectors
+ */
+export const getTags = (state: RootState): string[] => state.tag;
