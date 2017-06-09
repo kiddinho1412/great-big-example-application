@@ -6,27 +6,25 @@ import { slices } from '../util';
 import * as functions from '../entity/entity.functions';
 import { typeFor } from '../util';
 import { actions, EntityAction } from '../entity/entity.actions';
+import { SliceAction } from '../slice/slice.actions';
+import * as ArticleActions from '../article/article.actions';
 
 export function reducer(state: Entities<Article> = initialEntities<Article>({}, slices.ARTICLE, actions, initialArticle),
-    action: EntityAction<Article>): Entities<Article> {
+    action: SliceAction): Entities<Article> {
 
     switch (action.type) {
-        case typeFor(slices.ARTICLE, actions.ADD_SUCCESS):
-            return functions.addSuccess<Article>(state, <any>action);
-        case typeFor(slices.ARTICLE, actions.ADD_TEMP):
-        case typeFor(slices.ARTICLE, actions.LOAD_SUCCESS):
-            return functions.addToStore<Article>(state, <any>action);
-        case typeFor(slices.ARTICLE, actions.UPDATE):
-        case typeFor(slices.ARTICLE, actions.UPDATE_SUCCESS):
-            return functions.update<Article>(state, <any>action);
-        case typeFor(slices.ARTICLE, actions.DELETE):
-            return functions.deleteEntity<Article>(state, <any>action);
-        case typeFor(slices.ARTICLE, actions.DELETE_TEMP):
-            return functions.deleteTemp<Article>(state, <any>action);
-        case typeFor(slices.ARTICLE, actions.SELECT):
-            return functions.select<Article>(state, <any>action);
-        case typeFor(slices.ARTICLE, actions.SELECT_NEXT):
-            return functions.selectNext<Article>(state, <any>action);
+        case typeFor(slices.ARTICLE, ArticleActions.actions.FAVORITE_SUCCESS):
+        case typeFor(slices.ARTICLE, ArticleActions.actions.FAVORITE_FAIL):
+
+        // if (favorited) {
+        //     this.article.favoritesCount++;
+        // } else {
+        //     this.article.favoritesCount--;
+        // }
+        case typeFor(slices.ARTICLE, ArticleActions.actions.FOLLOW_SUCCESS):
+
+        // this.article.author.following = following;
+        case typeFor(slices.ARTICLE, ArticleActions.actions.FOLLOW_FAIL):
         default:
             return state;
     }

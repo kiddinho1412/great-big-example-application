@@ -64,19 +64,19 @@ export class ArticleComponent implements OnInit, OnDestroy {
         );
     }
 
-    onToggleFavorite(favorited: boolean) {
-        this.article.favorited = favorited;
+    // onToggleFavorite(favorited: boolean) {
+    //     this.article.favorited = favorited;
 
-        if (favorited) {
-            this.article.favoritesCount++;
-        } else {
-            this.article.favoritesCount--;
-        }
-    }
+    //     if (favorited) {
+    //         this.article.favoritesCount++;
+    //     } else {
+    //         this.article.favoritesCount--;
+    //     }
+    // }
 
-    onToggleFollowing(following: boolean) {
-        this.article.author.following = following;
-    }
+    // onToggleFollowing(following: boolean) {
+    //     this.article.author.following = following;
+    // }
 
     deleteArticle() {
         this.isDeleting = true;

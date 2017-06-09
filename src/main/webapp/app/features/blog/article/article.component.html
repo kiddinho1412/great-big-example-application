@@ -21,15 +21,13 @@
 
                 <span [hidden]="canModify">
           <jhi-follow-button
-            [profile]="article.author"
-            (onToggle)="onToggleFollowing($event)">
+            [profile]="article.author">
           </jhi-follow-button>
 
-          <favorite-button
-            [article]="article"
-            (onToggle)="onToggleFavorite($event)">
+          <jhi-favorite-button
+            [article]="article">
             {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
-                </favorite-button>
+                </jhi-favorite-button>
                 </span>
 
             </article-meta>
@@ -72,15 +70,13 @@
 
                 <span [hidden]="canModify">
           <jhi-follow-button
-            [profile]="article.author"
-            (onToggle)="onToggleFollowing($event)">
+            [profile]="article.author">
           </jhi-follow-button>
 
-          <favorite-button
-            [article]="article"
-            (onToggle)="onToggleFavorite($event)">
+          <jhi-favorite-button
+            [article]="article">
             {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
-                </favorite-button>
+                </jhi-favorite-button>
                 </span>
 
             </article-meta>

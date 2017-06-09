@@ -171,8 +171,8 @@ export function loadFromRemote$(actions$: Actions, slice: string, dataService): 
     return actions$
         .ofType(typeFor(slice, actions.LOAD))
         .startWith(new EntityActions.Load(slice, null))
-        .switchMap(() =>
-            dataService.getEntities(slice)
+        .switchMap((action) =>
+            dataService.getEntities(slice || action.payload.route, action.payload.query)
                 .mergeMap((fetchedEntities) => Observable.from(fetchedEntities))
                 .map((fetchedEntity) => new EntityActions.LoadSuccess(slice, fetchedEntity))  // one action per entity
                 .catch((err) => {

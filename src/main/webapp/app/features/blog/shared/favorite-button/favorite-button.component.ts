@@ -12,7 +12,7 @@ import { slices } from '../../../../core/store/util';
 import * as ArticleActions from '../../../../core/store/article/article.actions';
 
 @Component({
-    selector: 'favorite-button',
+    selector: 'jhi-favorite-button',
     templateUrl: './favorite-button.component.html'
 })
 export class FavoriteButtonComponent implements OnInit {
@@ -24,12 +24,11 @@ export class FavoriteButtonComponent implements OnInit {
     ) { }
 
     @Input() article: Article;
-    @Output() onToggle = new EventEmitter<boolean>();
+    // @Output() onToggle = new EventEmitter<boolean>();
     isSubmitting = false;
 
     ngOnInit() {
         this.identity$ = this.principal.identity();
-        this.
     }
 
     toggleFavorite() {
@@ -41,32 +40,33 @@ export class FavoriteButtonComponent implements OnInit {
 
         // Favorite the article if it isn't favorited yet
         if (!this.article.favorited) {
-            this.store.dispatch(new ArticleActions.Favorite(slices.ARTICLE, { route: '/articles/' + this.article.slug + '/favorite' }));
+            this.store.dispatch(new ArticleActions.Favorite(this.article.slug));
 
+            //     this.articlesService.favorite(this.article.slug)
+            //         .subscribe(
+            //         data => {
+            //             this.isSubmitting = false;
+            //             this.onToggle.emit(true);
+            //         },
+            //         err => this.isSubmitting = false
+            //         );
 
-            this.articlesService.favorite(this.article.slug)
-                .subscribe(
-                data => {
-                    this.isSubmitting = false;
-                    this.onToggle.emit(true);
-                },
-                err => this.isSubmitting = false
-                );
-
-            // Otherwise, unfavorite the article
+            //     // Otherwise, unfavorite the article
         } else {
-            this.articlesService.unfavorite(this.article.slug)
-                .subscribe(
-                data => {
-                    this.isSubmitting = false;
-                    this.onToggle.emit(false);
-                },
-                err => this.isSubmitting = false
-                );
+            this.store.dispatch(new ArticleActions.Unfavorite(this.article.slug));
+            //     this.articlesService.unfavorite(this.article.slug)
+            //         .subscribe(
+            //         data => {
+            //             this.isSubmitting = false;
+            //             this.onToggle.emit(false);
+            //         },
+            //         err => this.isSubmitting = false
+            //         );
+            // }
+
+
+
         }
 
-
-
     }
-
 }

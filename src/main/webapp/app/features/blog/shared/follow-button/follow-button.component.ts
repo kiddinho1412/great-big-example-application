@@ -4,9 +4,8 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../../../../core/store';
 import { Profile } from '../../../../core/store/profile/profile.model';
-import { ProfilesService } from '../services/profiles.service';
 import { Principal } from '../../../../shared/auth/principal.service';
-import * as EntityActions from '../../../../core/store/entity/entity.actions';
+import * as ArticleActions from '../../../../core/store/article/article.actions';
 import { slices } from '../../../../core/store/util';
 
 @Component({
@@ -16,18 +15,16 @@ import { slices } from '../../../../core/store/util';
 export class FollowButtonComponent {
     constructor(
         private store: Store<fromRoot.RootState>,
-        private profilesService: ProfilesService,
         private router: Router,
         private principal: Principal
     ) { }
 
     @Input() profile: Profile;
-    @Output() onToggle = new EventEmitter<boolean>();
+    // @Output() onToggle = new EventEmitter<boolean>();
     isSubmitting = false;
 
     toggleFollowing() {
         this.isSubmitting = true;
-
 
         // Not authenticated? Push to login screen
         if (!this.principal.isAuthenticated()) {
@@ -37,32 +34,31 @@ export class FollowButtonComponent {
 
         // Follow this profile if we aren't already
         if (!this.profile.following) {
-            this.store.dispatch(new EntityActions.Update(slices.CRISIS, this.crisis));
+            this.store.dispatch(new ArticleActions.Follow());
 
-
-
-
-            this.profilesService.follow(this.profile.username)
-                .subscribe(
-                data => {
-                    this.isSubmitting = false;
-                    this.onToggle.emit(true);
-                },
-                err => this.isSubmitting = false
-                );
+            // this.profilesService.follow(this.profile.username)
+            //     .subscribe(
+            //     data => {
+            //         this.isSubmitting = false;
+            //         this.onToggle.emit(true);
+            //     },
+            //     err => this.isSubmitting = false
+            //     );
 
             // Otherwise, unfollow this profile
         } else {
-            this.profilesService.unfollow(this.profile.username)
-                .subscribe(
-                data => {
-                    this.isSubmitting = false;
-                    this.onToggle.emit(false);
-                },
-                err => this.isSubmitting = false
-                );
+            this.store.dispatch(new ArticleActions.Unfollow());
+            //     this.profilesService.unfollow(this.profile.username)
+            //         .subscribe(
+            //         data => {
+            //             this.isSubmitting = false;
+            //             this.onToggle.emit(false);
+            //         },
+            //         err => this.isSubmitting = false
+            //         );
+            // }
+
+
         }
-
     }
-
 }

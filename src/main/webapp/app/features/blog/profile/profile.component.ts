@@ -45,9 +45,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     }
 
-    onToggleFollowing(following: boolean) {
-        this.profile.following = following;
-    }
+    // onToggleFollowing(following: boolean) {
+    //     this.profile.following = following;
+    // }
 
     ngOnDestroy() {
         this.userSub && this.userSub.unsubscribe();

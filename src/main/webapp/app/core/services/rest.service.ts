@@ -35,8 +35,17 @@ const endpoints = {
 export class RESTService {
     constructor(private http: Http, private config: AppConfig) { }
 
-    getEntities(table: string): Observable<any[]> {
-        return this.http.get(`${this.config.apiUrl}/${endpoints[table]}`)
+    getEntities(table: string, query: { [key: string]: string } = {}): Observable<any[]> {
+        const params: URLSearchParams = new URLSearchParams();
+
+        Object.keys(query)
+            .forEach((key) => {
+                params.set(key, query[key]);
+            });
+
+        const endpoint = endpoints[table] || table; // Could be a table name or a named endpoint TODO: reconsider this
+
+        return this.http.get(`${this.config.apiUrl}/${endpoint}`, { search: params })
             .map(this.extractData)
             .catch(this.handleError);
     }
