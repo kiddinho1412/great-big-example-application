@@ -19,6 +19,7 @@ import { Note } from './note/note.model';
 import { Rebuttal, initialRebuttal } from './rebuttal/rebuttal.model';
 import { Session } from './session/session.model';
 import { User } from './user/user.model';
+import { BlogPageLayout } from '../../features/blog/blog.layout';
 
 /**
  * The createSelector function is one of our most handy tools. In basic terms, you give
@@ -229,6 +230,7 @@ export const getBerniePageState = createSelector(getLayoutState, fromLayout.getB
 export const getHeroSearchTerm = createSelector(getLayoutState, fromLayout.getHeroSearchTerm);
 export const getSearchQuery = createSelector(getLayoutState, fromLayout.getQuery);
 export const getBernieSearchTerm = createSelector(getLayoutState, fromLayout.getBernieSearchTerm);
+export const getBlogPageLayout = createSelector(getLayoutState, fromLayout.getBlogPageState);
 
 /**
  * Session Selectors
@@ -401,7 +403,12 @@ export const getSelectedArticle = createSelector(getArticlesState, fromArticles.
 export const getArticles = createSelector(getArticleEntities, getArticleIds, (entities, ids) => {
     return ids.map((id) => entities[id]);
 });
-
+export const getArticlesForQuery = createSelector(getArticles, getBlogPageLayout, (articles, blogPageLayout: BlogPageLayout) => {
+    return articles.filter((article) => {
+        return !blogPageLayout.filters.author || blogPageLayout.filters.author === article.author.username &&
+            !blogPageLayout.filters.tag || article.tagList.some((tag) => tag === blogPageLayout.filters.tag);
+    })
+})
 export const getCommensForSelectedArticle = createSelector(getComments, getSelectedArticleId, (comments, articleId) => {
     return comments.filter((comment) => comment.articleId === articleId)
 })

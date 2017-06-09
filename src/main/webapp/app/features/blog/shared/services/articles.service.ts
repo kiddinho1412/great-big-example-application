@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 
 import { ApiService } from './api.service';
 import { Article } from '../../../../core/store/article/article.model';
-import { Layout } from '../../../../core/store/layout/layout.model';
+import { BlogPageLayout } from '../../blog.layout';
 
 @Injectable()
 export class ArticlesService {
@@ -14,7 +14,7 @@ export class ArticlesService {
         private apiService: ApiService
     ) { }
 
-    query(config: ArticleListConfig): Observable<{ articles: Article[], articlesCount: number }> {
+    query(config: BlogPageLayout): Observable<{ articles: Article[], articlesCount: number }> {
         // Convert any filters over to Angular's URLSearchParams
         const params: URLSearchParams = new URLSearchParams();
 

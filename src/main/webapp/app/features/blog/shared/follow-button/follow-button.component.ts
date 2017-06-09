@@ -6,6 +6,8 @@ import * as fromRoot from '../../../../core/store';
 import { Profile } from '../../../../core/store/profile/profile.model';
 import { ProfilesService } from '../services/profiles.service';
 import { Principal } from '../../../../shared/auth/principal.service';
+import * as EntityActions from '../../../../core/store/entity/entity.actions';
+import { slices } from '../../../../core/store/util';
 
 @Component({
     selector: 'jhi-follow-button',

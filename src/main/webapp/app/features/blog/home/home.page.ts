@@ -8,7 +8,9 @@ import * as fromRoot from '../../../core/store';
 import { Article } from '../../../core/store/article/article.model';
 import { Account, Principal } from '../../../shared';
 import { User } from '../../../core/store/user/user.model';
-import { Tag } from '../../../core/store/tag/tag.model';
+import * as SliceActions from '../../../core/store/slice/slice.actions';
+import { slices } from '../../../core/store/util';
+import { BlogPageLayout } from '../blog.layout';
 
 @Component({
     selector: 'home-page',
@@ -19,9 +21,11 @@ export class HomePage implements OnInit, OnDestroy {
     user$: Observable<User>;
     userSub: Subscription;
     isAuthenticated: boolean;
-    tags$: Observable<Tag>;
+    tags$: Observable<string[]>;
+    tagsSub: Subscription;
     tags: Array<string> = [];
     tagsLoaded = false;
+    blogPageLayout$: Observable<BlogPageLayout>;
 
     constructor(
         private principal: Principal,
@@ -32,6 +36,11 @@ export class HomePage implements OnInit, OnDestroy {
     ngOnInit() {
         this.user$ = this.store.select(fromRoot.getUserState);
         this.tags$ = this.store.select(fromRoot.getTags);
+        this.tagsSub = this.tags$.subscribe((tags) => {
+            this.tags = tags;
+            this.tagsLoaded = true;
+        })
+        this.blogPageLayout$ = this.store.select(fromRoot.getBlogPageLayout);
         this.userSub = this.user$.subscribe((user) => {
             // set the article list accordingly
             if (this.principal.isAuthenticated()) {
@@ -40,12 +49,6 @@ export class HomePage implements OnInit, OnDestroy {
                 this.setListTo('all');
             }
         });
-
-        this.tagsService.getAll()
-            .subscribe((tags) => {
-                this.tags = tags;
-                this.tagsLoaded = true;
-            });
     }
 
     setListTo(type = '', filters: Object = {}) {
@@ -56,10 +59,11 @@ export class HomePage implements OnInit, OnDestroy {
         }
 
         // Otherwise, set the list object
-        this.listConfig = { type: type, filters: filters };
+        this.store.dispatch(new SliceActions.Update(slices.LAYOUT, ['blogPage'], { type: type, filters: filters }));
     }
 
     ngOnDestroy() {
         this.userSub && this.userSub.unsubscribe();
+        this.tagsSub && this.tagsSub.unsubscribe();
     }
 }

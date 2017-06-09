@@ -91,3 +91,15 @@ export function loadFromRemote$(actions$: Actions, slice: string, dataService, d
                 .catch((error) => of(new ActionClasses.LoadFail(slice, error)))
         );
 }
+
+export function postToRemote$(actions$: Actions, slice: string, dataService, triggerAction: string, SuccessAction: SliceAction, ErrorAction: SliceAction, transform: Function = ((resp) => resp)): Observable<Action> {
+    return actions$
+        .ofType(typeFor(slice, triggerAction))
+        .switchMap((action: Action) =>
+            dataService.post(action.payload.route, action.payload.requestObject)
+                .map(transform)
+                .map((responseSlice: any) =>
+                    new SuccessAction(slice, responseSlice))
+                .catch((error) => of(new ErrorAction(slice, error)))
+        );
+}

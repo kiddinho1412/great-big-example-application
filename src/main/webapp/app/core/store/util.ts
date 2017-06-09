@@ -24,7 +24,7 @@ export function type<T>(label: T | ''): T {
 
 const typeForCache: { [slice: string]: { [action: string]: string } } = {};
 
-export function typeFor(slice, action) {
+export function typeFor(slice: string, action: string) {
     if (typeForCache[slice] && typeForCache[slice][action]) {
         return typeForCache[slice][action];
     } else {
