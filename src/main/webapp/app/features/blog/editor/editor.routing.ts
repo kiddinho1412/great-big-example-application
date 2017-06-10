@@ -7,24 +7,20 @@ import { UserRouteAccessService } from '../../../shared';
 
 const routes: Routes = [
     {
-        path: 'editor',
+        path: '/features/blog/editor',
         component: EditorComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'greatBigExampleApplicationApp.bernie.home.title',
-            source: 'https://angular2.realworld.io',
-            tags: []
+            pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
         },
         canActivate: [UserRouteAccessService, EditorGuard]
     },
     {
-        path: 'editor/:slug',
+        path: '/features/blog/editor/:slug',
         component: EditorComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'greatBigExampleApplicationApp.bernie.home.title',
-            source: 'https://angular2.realworld.io',
-            tags: []
+            pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
         },
         canActivate: [UserRouteAccessService, EditorGuard]
     }

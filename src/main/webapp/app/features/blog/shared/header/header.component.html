@@ -1,75 +1,59 @@
 <nav class="navbar navbar-light">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">conduit</a>
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">conduit</a>
 
-    <!-- Show this for logged out users -->
-    <ul *showAuthed="false"
-      class="nav navbar-nav pull-xs-right">
+        <!-- Show this for logged out users -->
+        <ul *showAuthed="false" class="nav navbar-nav pull-xs-right">
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">
           Home
         </a>
-      </li>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/login"
-          routerLinkActive="active">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">
           Sign in
         </a>
-      </li>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/register"
-          routerLinkActive="active">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">
           Sign up
         </a>
-      </li>
+            </li>
 
-    </ul>
+        </ul>
 
-    <!-- Show this for logged in users -->
-    <ul *showAuthed="true"
-      class="nav navbar-nav pull-xs-right">
+        <!-- Show this for logged in users -->
+        <ul *showAuthed="true" class="nav navbar-nav pull-xs-right">
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           Home
         </a>
-      </li>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/editor"
-          routerLinkActive="active">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/features/blog/editor" routerLinkActive="active">
           <i class="ion-compose"></i>&nbsp;New Article
         </a>
-      </li>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/settings"
-          routerLinkActive="active">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/settings" routerLinkActive="active">
           <i class="ion-gear-a"></i>&nbsp;Settings
         </a>
-      </li>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          [routerLink]="['/profile', currentUser.username]"
-          routerLinkActive="active">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/profile', currentUser.username]" routerLinkActive="active">
           <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />
           {{ currentUser.username }}
         </a>
-      </li>
+            </li>
 
-    </ul>
+        </ul>
 
-  </div>
+    </div>
 </nav>

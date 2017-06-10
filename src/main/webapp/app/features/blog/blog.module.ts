@@ -18,7 +18,6 @@ import { HeaderComponent } from './shared/header/header.component';
         ArticleModule,
         BlogRouting,
         EditorModule,
-        GreatBigExampleApplicationSharedModule,
         HomeModule,
         ProfileModule,
         SharedModule

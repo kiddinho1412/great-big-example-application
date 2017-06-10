@@ -6,13 +6,11 @@ import { UserRouteAccessService } from '../../../shared';
 
 const routes: Routes = [
     {
-        path: 'article/:slug',
+        path: 'features/blog/article/:slug',
         component: ArticleComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'greatBigExampleApplicationApp.bernie.home.title',
-            source: 'https://angular2.realworld.io',
-            tags: []
+            pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
         },
         canActivate: [UserRouteAccessService]
     }

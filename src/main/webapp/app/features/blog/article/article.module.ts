@@ -6,17 +6,12 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
 import { MarkdownPipe } from './markdown.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { ArticleRouting } from './article.routing';
-
-const articleRouting: ModuleWithProviders = RouterModule.forChild([
-    {
-        path: 'article/:slug',
-        component: ArticleComponent
-    }
-]);
+import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
 
 @NgModule({
     imports: [
         ArticleRouting,
+        GreatBigExampleApplicationSharedModule,
         SharedModule
     ],
     declarations: [
