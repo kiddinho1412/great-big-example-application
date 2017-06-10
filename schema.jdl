@@ -1,6 +1,20 @@
 DEFAULT_MIN_LENGTH = 20
 DEFAULT_MAX_LENGTH = 1200
 
+entity User {
+    login String required minlength(1) maxlength(100),
+    password String required minlength(60) maxlength(60),
+    firstName String maxlength(50),
+    lastName String maxlength(50),
+    email String minlength(5) maxlength(100) unique,
+    activated Boolean required,
+    langKey String minlength(2) maxlength(5),
+    imageUrl String maxlength(256),
+    activationKey String maxlength(20),
+    resetKey String maxlength(20),
+    resetDate ZonedDateTime,
+}
+
 entity Hero {
 	name String required
 }
@@ -42,24 +56,21 @@ entity ClaimRebuttal {
   sortOrder Integer
 }
 
-entity Blog {
-	name String required minlength(3),
-	handle String required minlength(2)
-}
-
 entity Tag {
 	name String required minlength(2)
 }
 
 entity Article {
+    slug String required,
 	title String required,
-	content Blob required,
-	date ZonedDateTime required
+    description String required,
+	body Blob required,
+	createdAt ZonedDateTime required
+	updatedAt ZonedDateTime required
 }
 
 relationship ManyToOne {
-	Blog{user(login)} to User,
-	Article{blog(name)} to Blog
+	Article{author(login)} to User,
 }
 
 relationship ManyToMany {
@@ -86,4 +97,8 @@ entity Profile {
 
 relationship OneToOne {
 	Profile{user(username)} to User
+}
+
+relationship ManyToMany {
+    User{following(username)} to User
 }
