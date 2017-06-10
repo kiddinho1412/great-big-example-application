@@ -6,13 +6,13 @@ import { UserRouteAccessService } from '../../../shared';
 
 const routes: Routes = [
     {
-        path: 'features/blog/article/:slug',
+        path: 'article/:slug',
         component: ArticleComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
         },
-        canActivate: [UserRouteAccessService]
+        // canActivate: [UserRouteAccessService]
     }
 ];
 
