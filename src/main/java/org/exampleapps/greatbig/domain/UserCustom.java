@@ -1,11 +1,14 @@
 package org.exampleapps.greatbig.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,18 @@ public class UserCustom implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "user_custom_follower",
+               joinColumns = @JoinColumn(name="user_customs_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
+    private Set<UserCustom> followers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "followers")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<UserCustom> followees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -64,6 +79,56 @@ public class UserCustom implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<UserCustom> getFollowers() {
+        return followers;
+    }
+
+    public UserCustom followers(Set<UserCustom> userCustoms) {
+        this.followers = userCustoms;
+        return this;
+    }
+
+    public UserCustom addFollower(UserCustom userCustom) {
+        this.followers.add(userCustom);
+        userCustom.getFollowees().add(this);
+        return this;
+    }
+
+    public UserCustom removeFollower(UserCustom userCustom) {
+        this.followers.remove(userCustom);
+        userCustom.getFollowees().remove(this);
+        return this;
+    }
+
+    public void setFollowers(Set<UserCustom> userCustoms) {
+        this.followers = userCustoms;
+    }
+
+    public Set<UserCustom> getFollowees() {
+        return followees;
+    }
+
+    public UserCustom followees(Set<UserCustom> userCustoms) {
+        this.followees = userCustoms;
+        return this;
+    }
+
+    public UserCustom addFollowee(UserCustom userCustom) {
+        this.followees.add(userCustom);
+        userCustom.getFollowers().add(this);
+        return this;
+    }
+
+    public UserCustom removeFollowee(UserCustom userCustom) {
+        this.followees.remove(userCustom);
+        userCustom.getFollowers().remove(this);
+        return this;
+    }
+
+    public void setFollowees(Set<UserCustom> userCustoms) {
+        this.followees = userCustoms;
     }
 
     @Override

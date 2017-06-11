@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the UserCustom entity.
+ * Performance test for the Profile entity.
  */
-class UserCustomGatlingTest extends Simulation {
+class ProfileGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -17,7 +17,7 @@ class UserCustomGatlingTest extends Simulation {
     // Log failed HTTP requests
     //context.getLogger("io.gatling.http").setLevel(Level.valueOf("DEBUG"))
 
-    val baseURL = Option(System.getProperty("baseURL")) getOrElse """http://127.0.0.1:8090"""
+    val baseURL = Option(System.getProperty("baseURL")) getOrElse """http://127.0.0.1:8080"""
 
     val httpConf = http
         .baseURL(baseURL)
@@ -42,7 +42,7 @@ class UserCustomGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the UserCustom entity")
+    val scn = scenario("Test the Profile entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -60,26 +60,26 @@ class UserCustomGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all userCustoms")
-            .get("/api/user-customs")
+            exec(http("Get all profiles")
+            .get("/api/profiles")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new userCustom")
-            .post("/api/user-customs")
+            .exec(http("Create new profile")
+            .post("/api/profiles")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "bio":null}""")).asJSON
+            .body(StringBody("""{"id":null, "username":"SAMPLE_TEXT", "bio":null, "image":"SAMPLE_TEXT", "following":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_userCustom_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_profile_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created userCustom")
-                .get("${new_userCustom_url}")
+                exec(http("Get created profile")
+                .get("${new_profile_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created userCustom")
-            .delete("${new_userCustom_url}")
+            .exec(http("Delete created profile")
+            .delete("${new_profile_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

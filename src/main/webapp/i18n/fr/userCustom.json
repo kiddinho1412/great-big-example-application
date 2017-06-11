@@ -17,7 +17,9 @@
                 "title": "User Custom"
             },
             "bio": "Bio",
-            "user": "User"
+            "user": "User",
+            "follower": "Follower",
+            "followee": "Followee"
         }
     }
 }

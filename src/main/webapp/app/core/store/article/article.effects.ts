@@ -17,7 +17,6 @@ import { initialBlogPageLayout } from '../../../features/blog/blog.layout';
 import * as SliceActions from '../slice/slice.actions';
 import * as fromRoot from '../../../core/store';
 
-
 @Injectable()
 export class ArticleEffects {
     @Effect()
@@ -48,8 +47,8 @@ export class ArticleEffects {
     @Effect()
     private loadForQueryFromRemote = Observable.combineLatest(this.actions$
         .ofType(typeFor(slices.LAYOUT, SliceActions.actions.UPDATE))
-        .filter((action: SliceAction) => action.payload.filters)   // TODO: make this a better test for this being the blog page layout
-        , fromRoot.getBlogPageLayout, (action, blogPageLayout) => {
+        .filter((action: SliceAction) => action.payload.filters),   // TODO: make this a better test for this being the blog page layout
+        fromRoot.getBlogPageLayout, (action, blogPageLayout) => {
 
             const route = '/articles' + (blogPageLayout.type === 'feed') ? '/feed' : '';
             return this.dataService.getEntities(route, blogPageLayout.filters)

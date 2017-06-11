@@ -5,8 +5,8 @@ import { Entities, initialEntities } from '../entity/entity.model';
 import { slices } from '../util';
 import * as functions from '../entity/entity.functions';
 import { typeFor } from '../util';
-import { actions, EntityAction } from '../entity/entity.actions';
-import { SliceAction } from '../slice/slice.actions';
+// import { actions, EntityAction } from '../entity/entity.actions';
+import { actions, SliceAction } from '../slice/slice.actions';
 import * as ArticleActions from '../article/article.actions';
 
 export function reducer(state: Entities<Article> = initialEntities<Article>({}, slices.ARTICLE, actions, initialArticle),

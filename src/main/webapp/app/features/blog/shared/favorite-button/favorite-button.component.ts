@@ -64,8 +64,6 @@ export class FavoriteButtonComponent implements OnInit {
             //         );
             // }
 
-
-
         }
 
     }

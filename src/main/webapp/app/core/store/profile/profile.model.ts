@@ -11,4 +11,3 @@ export const initialProfile = {
     image: '',
     following: false
 };
-

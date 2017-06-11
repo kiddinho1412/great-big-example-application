@@ -12,9 +12,9 @@ import * as EntityActions from '../../../core/store/entity/entity.actions';
 
 @Component({
     selector: 'jhi-editor-component',
-    templateUrl: './editor.component.html'
+    templateUrl: './editor.page.html'
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class EditorPage implements OnInit, OnDestroy {
     articleSub: Subscription;
     article: Article;
     articleForm: FormGroup;

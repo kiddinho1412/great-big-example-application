@@ -1,35 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { EditorComponent } from './editor.component';
+import { EditorPage } from './editor.page';
 import { EditorGuard } from './editor.guard';
 import { UserRouteAccessService } from '../../../shared';
 
 const routes: Routes = [
-    {
-        path: 'editor',
-        component: EditorComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
-        },
-        // canActivate: [UserRouteAccessService, EditorGuard]
+  {
+    path: 'editor',
+    component: EditorPage,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
     },
-    {
-        path: 'editor/:slug',
-        component: EditorComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
-        },
-        // canActivate: [UserRouteAccessService, EditorGuard]
-    }
+    // canActivate: [UserRouteAccessService, EditorGuard]
+  },
+  {
+    path: 'editor/:slug',
+    component: EditorPage,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'greatBigExampleApplicationApp.blog.home.title'
+    },
+    // canActivate: [UserRouteAccessService, EditorGuard]
+  }
 ];
 
-export const routedComponents = [EditorComponent];
+export const routedComponents = [EditorPage];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class EditorRouting { }

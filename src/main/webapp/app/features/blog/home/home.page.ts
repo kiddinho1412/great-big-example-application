@@ -59,7 +59,7 @@ export class HomePage implements OnInit, OnDestroy {
         }
 
         // Otherwise, set the list object
-        this.store.dispatch(new SliceActions.Update(slices.LAYOUT, ['blogPage'], { type: type, filters: filters }));
+        this.store.dispatch(new SliceActions.Update(slices.LAYOUT, ['blogPage'], { type, filters }));
     }
 
     ngOnDestroy() {

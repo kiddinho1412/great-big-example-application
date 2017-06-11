@@ -24,6 +24,8 @@ export class UserCustomDialogComponent implements OnInit {
 
     users: User[];
 
+    usercustoms: UserCustom[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: DataUtils,
@@ -39,6 +41,8 @@ export class UserCustomDialogComponent implements OnInit {
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.userService.query()
             .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.userCustomService.query()
+            .subscribe((res: ResponseWrapper) => { this.usercustoms = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
@@ -107,6 +111,21 @@ export class UserCustomDialogComponent implements OnInit {
 
     trackUserById(index: number, item: User) {
         return item.id;
+    }
+
+    trackUserCustomById(index: number, item: UserCustom) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

@@ -12,6 +12,12 @@
         <dd>
             {{userCustom.user?.id}}
         </dd>
+        <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.follower">Follower</span></dt>
+        <dd>
+            <span *ngFor="let follower of userCustom.followers; let last = last">
+                <a [routerLink]="['/user-custom', follower?.id ]">{{follower.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"

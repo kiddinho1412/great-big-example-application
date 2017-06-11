@@ -41,8 +41,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }
         );
 
-
-
     }
 
     // onToggleFollowing(following: boolean) {

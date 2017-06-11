@@ -81,6 +81,13 @@ entity UserCustom {
     bio TextBlob
 }
 
+entity Profile {
+    username String,
+    bio TextBlob,
+    image String,
+    following Boolean
+}
+
 relationship ManyToOne {
 	Article{author(login)} to User{article}
 }
@@ -93,5 +100,9 @@ relationship OneToOne {
     UserCustom{user} to User{custom}
 }
 
-// skipClient for * except Article
-// skipServer for * except Article
+relationship ManyToMany {
+    UserCustom{follower} to UserCustom{followee}
+}
+
+skipClient for *
+skipServer for * except User
