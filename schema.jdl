@@ -1,18 +1,15 @@
-DEFAULT_MIN_LENGTH = 20
-DEFAULT_MAX_LENGTH = 1200
-
 entity User {
     login String required minlength(1) maxlength(100),
     password String required minlength(60) maxlength(60),
     firstName String maxlength(50),
     lastName String maxlength(50),
-    email String minlength(5) maxlength(100) unique,
+    email String minlength(5) maxlength(100),
     activated Boolean required,
     langKey String minlength(2) maxlength(5),
     imageUrl String maxlength(256),
     activationKey String maxlength(20),
     resetKey String maxlength(20),
-    resetDate ZonedDateTime,
+    resetDate ZonedDateTime
 }
 
 entity Hero {
@@ -43,7 +40,7 @@ entity Note {
 }
 
 entity Rebuttal {
-    longName String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH),
+    longName String minlength(20) maxlength(1200),
     shortName String,
     date ZonedDateTime,
     expires ZonedDateTime,
@@ -56,29 +53,6 @@ entity ClaimRebuttal {
   sortOrder Integer
 }
 
-entity Tag {
-	name String required minlength(2)
-}
-
-entity Article {
-    slug String required,
-	title String required,
-    description String required,
-	body Blob required,
-	createdAt ZonedDateTime required
-	updatedAt ZonedDateTime required
-}
-
-relationship ManyToOne {
-	Article{author(login)} to User,
-}
-
-relationship ManyToMany {
-	Article{tag(name)} to Tag{article}
-}
-
-paginate Article, Tag with infinite-scroll
-
 entity Message {
     userLogin String,
     message String required,
@@ -88,17 +62,36 @@ entity Message {
 
 paginate Message with infinite-scroll
 
-entity Profile {
-    username String,
-    bio Clob,
-    image String,
-    following Boolean
+entity Tag {
+	name String required minlength(2)
 }
 
-relationship OneToOne {
-	Profile{user(username)} to User
+entity Article {
+    slug String required,
+	title String required,
+    description String required,
+	body TextBlob required,
+	createdAt ZonedDateTime required,
+	updatedAt ZonedDateTime required
+}
+
+paginate Article, Tag with infinite-scroll
+
+entity UserCustom {
+    bio TextBlob
+}
+
+relationship ManyToOne {
+	Article{author(login)} to User{article}
 }
 
 relationship ManyToMany {
-    User{following(username)} to User
+	Article{tag(name)} to Tag{article}
 }
+
+relationship OneToOne {
+    UserCustom{user} to User{custom}
+}
+
+// skipClient for * except Article
+// skipServer for * except Article

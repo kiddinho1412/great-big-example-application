@@ -18,6 +18,8 @@ export * from './login/login-modal.service';
 export * from '../core/store/account/account.model'; // moved to core
 export * from '../core/store/user/user.model'; // moved to core
 export * from '../core/services/user.service'; // moved to core
+export * from './model/response-wrapper.model';
+export * from './model/request-util';
 export * from './social/social.service';
 export * from './social/social.component';
 export * from './shared-libs.module';

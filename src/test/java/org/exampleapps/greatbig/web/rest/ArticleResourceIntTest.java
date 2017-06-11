@@ -44,16 +44,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GreatBigExampleApplicationApp.class)
 public class ArticleResourceIntTest {
 
+    private static final String DEFAULT_SLUG = "AAAAAAAAAA";
+    private static final String UPDATED_SLUG = "BBBBBBBBBB";
+
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_CONTENT = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_CONTENT = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_CONTENT_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_CONTENT_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_BODY = "AAAAAAAAAA";
+    private static final String UPDATED_BODY = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_CREATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CREATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final ZonedDateTime DEFAULT_UPDATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_UPDATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private ArticleRepository articleRepository;
@@ -95,10 +102,12 @@ public class ArticleResourceIntTest {
      */
     public static Article createEntity(EntityManager em) {
         Article article = new Article()
+            .slug(DEFAULT_SLUG)
             .title(DEFAULT_TITLE)
-            .content(DEFAULT_CONTENT)
-            .contentContentType(DEFAULT_CONTENT_CONTENT_TYPE)
-            .date(DEFAULT_DATE);
+            .description(DEFAULT_DESCRIPTION)
+            .body(DEFAULT_BODY)
+            .createdAt(DEFAULT_CREATED_AT)
+            .updatedAt(DEFAULT_UPDATED_AT);
         return article;
     }
 
@@ -123,10 +132,12 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeCreate + 1);
         Article testArticle = articleList.get(articleList.size() - 1);
+        assertThat(testArticle.getSlug()).isEqualTo(DEFAULT_SLUG);
         assertThat(testArticle.getTitle()).isEqualTo(DEFAULT_TITLE);
-        assertThat(testArticle.getContent()).isEqualTo(DEFAULT_CONTENT);
-        assertThat(testArticle.getContentContentType()).isEqualTo(DEFAULT_CONTENT_CONTENT_TYPE);
-        assertThat(testArticle.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testArticle.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testArticle.getBody()).isEqualTo(DEFAULT_BODY);
+        assertThat(testArticle.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
+        assertThat(testArticle.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
 
         // Validate the Article in Elasticsearch
         Article articleEs = articleSearchRepository.findOne(testArticle.getId());
@@ -154,6 +165,24 @@ public class ArticleResourceIntTest {
 
     @Test
     @Transactional
+    public void checkSlugIsRequired() throws Exception {
+        int databaseSizeBeforeTest = articleRepository.findAll().size();
+        // set the field null
+        article.setSlug(null);
+
+        // Create the Article, which fails.
+
+        restArticleMockMvc.perform(post("/api/articles")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(article)))
+            .andExpect(status().isBadRequest());
+
+        List<Article> articleList = articleRepository.findAll();
+        assertThat(articleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkTitleIsRequired() throws Exception {
         int databaseSizeBeforeTest = articleRepository.findAll().size();
         // set the field null
@@ -172,10 +201,10 @@ public class ArticleResourceIntTest {
 
     @Test
     @Transactional
-    public void checkContentIsRequired() throws Exception {
+    public void checkDescriptionIsRequired() throws Exception {
         int databaseSizeBeforeTest = articleRepository.findAll().size();
         // set the field null
-        article.setContent(null);
+        article.setDescription(null);
 
         // Create the Article, which fails.
 
@@ -190,10 +219,46 @@ public class ArticleResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDateIsRequired() throws Exception {
+    public void checkBodyIsRequired() throws Exception {
         int databaseSizeBeforeTest = articleRepository.findAll().size();
         // set the field null
-        article.setDate(null);
+        article.setBody(null);
+
+        // Create the Article, which fails.
+
+        restArticleMockMvc.perform(post("/api/articles")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(article)))
+            .andExpect(status().isBadRequest());
+
+        List<Article> articleList = articleRepository.findAll();
+        assertThat(articleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkCreatedAtIsRequired() throws Exception {
+        int databaseSizeBeforeTest = articleRepository.findAll().size();
+        // set the field null
+        article.setCreatedAt(null);
+
+        // Create the Article, which fails.
+
+        restArticleMockMvc.perform(post("/api/articles")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(article)))
+            .andExpect(status().isBadRequest());
+
+        List<Article> articleList = articleRepository.findAll();
+        assertThat(articleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkUpdatedAtIsRequired() throws Exception {
+        int databaseSizeBeforeTest = articleRepository.findAll().size();
+        // set the field null
+        article.setUpdatedAt(null);
 
         // Create the Article, which fails.
 
@@ -217,10 +282,12 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId().intValue())))
+            .andExpect(jsonPath("$.[*].slug").value(hasItem(DEFAULT_SLUG.toString())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-            .andExpect(jsonPath("$.[*].contentContentType").value(hasItem(DEFAULT_CONTENT_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].body").value(hasItem(DEFAULT_BODY.toString())))
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
+            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(sameInstant(DEFAULT_UPDATED_AT))));
     }
 
     @Test
@@ -234,10 +301,12 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(article.getId().intValue()))
+            .andExpect(jsonPath("$.slug").value(DEFAULT_SLUG.toString()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
-            .andExpect(jsonPath("$.contentContentType").value(DEFAULT_CONTENT_CONTENT_TYPE))
-            .andExpect(jsonPath("$.content").value(Base64Utils.encodeToString(DEFAULT_CONTENT)))
-            .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.body").value(DEFAULT_BODY.toString()))
+            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
+            .andExpect(jsonPath("$.updatedAt").value(sameInstant(DEFAULT_UPDATED_AT)));
     }
 
     @Test
@@ -259,10 +328,12 @@ public class ArticleResourceIntTest {
         // Update the article
         Article updatedArticle = articleRepository.findOne(article.getId());
         updatedArticle
+            .slug(UPDATED_SLUG)
             .title(UPDATED_TITLE)
-            .content(UPDATED_CONTENT)
-            .contentContentType(UPDATED_CONTENT_CONTENT_TYPE)
-            .date(UPDATED_DATE);
+            .description(UPDATED_DESCRIPTION)
+            .body(UPDATED_BODY)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
 
         restArticleMockMvc.perform(put("/api/articles")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -273,10 +344,12 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeUpdate);
         Article testArticle = articleList.get(articleList.size() - 1);
+        assertThat(testArticle.getSlug()).isEqualTo(UPDATED_SLUG);
         assertThat(testArticle.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testArticle.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testArticle.getContentContentType()).isEqualTo(UPDATED_CONTENT_CONTENT_TYPE);
-        assertThat(testArticle.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testArticle.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testArticle.getBody()).isEqualTo(UPDATED_BODY);
+        assertThat(testArticle.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
+        assertThat(testArticle.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
 
         // Validate the Article in Elasticsearch
         Article articleEs = articleSearchRepository.findOne(testArticle.getId());
@@ -335,10 +408,12 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId().intValue())))
+            .andExpect(jsonPath("$.[*].slug").value(hasItem(DEFAULT_SLUG.toString())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-            .andExpect(jsonPath("$.[*].contentContentType").value(hasItem(DEFAULT_CONTENT_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].body").value(hasItem(DEFAULT_BODY.toString())))
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
+            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(sameInstant(DEFAULT_UPDATED_AT))));
     }
 
     @Test

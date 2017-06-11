@@ -1,0 +1,23 @@
+{
+    "greatBigExampleApplicationApp": {
+        "userCustom" : {
+            "home": {
+                "title": "User Customs",
+                "createLabel": "Crear nuevo User Custom",
+                "createOrEditLabel": "Crear o editar User Custom",
+                "search": "Search for User Custom"
+            },
+            "created": "Un nuevo User Custom ha sido creado con el identificador {{ param }}",
+            "updated": "Un User Custom ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un User Custom ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar User Custom {{ id }}?"
+            },
+            "detail": {
+                "title": "User Custom"
+            },
+            "bio": "Bio",
+            "user": "User"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+<div *ngIf="userCustom">
+    <h2><span jhiTranslate="greatBigExampleApplicationApp.userCustom.detail.title">User Custom</span> {{userCustom.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.bio">Bio</span></dt>
+        <dd>
+            <span>{{userCustom.bio}}</span>
+        </dd>
+        <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.user">User</span></dt>
+        <dd>
+            {{userCustom.user?.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-custom/'+ userCustom.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

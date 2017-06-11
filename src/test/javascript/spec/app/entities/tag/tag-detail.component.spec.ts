@@ -33,7 +33,7 @@ describe('Component Tests', () => {
                     EventManager
                 ]
             }).overrideTemplate(TagDetailComponent, '')
-                .compileComponents();
+            .compileComponents();
         }));
 
         beforeEach(() => {
@@ -41,6 +41,7 @@ describe('Component Tests', () => {
             comp = fixture.componentInstance;
             service = fixture.debugElement.injector.get(TagService);
         });
+
 
         describe('OnInit', () => {
             it('Should call load all on init', () => {
@@ -53,7 +54,7 @@ describe('Component Tests', () => {
 
             // THEN
             expect(service.find).toHaveBeenCalledWith(123);
-            expect(comp.tag).toEqual(jasmine.objectContaining({id: 10}));
+            expect(comp.tag).toEqual(jasmine.objectContaining({id:10}));
             });
         });
     });

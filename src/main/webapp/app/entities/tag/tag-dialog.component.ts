@@ -10,6 +10,7 @@ import { Tag } from './tag.model';
 import { TagPopupService } from './tag-popup.service';
 import { TagService } from './tag.service';
 import { Article, ArticleService } from '../article';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-tag-dialog',
@@ -35,8 +36,8 @@ export class TagDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        this.articleService.query().subscribe(
-            (res: Response) => { this.articles = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.articleService.query()
+            .subscribe((res: ResponseWrapper) => { this.articles = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
     clear() {
         this.activeModal.dismiss('cancel');
@@ -46,20 +47,25 @@ export class TagDialogComponent implements OnInit {
         this.isSaving = true;
         if (this.tag.id !== undefined) {
             this.subscribeToSaveResponse(
-                this.tagService.update(this.tag));
+                this.tagService.update(this.tag), false);
         } else {
             this.subscribeToSaveResponse(
-                this.tagService.create(this.tag));
+                this.tagService.create(this.tag), true);
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<Tag>) {
+    private subscribeToSaveResponse(result: Observable<Tag>, isCreated: boolean) {
         result.subscribe((res: Tag) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
+            this.onSaveSuccess(res, isCreated), (res: Response) => this.onSaveError(res));
     }
 
-    private onSaveSuccess(result: Tag) {
-        this.eventManager.broadcast({ name: 'tagListModification', content: 'OK' });
+    private onSaveSuccess(result: Tag, isCreated: boolean) {
+        this.alertService.success(
+            isCreated ? 'greatBigExampleApplicationApp.tag.created'
+            : 'greatBigExampleApplicationApp.tag.updated',
+            { param : result.id }, null);
+
+        this.eventManager.broadcast({ name: 'tagListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -106,11 +112,11 @@ export class TagPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private tagPopupService: TagPopupService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if (params['id']) {
+            if ( params['id'] ) {
                 this.modalRef = this.tagPopupService
                     .open(TagDialogComponent, params['id']);
             } else {

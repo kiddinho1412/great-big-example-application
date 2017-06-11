@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class ArticleResource {
     private final Logger log = LoggerFactory.getLogger(ArticleResource.class);
 
     private static final String ENTITY_NAME = "article";
-        
+
     private final ArticleRepository articleRepository;
 
     private final ArticleSearchRepository articleSearchRepository;
@@ -140,7 +141,7 @@ public class ArticleResource {
      * SEARCH  /_search/articles?query=:query : search for the article corresponding
      * to the query.
      *
-     * @param query the query of the article search 
+     * @param query the query of the article search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -152,6 +153,5 @@ public class ArticleResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/articles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
 
 }

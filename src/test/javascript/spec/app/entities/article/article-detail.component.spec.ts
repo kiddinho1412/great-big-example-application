@@ -27,13 +27,13 @@ describe('Component Tests', () => {
                     DatePipe,
                     {
                         provide: ActivatedRoute,
-                        useValue: new MockActivatedRoute({ id: 123 })
+                        useValue: new MockActivatedRoute({id: 123})
                     },
                     ArticleService,
                     EventManager
                 ]
             }).overrideTemplate(ArticleDetailComponent, '')
-                .compileComponents();
+            .compileComponents();
         }));
 
         beforeEach(() => {
@@ -42,18 +42,19 @@ describe('Component Tests', () => {
             service = fixture.debugElement.injector.get(ArticleService);
         });
 
+
         describe('OnInit', () => {
             it('Should call load all on init', () => {
-                // GIVEN
+            // GIVEN
 
-                spyOn(service, 'find').and.returnValue(Observable.of(new Article(10)));
+            spyOn(service, 'find').and.returnValue(Observable.of(new Article(10)));
 
-                // WHEN
-                comp.ngOnInit();
+            // WHEN
+            comp.ngOnInit();
 
-                // THEN
-                expect(service.find).toHaveBeenCalledWith(123);
-                expect(comp.article).toEqual(jasmine.objectContaining({ id: 10 }));
+            // THEN
+            expect(service.find).toHaveBeenCalledWith(123);
+            expect(comp.article).toEqual(jasmine.objectContaining({id:10}));
             });
         });
     });

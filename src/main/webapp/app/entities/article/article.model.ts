@@ -1,13 +1,15 @@
-import { Blog } from '../blog';
+import { User } from '../../shared';
 import { Tag } from '../tag';
 export class Article {
     constructor(
         public id?: number,
+        public slug?: string,
         public title?: string,
-        public content?: any,
-        public contentType?: string,
-        public date?: any,
-        public blog?: Blog,
+        public description?: string,
+        public body?: any,
+        public createdAt?: any,
+        public updatedAt?: any,
+        public author?: User,
         public tag?: Tag,
     ) {
     }

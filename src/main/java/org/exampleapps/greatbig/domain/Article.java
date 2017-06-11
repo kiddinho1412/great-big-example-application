@@ -29,23 +29,32 @@ public class Article implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "slug", nullable = false)
+    private String slug;
+
+    @NotNull
     @Column(name = "title", nullable = false)
     private String title;
 
     @NotNull
-    @Lob
-    @Column(name = "content", nullable = false)
-    private byte[] content;
-
-    @Column(name = "content_content_type", nullable = false)
-    private String contentContentType;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @NotNull
-    @Column(name = "jhi_date", nullable = false)
-    private ZonedDateTime date;
+    @Lob
+    @Column(name = "jhi_body", nullable = false)
+    private String body;
+
+    @NotNull
+    @Column(name = "created_at", nullable = false)
+    private ZonedDateTime createdAt;
+
+    @NotNull
+    @Column(name = "updated_at", nullable = false)
+    private ZonedDateTime updatedAt;
 
     @ManyToOne
-    private Blog blog;
+    private User author;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -62,6 +71,19 @@ public class Article implements Serializable {
         this.id = id;
     }
 
+    public String getSlug() {
+        return slug;
+    }
+
+    public Article slug(String slug) {
+        this.slug = slug;
+        return this;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -75,56 +97,69 @@ public class Article implements Serializable {
         this.title = title;
     }
 
-    public byte[] getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public Article content(byte[] content) {
-        this.content = content;
+    public Article description(String description) {
+        this.description = description;
         return this;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getContentContentType() {
-        return contentContentType;
+    public String getBody() {
+        return body;
     }
 
-    public Article contentContentType(String contentContentType) {
-        this.contentContentType = contentContentType;
+    public Article body(String body) {
+        this.body = body;
         return this;
     }
 
-    public void setContentContentType(String contentContentType) {
-        this.contentContentType = contentContentType;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public ZonedDateTime getDate() {
-        return date;
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public Article date(ZonedDateTime date) {
-        this.date = date;
+    public Article createdAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
 
-    public void setDate(ZonedDateTime date) {
-        this.date = date;
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Blog getBlog() {
-        return blog;
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public Article blog(Blog blog) {
-        this.blog = blog;
+    public Article updatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
         return this;
     }
 
-    public void setBlog(Blog blog) {
-        this.blog = blog;
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public Article author(User user) {
+        this.author = user;
+        return this;
+    }
+
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
     public Set<Tag> getTags() {
@@ -176,10 +211,12 @@ public class Article implements Serializable {
     public String toString() {
         return "Article{" +
             "id=" + getId() +
+            ", slug='" + getSlug() + "'" +
             ", title='" + getTitle() + "'" +
-            ", content='" + getContent() + "'" +
-            ", contentContentType='" + contentContentType + "'" +
-            ", date='" + getDate() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", body='" + getBody() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
+            ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
     }
 }

@@ -9,6 +9,8 @@ import { ArticleDetailComponent } from './article-detail.component';
 import { ArticlePopupComponent } from './article-dialog.component';
 import { ArticleDeletePopupComponent } from './article-delete-dialog.component';
 
+import { Principal } from '../../shared';
+
 export const articleRoute: Routes = [
     {
         path: 'article',
