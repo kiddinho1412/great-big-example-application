@@ -57,20 +57,22 @@ public class ProfileService {
      */
     @Transactional(readOnly = true)
     public Optional<Profile> findOneByLogin(String login) {
-        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).map(currentUser -> {
-            return userRepository.findOneByLogin(login).map(subjectUser -> {
-                UserCustom currentUserCustom = currentUser.getUserCustom();
-                UserCustom subjectUserCustom = subjectUser.getUserCustom();
+        Profile profile = new Profile();
+        Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        if (currentUser.isPresent()) {
+            Optional<User> subjectUser = userRepository.findOneByLogin(login);
+            if (subjectUser.isPresent()) {
+                UserCustom currentUserCustom = currentUser.get().getUserCustom();
+                UserCustom subjectUserCustom = subjectUser.get().getUserCustom();
                 Boolean following = currentUserCustom.getFollowees().contains(subjectUserCustom);
-                Profile profile = new Profile();
-                profile.setUsername(subjectUser.getLogin());
+                profile.setUsername(subjectUser.get().getLogin());
                 profile.setBio(subjectUserCustom.getBio());
-                profile.setImage(subjectUser.getImageUrl());
+                profile.setImage(subjectUser.get().getImageUrl());
                 profile.setFollowing(following);
                 log.debug("Got profile for user: ", login);
-                return profile;
-            });
-        });
+            }
+        }
+        return Optional.of(profile);
     }
 
     @Transactional(readOnly = true)
@@ -79,21 +81,23 @@ public class ProfileService {
      *
      * @param login login
      */
-    public Profile followUser(String login) {
-        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).map(currentUser -> {
-            return userRepository.findOneByLogin(login).map(subjectUser -> {
-                UserCustom currentUserCustom = currentUser.getUserCustom();
-                UserCustom subjectUserCustom = subjectUser.getUserCustom();
+    public Optional<Profile> followUser(String login) {
+        Profile profile = new Profile();
+        Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        if (currentUser.isPresent()) {
+            Optional<User> subjectUser = userRepository.findOneByLogin(login);
+            if (subjectUser.isPresent()) {
+                UserCustom currentUserCustom = currentUser.get().getUserCustom();
+                UserCustom subjectUserCustom = subjectUser.get().getUserCustom();
                 currentUserCustom.addFollowee(subjectUserCustom);
-                Profile profile = new Profile();
-                profile.setUsername(subjectUser.getLogin());
+                profile.setUsername(subjectUser.get().getLogin());
                 profile.setBio(subjectUserCustom.getBio());
-                profile.setImage(subjectUser.getImageUrl());
+                profile.setImage(subjectUser.get().getImageUrl());
                 profile.setFollowing(true);
                 log.debug("Followed user: ", login);
-                return profile;
-            });
-        });
+            }
+        }
+        return Optional.of(profile);
     }
 
     @Transactional(readOnly = true)
@@ -102,20 +106,22 @@ public class ProfileService {
      *
      * @param login login
      */
-    public Profile unfollowUser(String login) {
-        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).map(currentUser -> {
-            return userRepository.findOneByLogin(login).map(subjectUser -> {
-                UserCustom currentUserCustom = currentUser.getUserCustom();
-                UserCustom subjectUserCustom = subjectUser.getUserCustom();
+    public Optional<Profile> unfollowUser(String login) {
+        Profile profile = new Profile();
+        Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        if (currentUser.isPresent()) {
+            Optional<User> subjectUser = userRepository.findOneByLogin(login);
+            if (subjectUser.isPresent()) {
+                UserCustom currentUserCustom = currentUser.get().getUserCustom();
+                UserCustom subjectUserCustom = subjectUser.get().getUserCustom();
                 currentUserCustom.removeFollowee(subjectUserCustom);
-                Profile profile = new Profile();
-                profile.setUsername(subjectUser.getLogin());
+                profile.setUsername(subjectUser.get().getLogin());
                 profile.setBio(subjectUserCustom.getBio());
-                profile.setImage(subjectUser.getImageUrl());
+                profile.setImage(subjectUser.get().getImageUrl());
                 profile.setFollowing(false);
-                log.debug("Unfollowed user: ", login);
-                return profile;
-            });
-        });
+                log.debug("Followed user: ", login);
+            }
+        }
+        return Optional.of(profile);
     }
 }

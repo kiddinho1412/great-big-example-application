@@ -34,11 +34,8 @@ public class ProfileResource {
 
     private final ProfileService profileService;
 
-    private final ProfileSearchRepository profileSearchRepository;
-
-    public ProfileResource(ProfileService profileService, ProfileSearchRepository profileSearchRepository) {
+    public ProfileResource(ProfileService profileService) {
         this.profileService = profileService;
-        this.profileSearchRepository = profileSearchRepository;
     }
 
     /**
@@ -65,9 +62,10 @@ public class ProfileResource {
     @Timed
     public ResponseEntity<Profile> followUser(@PathVariable String username) throws URISyntaxException {
         log.debug("REST request to follow user : {}", username);
-        Profile result = profileService.followUser(username);
+        // Optional<Profile> result = profileService.followUser(username);
         // profileSearchRepository.save(result);
-        return ResponseEntity.created(new URI("/api/profiles/{username}/follow")).body(result);
+        return ResponseUtil.wrapOrNotFound(profileService.followUser(username));
+        // return ResponseEntity.created(new URI("/api/profiles/{username}/follow")).body(profileService.followUser(username));
     }
 
     /**
@@ -80,8 +78,9 @@ public class ProfileResource {
     @Timed
     public ResponseEntity<Profile> unfollowUser(@PathVariable String username) throws URISyntaxException {
         log.debug("REST request to unfollow User : {}", username);
-        Profile result = profileService.unfollowUser(username);
+        Optional<Profile> result = profileService.unfollowUser(username);
         // profileSearchRepository.save(result);
-        return ResponseEntity.created(new URI("/api/profiles/{username}/unfollow")).body(result);
+        return ResponseUtil.wrapOrNotFound(result);
+        // return ResponseEntity.created(new URI("/api/profiles/{username}/unfollow")).body(result.get());
     }
 }

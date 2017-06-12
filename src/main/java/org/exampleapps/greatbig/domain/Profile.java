@@ -16,6 +16,7 @@ import java.util.Objects;
 @Document(indexName = "profile")
 public class Profile implements Serializable {
 
+    @Id
     @Column(name = "username")
     private String username;
 
