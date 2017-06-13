@@ -105,4 +105,4 @@ relationship ManyToMany {
 }
 
 skipClient for *
-skipServer for * except User
+skipServer for * except UserCustom

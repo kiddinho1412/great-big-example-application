@@ -87,6 +87,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Instant resetDate = null;
 
     @OneToOne
+    @MapsId
     @JoinColumn(unique = true)
     private UserCustom userCustom;
 
@@ -206,6 +207,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public UserCustom getUserCustom() {
         return userCustom;
+    }
+
+    public void setUserCustom(UserCustom userCustom) {
+        this.userCustom = userCustom;
     }
 
     @Override

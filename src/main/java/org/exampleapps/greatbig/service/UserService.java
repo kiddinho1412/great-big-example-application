@@ -2,10 +2,13 @@ package org.exampleapps.greatbig.service;
 
 import org.exampleapps.greatbig.domain.Authority;
 import org.exampleapps.greatbig.domain.User;
+import org.exampleapps.greatbig.domain.UserCustom;
 import org.exampleapps.greatbig.repository.AuthorityRepository;
 import org.exampleapps.greatbig.config.Constants;
 import org.exampleapps.greatbig.repository.UserRepository;
+import org.exampleapps.greatbig.repository.UserCustomRepository;
 import org.exampleapps.greatbig.repository.search.UserSearchRepository;
+import org.exampleapps.greatbig.repository.search.UserCustomSearchRepository;
 import org.exampleapps.greatbig.security.AuthoritiesConstants;
 import org.exampleapps.greatbig.security.SecurityUtils;
 import org.exampleapps.greatbig.service.util.RandomUtil;
@@ -18,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import javax.inject.Inject;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
@@ -43,6 +47,13 @@ public class UserService {
     private final UserSearchRepository userSearchRepository;
 
     private final AuthorityRepository authorityRepository;
+
+    @Inject
+    private UserCustomRepository userCustomRepository;
+
+    @Inject
+    private UserCustomSearchRepository userCustomSearchRepository;
+
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
@@ -89,7 +100,7 @@ public class UserService {
     }
 
     public User createUser(String login, String password, String firstName, String lastName, String email,
-        String imageUrl, String langKey) {
+        String imageUrl, String langKey, String bio) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -112,6 +123,16 @@ public class UserService {
         userRepository.save(newUser);
         userSearchRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        // Create and save the UserCustom entity
+        UserCustom newUserCustom = new UserCustom();
+        newUserCustom.setUser(newUser);
+        newUser.setUserCustom(newUserCustom);
+        newUserCustom.setBio(bio);
+        userCustomRepository.save(newUserCustom);
+        userCustomSearchRepository.save(newUserCustom);
+        log.debug("Created Information for UserCustom: {}", newUserCustom);
+
         return newUser;
     }
 

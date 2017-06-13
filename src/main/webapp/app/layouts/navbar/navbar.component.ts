@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
+        this.languageService.addLocation('home');
     }
 
     ngOnInit() {
