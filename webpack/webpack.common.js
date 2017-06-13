@@ -1,3 +1,6 @@
+// Here's a good overview of how to use Webpack with Angular
+// https://angular.io/docs/ts/latest/guide/webpack.html
+
 const webpack = require('webpack');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -5,12 +8,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin")
+const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
 const path = require('path');
 
 module.exports = function(options) {
     const DATAS = {
-        VERSION: JSON.stringify(require("../package.json").version),
+        VERSION: JSON.stringify(require('../package.json').version),
         DEBUG_INFO_ENABLED: options.env === 'dev'
     };
     return {
@@ -67,7 +70,7 @@ module.exports = function(options) {
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,
-                    loaders: ['file-loader?hash=sha512&digest=hex&name=content/[hash].[ext]']
+                    loaders: ['file-loader?hash=sha512&digest=hex&name=[hash].[ext]']
                 },
                 {
                     test: /app.constants.ts$/,
@@ -95,7 +98,8 @@ module.exports = function(options) {
                 { from: './node_modules/swagger-ui/dist', to: 'swagger-ui/dist' },
                 { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui' },
                 { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
-                { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
+                { from: './src/main/webapp/robots.txt', to: 'robots.txt' },
+                { from: './src/main/webapp/i18n', to: 'i18n' }
             ]),
             new webpack.ProvidePlugin({
                 $: "jquery",
