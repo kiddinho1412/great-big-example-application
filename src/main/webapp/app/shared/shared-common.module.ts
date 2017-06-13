@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Sanitizer } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from 'ng2-translate';
+import { AlertService } from 'ng-jhipster';
 import { WindowRef } from './services/window.service';
 import {
     GreatBigExampleApplicationSharedLibsModule,

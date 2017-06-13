@@ -17,6 +17,10 @@ import java.util.Objects;
 public class Profile implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
     @Column(name = "username")
     private String username;
 
@@ -30,13 +34,13 @@ public class Profile implements Serializable {
     @Column(name = "following")
     private Boolean following;
 
-    // public Long getId() {
-    //     return id;
-    // }
+    public Long getId() {
+        return id;
+    }
 
-    // public void setId(Long id) {
-    //     this.id = id;
-    // }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
