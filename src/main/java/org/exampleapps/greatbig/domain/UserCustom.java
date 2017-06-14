@@ -32,7 +32,7 @@ public class UserCustom implements Serializable {
     private String bio;
 
     @OneToOne
-    @MapsId
+    // @MapsId
     @JoinColumn(unique = true)
     private User user;
 

@@ -1,18 +1,17 @@
 package org.exampleapps.greatbig.service;
 
 import org.exampleapps.greatbig.domain.Authority;
-import org.exampleapps.greatbig.domain.Profile;
 import org.exampleapps.greatbig.domain.User;
 import org.exampleapps.greatbig.domain.UserCustom;
 import org.exampleapps.greatbig.repository.AuthorityRepository;
 import org.exampleapps.greatbig.config.Constants;
 import org.exampleapps.greatbig.repository.UserRepository;
 import org.exampleapps.greatbig.repository.UserCustomRepository;
-// import org.exampleapps.greatbig.repository.search.UserSearchRepository;
 import org.exampleapps.greatbig.security.AuthoritiesConstants;
 import org.exampleapps.greatbig.security.SecurityUtils;
 import org.exampleapps.greatbig.service.util.RandomUtil;
 import org.exampleapps.greatbig.service.dto.UserDTO;
+import org.exampleapps.greatbig.service.dto.ProfileDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,6 @@ public class ProfileService {
             AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.userCustomRepository = userCustomRepository;
-        // this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
     }
 
@@ -55,73 +53,83 @@ public class ProfileService {
      *
      * @param login login
      */
-    @Transactional(readOnly = true)
-    public Optional<Profile> findOneByLogin(String login) {
-        Profile profile = new Profile();
-        Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
-        if (currentUser.isPresent()) {
-            Optional<User> subjectUser = userRepository.findOneByLogin(login);
-            if (subjectUser.isPresent()) {
-                UserCustom currentUserCustom = currentUser.get().getUserCustom();
-                UserCustom subjectUserCustom = subjectUser.get().getUserCustom();
-                Boolean following = currentUserCustom.getFollowees().contains(subjectUserCustom);
-                profile.setUsername(subjectUser.get().getLogin());
-                profile.setBio(subjectUserCustom.getBio());
-                profile.setImage(subjectUser.get().getImageUrl());
-                profile.setFollowing(following);
-                log.debug("Got profile for user: ", login);
-            }
+    // @Transactional(readOnly = true)
+    public Optional<ProfileDTO> findOneByLogin(String login) {
+        ProfileDTO profile = new ProfileDTO();
+        Optional<User> subjectUser = userRepository.findOneByLogin(login);
+        if (subjectUser.isPresent()) {
+            UserCustom subjectUserCustom = this.getUserCustom(subjectUser.get().getId());
+            profile.setUsername(subjectUser.get().getLogin());
+            profile.setBio(subjectUserCustom.getBio());
+            profile.setImage(subjectUser.get().getImageUrl());
+            profile.setFollowing(isFollowing(subjectUserCustom));
+            log.debug("Got profile for user: ", login);
         }
         return Optional.of(profile);
     }
 
-    @Transactional(readOnly = true)
+    // @Transactional(readOnly = true)
     /**
      * Follow a user
      *
      * @param login login
      */
-    public Optional<Profile> followUser(String login) {
-        Profile profile = new Profile();
+    public Optional<ProfileDTO> followUser(String login) {
+        ProfileDTO profile = new ProfileDTO();
         Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
         if (currentUser.isPresent()) {
             Optional<User> subjectUser = userRepository.findOneByLogin(login);
             if (subjectUser.isPresent()) {
-                UserCustom currentUserCustom = currentUser.get().getUserCustom();
-                UserCustom subjectUserCustom = subjectUser.get().getUserCustom();
+                UserCustom currentUserCustom = this.getUserCustom(currentUser.get().getId());
+                UserCustom subjectUserCustom = this.getUserCustom(subjectUser.get().getId());
                 currentUserCustom.addFollowee(subjectUserCustom);
                 profile.setUsername(subjectUser.get().getLogin());
                 profile.setBio(subjectUserCustom.getBio());
                 profile.setImage(subjectUser.get().getImageUrl());
-                profile.setFollowing(true);
+                profile.setFollowing(isFollowing(subjectUserCustom));
                 log.debug("Followed user: ", login);
             }
         }
         return Optional.of(profile);
     }
 
-    @Transactional(readOnly = true)
+    // @Transactional(readOnly = true)
     /**
      * Unfollow a user
      *
      * @param login login
      */
-    public Optional<Profile> unfollowUser(String login) {
-        Profile profile = new Profile();
+    public Optional<ProfileDTO> unfollowUser(String login) {
+        ProfileDTO profile = new ProfileDTO();
         Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
         if (currentUser.isPresent()) {
             Optional<User> subjectUser = userRepository.findOneByLogin(login);
             if (subjectUser.isPresent()) {
-                UserCustom currentUserCustom = currentUser.get().getUserCustom();
-                UserCustom subjectUserCustom = subjectUser.get().getUserCustom();
+                UserCustom currentUserCustom = this.getUserCustom(currentUser.get().getId());
+                UserCustom subjectUserCustom = this.getUserCustom(subjectUser.get().getId());
                 currentUserCustom.removeFollowee(subjectUserCustom);
                 profile.setUsername(subjectUser.get().getLogin());
                 profile.setBio(subjectUserCustom.getBio());
                 profile.setImage(subjectUser.get().getImageUrl());
-                profile.setFollowing(false);
-                log.debug("Followed user: ", login);
+                profile.setFollowing(isFollowing(subjectUserCustom));
+                log.debug("Unfollowed user: ", login);
             }
         }
         return Optional.of(profile);
+    }
+
+    @Transactional(readOnly = true)
+    public UserCustom getUserCustom(Long id) {
+        return userCustomRepository.findById(id);
+    }
+
+    private Boolean isFollowing(UserCustom subjectUserCustom) {
+        Boolean following = false;
+        Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        if (currentUser.isPresent()) {
+            UserCustom currentUserCustom = this.getUserCustom(currentUser.get().getId());
+            following = currentUserCustom.getFollowees().contains(subjectUserCustom);
+        }
+        return following;
     }
 }

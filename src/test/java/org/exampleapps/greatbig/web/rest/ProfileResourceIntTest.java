@@ -2,9 +2,9 @@ package org.exampleapps.greatbig.web.rest;
 
 import org.exampleapps.greatbig.GreatBigExampleApplicationApp;
 
-import org.exampleapps.greatbig.domain.Profile;
 import org.exampleapps.greatbig.service.ProfileService;
 import org.exampleapps.greatbig.web.rest.errors.ExceptionTranslator;
+import org.exampleapps.greatbig.service.dto.ProfileDTO;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,8 +69,7 @@ public class ProfileResourceIntTest {
 
     private MockMvc restProfileMockMvc;
 
-    private Profile profile;
-
+    private ProfileDTO profile;
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -80,29 +79,13 @@ public class ProfileResourceIntTest {
                 .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    /**
-     * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
-     */
-    public static Profile createEntity(EntityManager em) {
-        Profile profile = new Profile().username(DEFAULT_USERNAME).bio(DEFAULT_BIO).image(DEFAULT_IMAGE)
-                .following(DEFAULT_FOLLOWING);
-        return profile;
-    }
-
     @Before
     public void initTest() {
-        // profileSearchRepository.deleteAll();
-        profile = createEntity(em);
     }
 
     @Test
     @Transactional
     public void getProfile() throws Exception {
-        // Initialize the database
-        // profileRepository.saveAndFlush(profile);
 
         // Get the profile
         restProfileMockMvc.perform(get("/api/profiles/{username}", profile.getUsername())).andExpect(status().isOk())
@@ -123,25 +106,10 @@ public class ProfileResourceIntTest {
     @Test
     @Transactional
     public void followUser() throws Exception {
-        // Initialize the database
-        // profileRepository.saveAndFlush(profile);
-        // profileSearchRepository.save(profile);
 
         // Follow user
-        restProfileMockMvc.perform(post("/api/profiles/{username}/follow", profile.getUsername())).andExpect(status().isOk());
-
-        // Validate the Profile in the database
-        // List<Profile> profileList = profileRepository.findAll();
-        // assertThat(profileList).hasSize(databaseSizeBeforeUpdate);
-        // Profile testProfile = profileList.get(profileList.size() - 1);
-        // assertThat(testProfile.getUsername()).isEqualTo(UPDATED_USERNAME);
-        // assertThat(testProfile.getBio()).isEqualTo(UPDATED_BIO);
-        // assertThat(testProfile.getImage()).isEqualTo(UPDATED_IMAGE);
-        // assertThat(testProfile.isFollowing()).isEqualTo(UPDATED_FOLLOWING);
-
-        // Validate the Profile in Elasticsearch
-        // Profile profileEs = profileSearchRepository.findOne(testProfile.getId());
-        // assertThat(profileEs).isEqualToComparingFieldByField(testProfile);
+        restProfileMockMvc.perform(post("/api/profiles/{username}/follow", profile.getUsername())).andExpect(status().isOk())
+                .andExpect(jsonPath("$.following").value(true));
     }
 
     @Test
@@ -149,20 +117,8 @@ public class ProfileResourceIntTest {
     public void unfollowUser() throws Exception {
 
         // Unfollow user
-        restProfileMockMvc.perform(post("/api/profiles/{username}/unfollow", profile.getUsername())).andExpect(status().isOk());
-
-        // Validate the Profile in the database
-        // List<Profile> profileList = profileRepository.findAll();
-        // assertThat(profileList).hasSize(databaseSizeBeforeUpdate);
-        // Profile testProfile = profileList.get(profileList.size() - 1);
-        // assertThat(testProfile.getUsername()).isEqualTo(UPDATED_USERNAME);
-        // assertThat(testProfile.getBio()).isEqualTo(UPDATED_BIO);
-        // assertThat(testProfile.getImage()).isEqualTo(UPDATED_IMAGE);
-        // assertThat(testProfile.isFollowing()).isEqualTo(UPDATED_FOLLOWING);
-
-        // Validate the Profile in Elasticsearch
-        // Profile profileEs = profileSearchRepository.findOne(testProfile.getId());
-        // assertThat(profileEs).isEqualToComparingFieldByField(testProfile);
+        restProfileMockMvc.perform(post("/api/profiles/{username}/unfollow", profile.getUsername())).andExpect(status().isOk())
+                .andExpect(jsonPath("$.following").value(false));
     }
 
     @Test
@@ -170,25 +126,10 @@ public class ProfileResourceIntTest {
     public void followNonExistingUser() throws Exception {
         // int databaseSizeBeforeUpdate = profileRepository.findAll().size();
 
-        restProfileMockMvc.perform(post("/api/profiles/{username}/follow", profile.getUsername())).andExpect(status().isOk());
+        // restProfileMockMvc.perform(post("/api/profiles/{username}/follow", profile.getUsername())).andExpect(status().isOk());
 
         // Validate the change to the database
         // List<Profile> profileList = profileRepository.findAll();
         // assertThat(profileList).hasSize(databaseSizeBeforeUpdate + 1);
     }
-
-    // @Test
-    // @Transactional
-    // public void equalsVerifier() throws Exception {
-    //     TestUtil.equalsVerifier(Profile.class);
-    //     Profile profile1 = new Profile();
-    //     profile1.setId(1L);
-    //     Profile profile2 = new Profile();
-    //     profile2.setId(profile1.getId());
-    //     assertThat(profile1).isEqualTo(profile2);
-    //     profile2.setId(2L);
-    //     assertThat(profile1).isNotEqualTo(profile2);
-    //     profile1.setId(null);
-    //     assertThat(profile1).isNotEqualTo(profile2);
-    // }
 }

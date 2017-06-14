@@ -20,4 +20,7 @@ public interface UserCustomRepository extends JpaRepository<UserCustom,Long> {
     @Query("select user_custom from UserCustom user_custom left join fetch user_custom.followers where user_custom.id =:id")
     UserCustom findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select user_custom from UserCustom user_custom where user_custom.id =:id")
+    UserCustom findById(@Param("id") Long id);
+
 }

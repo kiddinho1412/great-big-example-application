@@ -88,6 +88,8 @@ entity Profile {
     following Boolean
 }
 
+dto Profile with mapstruct
+
 relationship ManyToOne {
 	Article{author(login)} to User{article}
 }
@@ -105,4 +107,4 @@ relationship ManyToMany {
 }
 
 skipClient for *
-skipServer for * except UserCustom
+skipServer for * except Profile

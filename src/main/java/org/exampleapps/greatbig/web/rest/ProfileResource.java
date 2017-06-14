@@ -1,11 +1,10 @@
 package org.exampleapps.greatbig.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import org.exampleapps.greatbig.domain.Profile;
 
-import org.exampleapps.greatbig.repository.search.ProfileSearchRepository;
 import org.exampleapps.greatbig.web.rest.util.HeaderUtil;
 import org.exampleapps.greatbig.service.ProfileService;
+import org.exampleapps.greatbig.service.dto.ProfileDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,7 @@ public class ProfileResource {
      */
     @GetMapping("/profiles/{username}")
     @Timed
-    public ResponseEntity<Profile> getProfile(@PathVariable String username) {
+    public ResponseEntity<ProfileDTO> getProfile(@PathVariable String username) {
         log.debug("REST request to get Profile : {}", username);
         return ResponseUtil.wrapOrNotFound(profileService.findOneByLogin(username));
     }
@@ -60,12 +59,10 @@ public class ProfileResource {
      */
     @PostMapping("/profiles/{username}/follow")
     @Timed
-    public ResponseEntity<Profile> followUser(@PathVariable String username) throws URISyntaxException {
+    public ResponseEntity<ProfileDTO> followUser(@PathVariable String username) throws URISyntaxException {
         log.debug("REST request to follow user : {}", username);
-        // Optional<Profile> result = profileService.followUser(username);
-        // profileSearchRepository.save(result);
+        // Optional<ProfileDTO> result = profileService.followUser(username);
         return ResponseUtil.wrapOrNotFound(profileService.followUser(username));
-        // return ResponseEntity.created(new URI("/api/profiles/{username}/follow")).body(profileService.followUser(username));
     }
 
     /**
@@ -76,11 +73,9 @@ public class ProfileResource {
      */
     @DeleteMapping("/profiles/{username}/follow")
     @Timed
-    public ResponseEntity<Profile> unfollowUser(@PathVariable String username) throws URISyntaxException {
+    public ResponseEntity<ProfileDTO> unfollowUser(@PathVariable String username) throws URISyntaxException {
         log.debug("REST request to unfollow User : {}", username);
-        Optional<Profile> result = profileService.unfollowUser(username);
-        // profileSearchRepository.save(result);
+        Optional<ProfileDTO> result = profileService.unfollowUser(username);
         return ResponseUtil.wrapOrNotFound(result);
-        // return ResponseEntity.created(new URI("/api/profiles/{username}/unfollow")).body(result.get());
     }
 }

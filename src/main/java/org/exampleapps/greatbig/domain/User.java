@@ -86,11 +86,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(unique = true)
-    private UserCustom userCustom;
-
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = "jhi_user_authority", joinColumns = {
@@ -203,14 +198,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
-    }
-
-    public UserCustom getUserCustom() {
-        return userCustom;
-    }
-
-    public void setUserCustom(UserCustom userCustom) {
-        this.userCustom = userCustom;
     }
 
     @Override

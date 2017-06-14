@@ -127,7 +127,6 @@ public class UserService {
         // Create and save the UserCustom entity
         UserCustom newUserCustom = new UserCustom();
         newUserCustom.setUser(newUser);
-        newUser.setUserCustom(newUserCustom);
         newUserCustom.setBio(bio);
         userCustomRepository.save(newUserCustom);
         userCustomSearchRepository.save(newUserCustom);
@@ -163,6 +162,16 @@ public class UserService {
         userRepository.save(user);
         userSearchRepository.save(user);
         log.debug("Created Information for User: {}", user);
+
+        // Seems to me this should be necessary but it's not part of
+        // https://jhipster.github.io/tips/022_tip_registering_user_with_additional_information.html
+        // // Create and save the UserCustom entity
+        // UserCustom newUserCustom = new UserCustom();
+        // newUserCustom.setUser(user);
+        // newUserCustom.setBio(userDTO.getBio());
+        // userCustomRepository.save(newUserCustom);
+        // userCustomSearchRepository.save(newUserCustom);
+        // log.debug("Created Information for UserCustom: {}", newUserCustom);
         return user;
     }
 

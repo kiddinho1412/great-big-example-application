@@ -53,6 +53,11 @@
                   separator=","
                   tableName="note">
         </loadData>
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/user-custom.csv"
+                  separator=","
+                  tableName="user_custom">
+        </loadData>
 
     </changeSet>
 </databaseChangeLog>
