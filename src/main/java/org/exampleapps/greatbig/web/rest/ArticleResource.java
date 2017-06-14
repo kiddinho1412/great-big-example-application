@@ -101,9 +101,14 @@ public class ArticleResource {
      */
     @GetMapping("/articles")
     @Timed
-    public ResponseEntity<List<Article>> getAllArticles(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Article>> getAllArticles(@ApiParam Pageable pageable, @RequestParam MultiValueMap<String, String> parameters) {
         log.debug("REST request to get a page of Articles");
-        Page<Article> page = articleRepository.findAll(pageable);
+        Page<Article> page;
+        if(parameters.containsKey('tag')) {
+            page = articleRepository.findAll(pageable);
+        } else if(parameters.containsKey('author')) {
+
+        } else if(parameters.containsKey())
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

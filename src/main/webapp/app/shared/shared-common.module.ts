@@ -11,6 +11,12 @@ import {
     JhiAlertErrorComponent
 } from './';
 
+export function alertServiceProvider(sanitizer: Sanitizer, translateService: TranslateService) {
+    // set below to true to make alerts look like toast
+    const isToast = true;
+    return new AlertService(sanitizer, isToast, translateService);
+}
+
 @NgModule({
     imports: [
         GreatBigExampleApplicationSharedLibsModule
@@ -23,6 +29,11 @@ import {
     providers: [
         JhiLanguageHelper,
         WindowRef,
+        {
+            provide: AlertService,
+            useFactory: alertServiceProvider,
+            deps: [Sanitizer, TranslateService]
+        },
         Title
     ],
     exports: [
