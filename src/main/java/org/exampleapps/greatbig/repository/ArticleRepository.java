@@ -27,6 +27,9 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     List<Article> findByAuthor(@Param("author") String author);
 
     @Query("select article from Article article left join fetch article.tags tags where tags.name =:tag")
-    Article findByTag(@Param("tag") String tag);
+    List<Article>  findByTag(@Param("tag") String tag);
+
+    @Query("select article from Article article left join fetch article.favorites where article.id =:id")
+    List<Article>  findByFavorited(@Param("favoriter") String favoriter);
 
 }

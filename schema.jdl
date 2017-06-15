@@ -90,6 +90,7 @@ entity Profile {
 
 dto Profile with mapstruct
 
+
 relationship ManyToOne {
 	Article{author(login)} to User{article}
 }
@@ -104,7 +105,8 @@ relationship OneToOne {
 
 relationship ManyToMany {
     UserCustom{follower} to UserCustom{followee}
+    UserCustom{favoritee} to Article{favoriter}
 }
 
 skipClient for *
-skipServer for * except Profile
+skipServer for * except UserCustom

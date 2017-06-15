@@ -1,31 +1,20 @@
 package org.exampleapps.greatbig.service;
 
-// import org.exampleapps.greatbig.domain.Authority;
 import org.exampleapps.greatbig.domain.User;
 import org.exampleapps.greatbig.domain.UserCustom;
 import org.exampleapps.greatbig.repository.AuthorityRepository;
-// import org.exampleapps.greatbig.config.Constants;
 import org.exampleapps.greatbig.repository.UserRepository;
 import org.exampleapps.greatbig.repository.UserCustomRepository;
-// import org.exampleapps.greatbig.security.AuthoritiesConstants;
 import org.exampleapps.greatbig.security.SecurityUtils;
-// import org.exampleapps.greatbig.service.util.RandomUtil;
 import org.exampleapps.greatbig.service.dto.UserDTO;
 import org.exampleapps.greatbig.service.dto.ProfileDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-// import org.springframework.data.domain.Page;
-// import org.springframework.data.domain.Pageable;
-// import org.springframework.scheduling.annotation.Scheduled;
-// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-// import java.time.Instant;
-// import java.time.temporal.ChronoUnit;
 import java.util.*;
-// import java.util.stream.Collectors;
 
 /**
  * Service class for managing users.

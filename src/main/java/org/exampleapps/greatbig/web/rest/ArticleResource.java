@@ -105,10 +105,12 @@ public class ArticleResource {
         log.debug("REST request to get a page of Articles");
         Page<Article> page;
         if(parameters.containsKey('tag')) {
-            page = articleRepository.findAll(pageable);
+            page = articleRepository.findByTag(pageable, parameters['tag']);
         } else if(parameters.containsKey('author')) {
-
-        } else if(parameters.containsKey())
+            page = articleRepository.findByAuthor(pageable, parameters['author']);
+        } else if(parameters.containsKey('favorited')) {
+            page = articleRepository.findByFavorited(pageable, parameters['favorited']);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
