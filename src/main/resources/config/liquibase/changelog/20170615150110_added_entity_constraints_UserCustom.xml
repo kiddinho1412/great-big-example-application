@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity UserCustom.
     -->
-    <changeSet id="20170613185528-2" author="jhipster">
+    <changeSet id="20170615150110-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_custom"
@@ -24,6 +24,17 @@
                                  constraintName="fk_user_custom_follower_followers_id"
                                  referencedColumnNames="id"
                                  referencedTableName="user_custom"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_customs_id"
+                                 baseTableName="user_custom_favoritee"
+                                 constraintName="fk_user_custom_favoritee_user_customs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_custom"/>
+        <addForeignKeyConstraint baseColumnNames="favoritees_id"
+                                 baseTableName="user_custom_favoritee"
+                                 constraintName="fk_user_custom_favoritee_favoritees_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
         
     </changeSet>
 </databaseChangeLog>

@@ -16,7 +16,7 @@
     <!--
         Added the entity UserCustom.
     -->
-    <changeSet id="20170613185528-1" author="jhipster">
+    <changeSet id="20170615150235-1" author="jhipster">
         <createTable tableName="user_custom">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -40,6 +40,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="user_customs_id, followers_id" tableName="user_custom_follower"/>
+        
+        <createTable tableName="user_custom_favorite">
+            <column name="favorites_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_customs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="user_customs_id, favorites_id" tableName="user_custom_favorite"/>
         
     </changeSet>
 </databaseChangeLog>

@@ -43,6 +43,13 @@ public class UserCustom implements Serializable {
                inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
     private Set<UserCustom> followers = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "user_custom_favorite",
+               joinColumns = @JoinColumn(name="user_customs_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="favorites_id", referencedColumnName="id"))
+    private Set<Article> favorites = new HashSet<>();
+
     @ManyToMany(mappedBy = "followers")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -105,6 +112,31 @@ public class UserCustom implements Serializable {
 
     public void setFollowers(Set<UserCustom> userCustoms) {
         this.followers = userCustoms;
+    }
+
+    public Set<Article> getFavorites() {
+        return favorites;
+    }
+
+    public UserCustom favorites(Set<Article> articles) {
+        this.favorites = articles;
+        return this;
+    }
+
+    public UserCustom addFavorite(Article article) {
+        this.favorites.add(article);
+        article.getFavoriters().add(this);
+        return this;
+    }
+
+    public UserCustom removeFavorite(Article article) {
+        this.favorites.remove(article);
+        article.getFavoriters().remove(this);
+        return this;
+    }
+
+    public void setFavorites(Set<Article> articles) {
+        this.favorites = articles;
     }
 
     public Set<UserCustom> getFollowees() {

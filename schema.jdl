@@ -105,8 +105,8 @@ relationship OneToOne {
 
 relationship ManyToMany {
     UserCustom{follower} to UserCustom{followee}
-    UserCustom{favoritee} to Article{favoriter}
+    UserCustom{favorite} to Article{favoriter}
 }
 
 skipClient for *
-skipServer for * except UserCustom
+skipServer for * except Article

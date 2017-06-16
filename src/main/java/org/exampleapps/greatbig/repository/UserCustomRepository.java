@@ -14,10 +14,10 @@ import java.util.List;
 @Repository
 public interface UserCustomRepository extends JpaRepository<UserCustom,Long> {
 
-    @Query("select distinct user_custom from UserCustom user_custom left join fetch user_custom.followers")
+    @Query("select distinct user_custom from UserCustom user_custom left join fetch user_custom.followers left join fetch user_custom.favorites")
     List<UserCustom> findAllWithEagerRelationships();
 
-    @Query("select user_custom from UserCustom user_custom left join fetch user_custom.followers where user_custom.id =:id")
+    @Query("select user_custom from UserCustom user_custom left join fetch user_custom.followers left join fetch user_custom.favorites where user_custom.id =:id")
     UserCustom findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query("select user_custom from UserCustom user_custom where user_custom.id =:id")

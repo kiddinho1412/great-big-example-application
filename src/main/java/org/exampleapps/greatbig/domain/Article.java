@@ -1,5 +1,6 @@
 package org.exampleapps.greatbig.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -62,6 +63,11 @@ public class Article implements Serializable {
                joinColumns = @JoinColumn(name="articles_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"))
     private Set<Tag> tags = new HashSet<>();
+
+    @ManyToMany(mappedBy = "favorites")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<UserCustom> favoriters = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -185,6 +191,31 @@ public class Article implements Serializable {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Set<UserCustom> getFavoriters() {
+        return favoriters;
+    }
+
+    public Article favoriters(Set<UserCustom> userCustoms) {
+        this.favoriters = userCustoms;
+        return this;
+    }
+
+    public Article addFavoriter(UserCustom userCustom) {
+        this.favoriters.add(userCustom);
+        userCustom.getFavorites().add(this);
+        return this;
+    }
+
+    public Article removeFavoriter(UserCustom userCustom) {
+        this.favoriters.remove(userCustom);
+        userCustom.getFavorites().remove(this);
+        return this;
+    }
+
+    public void setFavoriters(Set<UserCustom> userCustoms) {
+        this.favoriters = userCustoms;
     }
 
     @Override

@@ -16,7 +16,7 @@
     <!--
         Added the entity Article.
     -->
-    <changeSet id="20170611005558-1" author="jhipster">
+    <changeSet id="20170615164607-1" author="jhipster">
         <createTable tableName="article">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>

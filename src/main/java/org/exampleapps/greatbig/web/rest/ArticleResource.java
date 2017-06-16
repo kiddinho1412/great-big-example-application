@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.MultiValueMap;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,6 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
-
 /**
  * REST controller for managing Article.
  */
@@ -104,12 +104,14 @@ public class ArticleResource {
     public ResponseEntity<List<Article>> getAllArticles(@ApiParam Pageable pageable, @RequestParam MultiValueMap<String, String> parameters) {
         log.debug("REST request to get a page of Articles");
         Page<Article> page;
-        if(parameters.containsKey('tag')) {
-            page = articleRepository.findByTag(pageable, parameters['tag']);
-        } else if(parameters.containsKey('author')) {
-            page = articleRepository.findByAuthor(pageable, parameters['author']);
-        } else if(parameters.containsKey('favorited')) {
-            page = articleRepository.findByFavorited(pageable, parameters['favorited']);
+        if(parameters.containsKey("tag")) {
+            page = articleRepository.findByTag(parameters.getFirst("tag"), pageable);
+        } else if(parameters.containsKey("author")) {
+            page = articleRepository.findByAuthor(parameters.getFirst("author"), pageable);
+        } else if(parameters.containsKey("favorited")) {
+            page = articleRepository.findByFavoriter(parameters.getFirst("favorited"), pageable);
+        } else {
+            page = articleRepository.findAll(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
