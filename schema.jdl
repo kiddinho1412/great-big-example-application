@@ -108,5 +108,5 @@ relationship ManyToMany {
     UserCustom{favorite} to Article{favoriter}
 }
 
-skipClient for *
-skipServer for * except Article
+skipClient for * except Article
+skipServer for *

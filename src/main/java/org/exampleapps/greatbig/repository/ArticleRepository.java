@@ -29,7 +29,7 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     @Query("select article from Article article where article.author.login = :author")
     Page<Article> findByAuthor(@Param("author") String author, Pageable pageable);
 
-    @Query("select article from Article article left join fetch article.tags tags where tags.name = :tag")
+    @Query("select article from Article article left join article.tags tags where tags.name = :tag")
     Page<Article>  findByTag(@Param("tag") String tag, Pageable pageable);
 
     // @PersistenceContext
@@ -48,8 +48,8 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
 
 
 
-    @Query("select distinct article from Article article left join fetch article.favoriters favoriters where favoriters.login =:login")
-    Page<Article>  findByFavoriter(@Param("login") String login, Pageable pageable);
+    @Query("select distinct article from Article article left join article.favoriters favoriters where favoriters.id =:id")
+    Page<Article>  findByFavoriter(@Param("id") Long id, Pageable pageable);
 
     @Query("select article from Article article")
     Page<Article>  findAll(Pageable pageable);

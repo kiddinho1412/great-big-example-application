@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import org.exampleapps.greatbig.domain.Article;
 
 import org.exampleapps.greatbig.repository.ArticleRepository;
+import org.exampleapps.greatbig.domain.User;
+import org.exampleapps.greatbig.repository.UserRepository;
 import org.exampleapps.greatbig.repository.search.ArticleSearchRepository;
 import org.exampleapps.greatbig.web.rest.util.HeaderUtil;
 import org.exampleapps.greatbig.web.rest.util.PaginationUtil;
@@ -41,12 +43,14 @@ public class ArticleResource {
     private static final String ENTITY_NAME = "article";
 
     private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
     private final ArticleSearchRepository articleSearchRepository;
 
-    public ArticleResource(ArticleRepository articleRepository, ArticleSearchRepository articleSearchRepository) {
+    public ArticleResource(ArticleRepository articleRepository, ArticleSearchRepository articleSearchRepository, UserRepository userRepository) {
         this.articleRepository = articleRepository;
         this.articleSearchRepository = articleSearchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -109,7 +113,9 @@ public class ArticleResource {
         } else if(parameters.containsKey("author")) {
             page = articleRepository.findByAuthor(parameters.getFirst("author"), pageable);
         } else if(parameters.containsKey("favorited")) {
-            page = articleRepository.findByFavoriter(parameters.getFirst("favorited"), pageable);
+            String favorited = parameters.getFirst("favorited");
+            Long userId = userRepository.findOneByLogin(favorited).get().getId();
+            page = articleRepository.findByFavoriter(userId, pageable);
         } else {
             page = articleRepository.findAll(pageable);
         }
