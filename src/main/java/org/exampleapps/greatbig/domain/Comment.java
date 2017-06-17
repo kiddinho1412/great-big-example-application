@@ -43,7 +43,7 @@ public class Comment implements Serializable {
     private Article article;
 
     @ManyToOne
-    private UserCustom author;
+    private Author author;
 
     public Long getId() {
         return id;
@@ -105,17 +105,17 @@ public class Comment implements Serializable {
         this.article = article;
     }
 
-    public UserCustom getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public Comment author(UserCustom userCustom) {
-        this.author = userCustom;
+    public Comment author(Author author) {
+        this.author = author;
         return this;
     }
 
-    public void setAuthor(UserCustom userCustom) {
-        this.author = userCustom;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override

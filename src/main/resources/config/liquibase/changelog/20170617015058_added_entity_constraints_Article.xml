@@ -23,7 +23,7 @@
                                  baseTableName="article"
                                  constraintName="fk_article_author_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="user_custom"/>
+                                 referencedTableName="author"/>
 
     </changeSet>
 </databaseChangeLog>

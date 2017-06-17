@@ -60,7 +60,6 @@ entity Message {
     updatedAt ZonedDateTime
 }
 
-
 entity Tag {
 	name String required minlength(2)
 }
@@ -80,7 +79,7 @@ entity Comment {
 	updatedAt ZonedDateTime required
 }
 
-entity UserCustom {
+entity Author {
     login String,
     bio TextBlob
 }
@@ -92,25 +91,25 @@ entity Profile {
     following Boolean
 }
 
-dto Profile with mapstruct
+dto Profile, Author with mapstruct
 
 paginate Article, Tag, Message with infinite-scroll
 paginate Comment with pager
 
 relationship OneToMany {
-	UserCustom{article} to Article{author(login)},
+	Author{article} to Article{author(login)},
     Article{comment} to Comment{article},
-    UserCustom{comment} to Comment{author}
+    Author{comment} to Comment{author}
 }
 
 relationship ManyToMany {
 	Article{tag(name)} to Tag{article},
-    UserCustom{follower} to UserCustom{followee},
-    UserCustom{favorite} to Article{favoriter}
+    Author{follower} to Author{followee},
+    Author{favorite} to Article{favoriter}
 }
 
 relationship OneToOne {
-    UserCustom{user(login)} to User{custom(login)}
+    Author{user(login)} to User{custom(login)}
 }
 
 skipClient for * except User, Profile

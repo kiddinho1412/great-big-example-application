@@ -1,5 +1,5 @@
 import { Article } from '../article';
-import { UserCustom } from '../user-custom';
+import { Author } from '../author';
 export class Comment {
     constructor(
         public id?: number,
@@ -7,7 +7,7 @@ export class Comment {
         public createdAt?: any,
         public updatedAt?: any,
         public article?: Article,
-        public author?: UserCustom,
+        public author?: Author,
     ) {
     }
 }

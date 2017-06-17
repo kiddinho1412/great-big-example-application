@@ -1,29 +1,29 @@
 {
-    "greatBigExampleApplicationApp": {
-        "userCustom" : {
-            "home": {
-                "title": "User Customs",
-                "createLabel": "Create a new User Custom",
-                "createOrEditLabel": "Create or edit a User Custom",
-                "search": "Search for User Custom"
-            },
-            "created": "A new User Custom is created with identifier {{ param }}",
-            "updated": "A User Custom is updated with identifier {{ param }}",
-            "deleted": "A User Custom is deleted with identifier {{ param }}",
-            "delete": {
-                "question": "Are you sure you want to delete User Custom {{ id }}?"
-            },
-            "detail": {
-                "title": "User Custom"
-            },
-            "login": "Login",
-            "bio": "Bio",
-            "user": "User",
-            "article": "Article",
-            "comment": "Comment",
-            "follower": "Follower",
-            "favorite": "Favorite",
-            "followee": "Followee"
-        }
+  "greatBigExampleApplicationApp": {
+    "author": {
+      "home": {
+        "title": "User Customs",
+        "createLabel": "Create a new User Custom",
+        "createOrEditLabel": "Create or edit a User Custom",
+        "search": "Search for User Custom"
+      },
+      "created": "A new User Custom is created with identifier {{ param }}",
+      "updated": "A User Custom is updated with identifier {{ param }}",
+      "deleted": "A User Custom is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Custom {{ id }}?"
+      },
+      "detail": {
+        "title": "User Custom"
+      },
+      "login": "Login",
+      "bio": "Bio",
+      "user": "User",
+      "article": "Article",
+      "comment": "Comment",
+      "follower": "Follower",
+      "favorite": "Favorite",
+      "followee": "Followee"
     }
+  }
 }

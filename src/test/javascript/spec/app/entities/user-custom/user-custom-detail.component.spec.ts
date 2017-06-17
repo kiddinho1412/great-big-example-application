@@ -6,21 +6,21 @@ import { Observable } from 'rxjs/Rx';
 import { DateUtils, DataUtils, EventManager } from 'ng-jhipster';
 import { GreatBigExampleApplicationTestModule } from '../../../test.module';
 import { MockActivatedRoute } from '../../../helpers/mock-route.service';
-import { UserCustomDetailComponent } from '../../../../../../main/webapp/app/entities/user-custom/user-custom-detail.component';
-import { UserCustomService } from '../../../../../../main/webapp/app/entities/user-custom/user-custom.service';
-import { UserCustom } from '../../../../../../main/webapp/app/entities/user-custom/user-custom.model';
+import { AuthorDetailComponent } from '../../../../../../main/webapp/app/entities/author/author-detail.component';
+import { AuthorService } from '../../../../../../main/webapp/app/entities/author/author.service';
+import { Author } from '../../../../../../main/webapp/app/entities/author/author.model';
 
 describe('Component Tests', () => {
 
-    describe('UserCustom Management Detail Component', () => {
-        let comp: UserCustomDetailComponent;
-        let fixture: ComponentFixture<UserCustomDetailComponent>;
-        let service: UserCustomService;
+    describe('Author Management Detail Component', () => {
+        let comp: AuthorDetailComponent;
+        let fixture: ComponentFixture<AuthorDetailComponent>;
+        let service: AuthorService;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [GreatBigExampleApplicationTestModule],
-                declarations: [UserCustomDetailComponent],
+                declarations: [AuthorDetailComponent],
                 providers: [
                     DateUtils,
                     DataUtils,
@@ -29,17 +29,17 @@ describe('Component Tests', () => {
                         provide: ActivatedRoute,
                         useValue: new MockActivatedRoute({id: 123})
                     },
-                    UserCustomService,
+                    AuthorService,
                     EventManager
                 ]
-            }).overrideTemplate(UserCustomDetailComponent, '')
+            }).overrideTemplate(AuthorDetailComponent, '')
             .compileComponents();
         }));
 
         beforeEach(() => {
-            fixture = TestBed.createComponent(UserCustomDetailComponent);
+            fixture = TestBed.createComponent(AuthorDetailComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(UserCustomService);
+            service = fixture.debugElement.injector.get(AuthorService);
         });
 
 
@@ -47,14 +47,14 @@ describe('Component Tests', () => {
             it('Should call load all on init', () => {
             // GIVEN
 
-            spyOn(service, 'find').and.returnValue(Observable.of(new UserCustom(10)));
+            spyOn(service, 'find').and.returnValue(Observable.of(new Author(10)));
 
             // WHEN
             comp.ngOnInit();
 
             // THEN
             expect(service.find).toHaveBeenCalledWith(123);
-            expect(comp.userCustom).toEqual(jasmine.objectContaining({id:10}));
+            expect(comp.author).toEqual(jasmine.objectContaining({id:10}));
             });
         });
     });

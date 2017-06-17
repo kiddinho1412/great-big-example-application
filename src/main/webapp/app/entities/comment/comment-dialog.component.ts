@@ -10,7 +10,7 @@ import { Comment } from './comment.model';
 import { CommentPopupService } from './comment-popup.service';
 import { CommentService } from './comment.service';
 import { Article, ArticleService } from '../article';
-import { UserCustom, UserCustomService } from '../user-custom';
+import { Author, AuthorService } from '../author';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -25,7 +25,7 @@ export class CommentDialogComponent implements OnInit {
 
     articles: Article[];
 
-    usercustoms: UserCustom[];
+    usercustoms: Author[];
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -33,7 +33,7 @@ export class CommentDialogComponent implements OnInit {
         private alertService: AlertService,
         private commentService: CommentService,
         private articleService: ArticleService,
-        private userCustomService: UserCustomService,
+        private userCustomService: AuthorService,
         private eventManager: EventManager
     ) {
     }
@@ -117,7 +117,7 @@ export class CommentDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackUserCustomById(index: number, item: UserCustom) {
+    trackAuthorById(index: number, item: Author) {
         return item.id;
     }
 }

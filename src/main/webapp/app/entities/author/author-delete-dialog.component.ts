@@ -4,20 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService, EventManager } from 'ng-jhipster';
 
-import { UserCustom } from './user-custom.model';
-import { UserCustomPopupService } from './user-custom-popup.service';
-import { UserCustomService } from './user-custom.service';
+import { Author } from './author.model';
+import { AuthorPopupService } from './author-popup.service';
+import { AuthorService } from './author.service';
 
 @Component({
-    selector: 'jhi-user-custom-delete-dialog',
-    templateUrl: './user-custom-delete-dialog.component.html'
+    selector: 'jhi-author-delete-dialog',
+    templateUrl: './author-delete-dialog.component.html'
 })
-export class UserCustomDeleteDialogComponent {
+export class AuthorDeleteDialogComponent {
 
-    userCustom: UserCustom;
+    author: Author;
 
     constructor(
-        private userCustomService: UserCustomService,
+        private userCustomService: AuthorService,
         public activeModal: NgbActiveModal,
         private alertService: AlertService,
         private eventManager: EventManager
@@ -32,32 +32,32 @@ export class UserCustomDeleteDialogComponent {
         this.userCustomService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'userCustomListModification',
-                content: 'Deleted an userCustom'
+                content: 'Deleted an author'
             });
             this.activeModal.dismiss(true);
         });
-        this.alertService.success('greatBigExampleApplicationApp.userCustom.deleted', { param : id }, null);
+        this.alertService.success('greatBigExampleApplicationApp.author.deleted', { param : id }, null);
     }
 }
 
 @Component({
-    selector: 'jhi-user-custom-delete-popup',
+    selector: 'jhi-author-delete-popup',
     template: ''
 })
-export class UserCustomDeletePopupComponent implements OnInit, OnDestroy {
+export class AuthorDeletePopupComponent implements OnInit, OnDestroy {
 
     modalRef: NgbModalRef;
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private userCustomPopupService: UserCustomPopupService
+        private userCustomPopupService: AuthorPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             this.modalRef = this.userCustomPopupService
-                .open(UserCustomDeleteDialogComponent, params['id']);
+                .open(AuthorDeleteDialogComponent, params['id']);
         });
     }
 

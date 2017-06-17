@@ -1,7 +1,7 @@
 package org.exampleapps.greatbig.domain;
 
 import org.exampleapps.greatbig.config.Constants;
-import org.exampleapps.greatbig.domain.UserCustom;
+import org.exampleapps.greatbig.domain.Author;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.BatchSize;

@@ -1,29 +1,29 @@
 {
-    "greatBigExampleApplicationApp": {
-        "userCustom" : {
-            "home": {
-                "title": "UserCustoms",
-                "createLabel": "Créer un nouveau User Custom",
-                "createOrEditLabel": "Créer ou éditer un User Custom",
-                "search": "Recherche pour User Custom"
-            },
-            "created": "Un nouveau User Custom a été créé avec l'identifiant {{ param }}",
-            "updated": "Le User Custom avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le User Custom avec l'identifiant {{ param }} a été supprimé",
-            "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le User Custom {{ id }} ?"
-            },
-            "detail": {
-                "title": "User Custom"
-            },
-            "login": "Login",
-            "bio": "Bio",
-            "user": "User",
-            "article": "Article",
-            "comment": "Comment",
-            "follower": "Follower",
-            "favorite": "Favorite",
-            "followee": "Followee"
-        }
+  "greatBigExampleApplicationApp": {
+    "author": {
+      "home": {
+        "title": "Authors",
+        "createLabel": "Créer un nouveau User Custom",
+        "createOrEditLabel": "Créer ou éditer un User Custom",
+        "search": "Recherche pour User Custom"
+      },
+      "created": "Un nouveau User Custom a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Custom avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Custom avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User Custom {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Custom"
+      },
+      "login": "Login",
+      "bio": "Bio",
+      "user": "User",
+      "article": "Article",
+      "comment": "Comment",
+      "follower": "Follower",
+      "favorite": "Favorite",
+      "followee": "Followee"
     }
+  }
 }

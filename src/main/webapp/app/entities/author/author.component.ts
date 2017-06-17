@@ -3,23 +3,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { EventManager, ParseLinks, PaginationUtil, JhiLanguageService, AlertService, DataUtils } from 'ng-jhipster';
 
-import { UserCustom } from './user-custom.model';
-import { UserCustomService } from './user-custom.service';
+import { Author } from './author.model';
+import { AuthorService } from './author.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
-    selector: 'jhi-user-custom',
-    templateUrl: './user-custom.component.html'
+    selector: 'jhi-author',
+    templateUrl: './author.component.html'
 })
-export class UserCustomComponent implements OnInit, OnDestroy {
-userCustoms: UserCustom[];
+export class AuthorComponent implements OnInit, OnDestroy {
+userCustoms: Author[];
     currentAccount: any;
     eventSubscriber: Subscription;
     currentSearch: string;
 
     constructor(
-        private userCustomService: UserCustomService,
+        private userCustomService: AuthorService,
         private alertService: AlertService,
         private dataUtils: DataUtils,
         private eventManager: EventManager,
@@ -65,14 +65,14 @@ userCustoms: UserCustom[];
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInUserCustoms();
+        this.registerChangeInAuthors();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: UserCustom) {
+    trackId(index: number, item: Author) {
         return item.id;
     }
 
@@ -83,7 +83,7 @@ userCustoms: UserCustom[];
     openFile(contentType, field) {
         return this.dataUtils.openFile(contentType, field);
     }
-    registerChangeInUserCustoms() {
+    registerChangeInAuthors() {
         this.eventSubscriber = this.eventManager.subscribe('userCustomListModification', (response) => this.loadAll());
     }
 

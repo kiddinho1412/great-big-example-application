@@ -1,16 +1,16 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { UserCustom } from './user-custom.model';
-import { UserCustomService } from './user-custom.service';
+import { Author } from './author.model';
+import { AuthorService } from './author.service';
 
 @Injectable()
-export class UserCustomPopupService {
+export class AuthorPopupService {
     private isOpen = false;
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private userCustomService: UserCustomService
+        private userCustomService: AuthorService
 
     ) {}
 
@@ -21,17 +21,17 @@ export class UserCustomPopupService {
         this.isOpen = true;
 
         if (id) {
-            this.userCustomService.find(id).subscribe((userCustom) => {
-                this.userCustomModalRef(component, userCustom);
+            this.userCustomService.find(id).subscribe((author) => {
+                this.userCustomModalRef(component, author);
             });
         } else {
-            return this.userCustomModalRef(component, new UserCustom());
+            return this.userCustomModalRef(component, new Author());
         }
     }
 
-    userCustomModalRef(component: Component, userCustom: UserCustom): NgbModalRef {
+    userCustomModalRef(component: Component, author: Author): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
-        modalRef.componentInstance.userCustom = userCustom;
+        modalRef.componentInstance.author = author;
         modalRef.result.then((result) => {
             this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true });
             this.isOpen = false;

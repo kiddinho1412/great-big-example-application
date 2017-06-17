@@ -17,7 +17,7 @@ import javax.persistence.EntityManager;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    // Since moving the relationship from User to UserCustom (with no login field) this doesn't work.
+    // Since moving the relationship from User to Author (with no login field) this doesn't work.
     // Luckily it isn't needed yet.
     // @Query("select article from Article article where article.author.login = ?#{principal.username}")
     // List<Article> findByAuthorIsCurrentUser();

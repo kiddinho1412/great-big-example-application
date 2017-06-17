@@ -2,9 +2,9 @@ package org.exampleapps.greatbig.web.rest;
 
 import org.exampleapps.greatbig.GreatBigExampleApplicationApp;
 
-import org.exampleapps.greatbig.domain.UserCustom;
-import org.exampleapps.greatbig.repository.UserCustomRepository;
-import org.exampleapps.greatbig.repository.search.UserCustomSearchRepository;
+import org.exampleapps.greatbig.domain.Author;
+import org.exampleapps.greatbig.repository.AuthorRepository;
+import org.exampleapps.greatbig.repository.search.AuthorSearchRepository;
 import org.exampleapps.greatbig.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -31,13 +31,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Test class for the UserCustomResource REST controller.
+ * Test class for the AuthorResource REST controller.
  *
- * @see UserCustomResource
+ * @see AuthorResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GreatBigExampleApplicationApp.class)
-public class UserCustomResourceIntTest {
+public class AuthorResourceIntTest {
 
     private static final String DEFAULT_LOGIN = "AAAAAAAAAA";
     private static final String UPDATED_LOGIN = "BBBBBBBBBB";
@@ -46,10 +46,10 @@ public class UserCustomResourceIntTest {
     private static final String UPDATED_BIO = "BBBBBBBBBB";
 
     @Autowired
-    private UserCustomRepository userCustomRepository;
+    private AuthorRepository userCustomRepository;
 
     @Autowired
-    private UserCustomSearchRepository userCustomSearchRepository;
+    private AuthorSearchRepository userCustomSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -63,15 +63,15 @@ public class UserCustomResourceIntTest {
     @Autowired
     private EntityManager em;
 
-    private MockMvc restUserCustomMockMvc;
+    private MockMvc restAuthorMockMvc;
 
-    private UserCustom userCustom;
+    private Author author;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        UserCustomResource userCustomResource = new UserCustomResource(userCustomRepository, userCustomSearchRepository);
-        this.restUserCustomMockMvc = MockMvcBuilders.standaloneSetup(userCustomResource)
+        AuthorResource userCustomResource = new AuthorResource(userCustomRepository, userCustomSearchRepository);
+        this.restAuthorMockMvc = MockMvcBuilders.standaloneSetup(userCustomResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -83,182 +83,182 @@ public class UserCustomResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static UserCustom createEntity(EntityManager em) {
-        UserCustom userCustom = new UserCustom()
+    public static Author createEntity(EntityManager em) {
+        Author author = new Author()
             .login(DEFAULT_LOGIN)
             .bio(DEFAULT_BIO);
-        return userCustom;
+        return author;
     }
 
     @Before
     public void initTest() {
         userCustomSearchRepository.deleteAll();
-        userCustom = createEntity(em);
+        author = createEntity(em);
     }
 
     @Test
     @Transactional
-    public void createUserCustom() throws Exception {
+    public void createAuthor() throws Exception {
         int databaseSizeBeforeCreate = userCustomRepository.findAll().size();
 
-        // Create the UserCustom
-        restUserCustomMockMvc.perform(post("/api/user-customs")
+        // Create the Author
+        restAuthorMockMvc.perform(post("/api/authors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userCustom)))
+            .content(TestUtil.convertObjectToJsonBytes(author)))
             .andExpect(status().isCreated());
 
-        // Validate the UserCustom in the database
-        List<UserCustom> userCustomList = userCustomRepository.findAll();
+        // Validate the Author in the database
+        List<Author> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeCreate + 1);
-        UserCustom testUserCustom = userCustomList.get(userCustomList.size() - 1);
-        assertThat(testUserCustom.getLogin()).isEqualTo(DEFAULT_LOGIN);
-        assertThat(testUserCustom.getBio()).isEqualTo(DEFAULT_BIO);
+        Author testAuthor = userCustomList.get(userCustomList.size() - 1);
+        assertThat(testAuthor.getLogin()).isEqualTo(DEFAULT_LOGIN);
+        assertThat(testAuthor.getBio()).isEqualTo(DEFAULT_BIO);
 
-        // Validate the UserCustom in Elasticsearch
-        UserCustom userCustomEs = userCustomSearchRepository.findOne(testUserCustom.getId());
-        assertThat(userCustomEs).isEqualToComparingFieldByField(testUserCustom);
+        // Validate the Author in Elasticsearch
+        Author userCustomEs = userCustomSearchRepository.findOne(testAuthor.getId());
+        assertThat(userCustomEs).isEqualToComparingFieldByField(testAuthor);
     }
 
     @Test
     @Transactional
-    public void createUserCustomWithExistingId() throws Exception {
+    public void createAuthorWithExistingId() throws Exception {
         int databaseSizeBeforeCreate = userCustomRepository.findAll().size();
 
-        // Create the UserCustom with an existing ID
-        userCustom.setId(1L);
+        // Create the Author with an existing ID
+        author.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restUserCustomMockMvc.perform(post("/api/user-customs")
+        restAuthorMockMvc.perform(post("/api/authors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userCustom)))
+            .content(TestUtil.convertObjectToJsonBytes(author)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
-        List<UserCustom> userCustomList = userCustomRepository.findAll();
+        List<Author> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
-    public void getAllUserCustoms() throws Exception {
+    public void getAllAuthors() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(userCustom);
+        userCustomRepository.saveAndFlush(author);
 
         // Get all the userCustomList
-        restUserCustomMockMvc.perform(get("/api/user-customs?sort=id,desc"))
+        restAuthorMockMvc.perform(get("/api/authors?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(userCustom.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(author.getId().intValue())))
             .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
 
     @Test
     @Transactional
-    public void getUserCustom() throws Exception {
+    public void getAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(userCustom);
+        userCustomRepository.saveAndFlush(author);
 
-        // Get the userCustom
-        restUserCustomMockMvc.perform(get("/api/user-customs/{id}", userCustom.getId()))
+        // Get the author
+        restAuthorMockMvc.perform(get("/api/authors/{id}", author.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(userCustom.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(author.getId().intValue()))
             .andExpect(jsonPath("$.login").value(DEFAULT_LOGIN.toString()))
             .andExpect(jsonPath("$.bio").value(DEFAULT_BIO.toString()));
     }
 
     @Test
     @Transactional
-    public void getNonExistingUserCustom() throws Exception {
-        // Get the userCustom
-        restUserCustomMockMvc.perform(get("/api/user-customs/{id}", Long.MAX_VALUE))
+    public void getNonExistingAuthor() throws Exception {
+        // Get the author
+        restAuthorMockMvc.perform(get("/api/authors/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    public void updateUserCustom() throws Exception {
+    public void updateAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(userCustom);
-        userCustomSearchRepository.save(userCustom);
+        userCustomRepository.saveAndFlush(author);
+        userCustomSearchRepository.save(author);
         int databaseSizeBeforeUpdate = userCustomRepository.findAll().size();
 
-        // Update the userCustom
-        UserCustom updatedUserCustom = userCustomRepository.findOne(userCustom.getId());
-        updatedUserCustom
+        // Update the author
+        Author updatedAuthor = userCustomRepository.findOne(author.getId());
+        updatedAuthor
             .login(UPDATED_LOGIN)
             .bio(UPDATED_BIO);
 
-        restUserCustomMockMvc.perform(put("/api/user-customs")
+        restAuthorMockMvc.perform(put("/api/authors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedUserCustom)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedAuthor)))
             .andExpect(status().isOk());
 
-        // Validate the UserCustom in the database
-        List<UserCustom> userCustomList = userCustomRepository.findAll();
+        // Validate the Author in the database
+        List<Author> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeUpdate);
-        UserCustom testUserCustom = userCustomList.get(userCustomList.size() - 1);
-        assertThat(testUserCustom.getLogin()).isEqualTo(UPDATED_LOGIN);
-        assertThat(testUserCustom.getBio()).isEqualTo(UPDATED_BIO);
+        Author testAuthor = userCustomList.get(userCustomList.size() - 1);
+        assertThat(testAuthor.getLogin()).isEqualTo(UPDATED_LOGIN);
+        assertThat(testAuthor.getBio()).isEqualTo(UPDATED_BIO);
 
-        // Validate the UserCustom in Elasticsearch
-        UserCustom userCustomEs = userCustomSearchRepository.findOne(testUserCustom.getId());
-        assertThat(userCustomEs).isEqualToComparingFieldByField(testUserCustom);
+        // Validate the Author in Elasticsearch
+        Author userCustomEs = userCustomSearchRepository.findOne(testAuthor.getId());
+        assertThat(userCustomEs).isEqualToComparingFieldByField(testAuthor);
     }
 
     @Test
     @Transactional
-    public void updateNonExistingUserCustom() throws Exception {
+    public void updateNonExistingAuthor() throws Exception {
         int databaseSizeBeforeUpdate = userCustomRepository.findAll().size();
 
-        // Create the UserCustom
+        // Create the Author
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
-        restUserCustomMockMvc.perform(put("/api/user-customs")
+        restAuthorMockMvc.perform(put("/api/authors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userCustom)))
+            .content(TestUtil.convertObjectToJsonBytes(author)))
             .andExpect(status().isCreated());
 
-        // Validate the UserCustom in the database
-        List<UserCustom> userCustomList = userCustomRepository.findAll();
+        // Validate the Author in the database
+        List<Author> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeUpdate + 1);
     }
 
     @Test
     @Transactional
-    public void deleteUserCustom() throws Exception {
+    public void deleteAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(userCustom);
-        userCustomSearchRepository.save(userCustom);
+        userCustomRepository.saveAndFlush(author);
+        userCustomSearchRepository.save(author);
         int databaseSizeBeforeDelete = userCustomRepository.findAll().size();
 
-        // Get the userCustom
-        restUserCustomMockMvc.perform(delete("/api/user-customs/{id}", userCustom.getId())
+        // Get the author
+        restAuthorMockMvc.perform(delete("/api/authors/{id}", author.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
-        boolean userCustomExistsInEs = userCustomSearchRepository.exists(userCustom.getId());
+        boolean userCustomExistsInEs = userCustomSearchRepository.exists(author.getId());
         assertThat(userCustomExistsInEs).isFalse();
 
         // Validate the database is empty
-        List<UserCustom> userCustomList = userCustomRepository.findAll();
+        List<Author> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
     @Test
     @Transactional
-    public void searchUserCustom() throws Exception {
+    public void searchAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(userCustom);
-        userCustomSearchRepository.save(userCustom);
+        userCustomRepository.saveAndFlush(author);
+        userCustomSearchRepository.save(author);
 
-        // Search the userCustom
-        restUserCustomMockMvc.perform(get("/api/_search/user-customs?query=id:" + userCustom.getId()))
+        // Search the author
+        restAuthorMockMvc.perform(get("/api/_search/authors?query=id:" + author.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(userCustom.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(author.getId().intValue())))
             .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
@@ -266,10 +266,10 @@ public class UserCustomResourceIntTest {
     @Test
     @Transactional
     public void equalsVerifier() throws Exception {
-        TestUtil.equalsVerifier(UserCustom.class);
-        UserCustom userCustom1 = new UserCustom();
+        TestUtil.equalsVerifier(Author.class);
+        Author userCustom1 = new Author();
         userCustom1.setId(1L);
-        UserCustom userCustom2 = new UserCustom();
+        Author userCustom2 = new Author();
         userCustom2.setId(userCustom1.getId());
         assertThat(userCustom1).isEqualTo(userCustom2);
         userCustom2.setId(2L);

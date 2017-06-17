@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the UserCustom entity.
+ * Performance test for the Author entity.
  */
-class UserCustomGatlingTest extends Simulation {
+class AuthorGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -42,7 +42,7 @@ class UserCustomGatlingTest extends Simulation {
         "Authorization" -> "${access_token}"
     )
 
-    val scn = scenario("Test the UserCustom entity")
+    val scn = scenario("Test the Author entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -61,24 +61,24 @@ class UserCustomGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all userCustoms")
-            .get("/api/user-customs")
+            .get("/api/authors")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new userCustom")
-            .post("/api/user-customs")
+            .exec(http("Create new author")
+            .post("/api/authors")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "login":"SAMPLE_TEXT", "bio":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_userCustom_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created userCustom")
+                exec(http("Get created author")
                 .get("${new_userCustom_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created userCustom")
+            .exec(http("Delete created author")
             .delete("${new_userCustom_url}")
             .headers(headers_http_authenticated))
             .pause(10)

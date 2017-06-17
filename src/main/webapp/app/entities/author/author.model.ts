@@ -1,7 +1,7 @@
 import { User } from '../../shared';
 import { Article } from '../article';
 import { Comment } from '../comment';
-export class UserCustom {
+export class Author {
     constructor(
         public id?: number,
         public login?: string,
@@ -9,9 +9,9 @@ export class UserCustom {
         public user?: User,
         public article?: Article,
         public comment?: Comment,
-        public follower?: UserCustom,
+        public follower?: Author,
         public favorite?: Article,
-        public followee?: UserCustom,
+        public followee?: Author,
     ) {
     }
 }

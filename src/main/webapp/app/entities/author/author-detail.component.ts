@@ -3,23 +3,23 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { EventManager , DataUtils } from 'ng-jhipster';
 
-import { UserCustom } from './user-custom.model';
-import { UserCustomService } from './user-custom.service';
+import { Author } from './author.model';
+import { AuthorService } from './author.service';
 
 @Component({
-    selector: 'jhi-user-custom-detail',
-    templateUrl: './user-custom-detail.component.html'
+    selector: 'jhi-author-detail',
+    templateUrl: './author-detail.component.html'
 })
-export class UserCustomDetailComponent implements OnInit, OnDestroy {
+export class AuthorDetailComponent implements OnInit, OnDestroy {
 
-    userCustom: UserCustom;
+    author: Author;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
         private eventManager: EventManager,
         private dataUtils: DataUtils,
-        private userCustomService: UserCustomService,
+        private userCustomService: AuthorService,
         private route: ActivatedRoute
     ) {
     }
@@ -28,12 +28,12 @@ export class UserCustomDetailComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });
-        this.registerChangeInUserCustoms();
+        this.registerChangeInAuthors();
     }
 
     load(id) {
-        this.userCustomService.find(id).subscribe((userCustom) => {
-            this.userCustom = userCustom;
+        this.userCustomService.find(id).subscribe((author) => {
+            this.author = author;
         });
     }
     byteSize(field) {
@@ -52,10 +52,10 @@ export class UserCustomDetailComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    registerChangeInUserCustoms() {
+    registerChangeInAuthors() {
         this.eventSubscriber = this.eventManager.subscribe(
             'userCustomListModification',
-            (response) => this.load(this.userCustom.id)
+            (response) => this.load(this.author.id)
         );
     }
 }

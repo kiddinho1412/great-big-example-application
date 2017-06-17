@@ -67,12 +67,12 @@ public class Article implements Serializable {
     private Set<Tag> tags = new HashSet<>();
 
     @ManyToOne
-    private UserCustom author;
+    private Author author;
 
     @ManyToMany(mappedBy = "favorites")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<UserCustom> favoriters = new HashSet<>();
+    private Set<Author> favoriters = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -210,41 +210,41 @@ public class Article implements Serializable {
         this.tags = tags;
     }
 
-    public UserCustom getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public Article author(UserCustom userCustom) {
-        this.author = userCustom;
+    public Article author(Author author) {
+        this.author = author;
         return this;
     }
 
-    public void setAuthor(UserCustom userCustom) {
-        this.author = userCustom;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
-    public Set<UserCustom> getFavoriters() {
+    public Set<Author> getFavoriters() {
         return favoriters;
     }
 
-    public Article favoriters(Set<UserCustom> userCustoms) {
+    public Article favoriters(Set<Author> userCustoms) {
         this.favoriters = userCustoms;
         return this;
     }
 
-    public Article addFavoriter(UserCustom userCustom) {
-        this.favoriters.add(userCustom);
-        userCustom.getFavorites().add(this);
+    public Article addFavoriter(Author author) {
+        this.favoriters.add(author);
+        author.getFavorites().add(this);
         return this;
     }
 
-    public Article removeFavoriter(UserCustom userCustom) {
-        this.favoriters.remove(userCustom);
-        userCustom.getFavorites().remove(this);
+    public Article removeFavoriter(Author author) {
+        this.favoriters.remove(author);
+        author.getFavorites().remove(this);
         return this;
     }
 
-    public void setFavoriters(Set<UserCustom> userCustoms) {
+    public void setFavoriters(Set<Author> userCustoms) {
         this.favoriters = userCustoms;
     }
 

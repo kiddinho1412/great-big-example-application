@@ -51,7 +51,7 @@
                 </td>
                 <td>
                     <div *ngIf="comment.author">
-                        <a [routerLink]="['../user-custom', comment.author?.id ]" >{{comment.author?.id}}</a>
+                        <a [routerLink]="['../author', comment.author?.id ]" >{{comment.author?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

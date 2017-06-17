@@ -2,32 +2,32 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { UserCustom } from './user-custom.model';
+import { Author } from './author.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
-export class UserCustomService {
+export class AuthorService {
 
-    private resourceUrl = 'api/user-customs';
-    private resourceSearchUrl = 'api/_search/user-customs';
+    private resourceUrl = 'api/authors';
+    private resourceSearchUrl = 'api/_search/authors';
 
     constructor(private http: Http) { }
 
-    create(userCustom: UserCustom): Observable<UserCustom> {
-        const copy = this.convert(userCustom);
+    create(author: Author): Observable<Author> {
+        const copy = this.convert(author);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
     }
 
-    update(userCustom: UserCustom): Observable<UserCustom> {
-        const copy = this.convert(userCustom);
+    update(author: Author): Observable<Author> {
+        const copy = this.convert(author);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
     }
 
-    find(id: number): Observable<UserCustom> {
+    find(id: number): Observable<Author> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             return res.json();
         });
@@ -54,8 +54,8 @@ export class UserCustomService {
         return new ResponseWrapper(res.headers, jsonResponse, res.status);
     }
 
-    private convert(userCustom: UserCustom): UserCustom {
-        const copy: UserCustom = Object.assign({}, userCustom);
+    private convert(author: Author): Author {
+        const copy: Author = Object.assign({}, author);
         return copy;
     }
 }

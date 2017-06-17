@@ -2,13 +2,13 @@ package org.exampleapps.greatbig.service;
 
 import org.exampleapps.greatbig.domain.Authority;
 import org.exampleapps.greatbig.domain.User;
-import org.exampleapps.greatbig.domain.UserCustom;
+import org.exampleapps.greatbig.domain.Author;
 import org.exampleapps.greatbig.repository.AuthorityRepository;
 import org.exampleapps.greatbig.config.Constants;
 import org.exampleapps.greatbig.repository.UserRepository;
-import org.exampleapps.greatbig.repository.UserCustomRepository;
+import org.exampleapps.greatbig.repository.AuthorRepository;
 import org.exampleapps.greatbig.repository.search.UserSearchRepository;
-import org.exampleapps.greatbig.repository.search.UserCustomSearchRepository;
+import org.exampleapps.greatbig.repository.search.AuthorSearchRepository;
 import org.exampleapps.greatbig.security.AuthoritiesConstants;
 import org.exampleapps.greatbig.security.SecurityUtils;
 import org.exampleapps.greatbig.service.util.RandomUtil;
@@ -49,10 +49,10 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     @Inject
-    private UserCustomRepository userCustomRepository;
+    private AuthorRepository userCustomRepository;
 
     @Inject
-    private UserCustomSearchRepository userCustomSearchRepository;
+    private AuthorSearchRepository userCustomSearchRepository;
 
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository) {
@@ -124,13 +124,13 @@ public class UserService {
         userSearchRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
 
-        // Create and save the UserCustom entity
-        UserCustom newUserCustom = new UserCustom();
-        newUserCustom.setUser(newUser);
-        newUserCustom.setBio(bio);
-        userCustomRepository.save(newUserCustom);
-        userCustomSearchRepository.save(newUserCustom);
-        log.debug("Created Information for UserCustom: {}", newUserCustom);
+        // Create and save the Author entity
+        Author newAuthor = new Author();
+        newAuthor.setUser(newUser);
+        newAuthor.setBio(bio);
+        userCustomRepository.save(newAuthor);
+        userCustomSearchRepository.save(newAuthor);
+        log.debug("Created Information for Author: {}", newAuthor);
 
         return newUser;
     }
@@ -165,13 +165,13 @@ public class UserService {
 
         // Seems to me this should be necessary but it's not part of
         // https://jhipster.github.io/tips/022_tip_registering_user_with_additional_information.html
-        // // Create and save the UserCustom entity
-        // UserCustom newUserCustom = new UserCustom();
-        // newUserCustom.setUser(user);
-        // newUserCustom.setBio(userDTO.getBio());
-        // userCustomRepository.save(newUserCustom);
-        // userCustomSearchRepository.save(newUserCustom);
-        // log.debug("Created Information for UserCustom: {}", newUserCustom);
+        // // Create and save the Author entity
+        // Author newAuthor = new Author();
+        // newAuthor.setUser(user);
+        // newAuthor.setBio(userDTO.getBio());
+        // userCustomRepository.save(newAuthor);
+        // userCustomSearchRepository.save(newAuthor);
+        // log.debug("Created Information for Author: {}", newAuthor);
         return user;
     }
 

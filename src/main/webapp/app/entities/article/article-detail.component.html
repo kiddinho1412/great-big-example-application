@@ -37,7 +37,7 @@
         <dt><span jhiTranslate="greatBigExampleApplicationApp.article.author">Author</span></dt>
         <dd>
             <div *ngIf="article.author">
-                <a [routerLink]="['/user-custom', article.author?.id]">{{article.author?.login}}</a>
+                <a [routerLink]="['/author', article.author?.id]">{{article.author?.login}}</a>
             </div>
         </dd>
     </dl>

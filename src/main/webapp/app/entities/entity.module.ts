@@ -10,7 +10,7 @@ import { GreatBigExampleApplicationClaimRebuttalModule } from './claim-rebuttal/
 import { GreatBigExampleApplicationArticleModule } from './article/article.module';
 import { GreatBigExampleApplicationTagModule } from './tag/tag.module';
 import { GreatBigExampleApplicationMessageModule } from './message/message.module';
-import { GreatBigExampleApplicationUserCustomModule } from './user-custom/user-custom.module';
+import { GreatBigExampleApplicationAuthorModule } from './author/author.module';
 import { GreatBigExampleApplicationCommentModule } from './comment/comment.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
@@ -26,7 +26,7 @@ import { GreatBigExampleApplicationCommentModule } from './comment/comment.modul
         GreatBigExampleApplicationArticleModule,
         GreatBigExampleApplicationTagModule,
         GreatBigExampleApplicationMessageModule,
-        GreatBigExampleApplicationUserCustomModule,
+        GreatBigExampleApplicationAuthorModule,
         GreatBigExampleApplicationCommentModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],

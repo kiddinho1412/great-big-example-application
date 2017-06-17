@@ -6,25 +6,25 @@ import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager, AlertService, DataUtils } from 'ng-jhipster';
 
-import { UserCustom } from './user-custom.model';
-import { UserCustomPopupService } from './user-custom-popup.service';
-import { UserCustomService } from './user-custom.service';
+import { Author } from './author.model';
+import { AuthorPopupService } from './author-popup.service';
+import { AuthorService } from './author.service';
 import { User, UserService } from '../../shared';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
-    selector: 'jhi-user-custom-dialog',
-    templateUrl: './user-custom-dialog.component.html'
+    selector: 'jhi-author-dialog',
+    templateUrl: './author-dialog.component.html'
 })
-export class UserCustomDialogComponent implements OnInit {
+export class AuthorDialogComponent implements OnInit {
 
-    userCustom: UserCustom;
+    author: Author;
     authorities: any[];
     isSaving: boolean;
 
     users: User[];
 
-    usercustoms: UserCustom[];
+    usercustoms: Author[];
 
     articles: Article[];
 
@@ -32,7 +32,7 @@ export class UserCustomDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private dataUtils: DataUtils,
         private alertService: AlertService,
-        private userCustomService: UserCustomService,
+        private userCustomService: AuthorService,
         private userService: UserService,
         private eventManager: EventManager
     ) {
@@ -57,15 +57,15 @@ export class UserCustomDialogComponent implements OnInit {
         return this.dataUtils.openFile(contentType, field);
     }
 
-    setFileData(event, userCustom, field, isImage) {
+    setFileData(event, author, field, isImage) {
         if (event && event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
             if (isImage && !/^image\//.test(file.type)) {
                 return;
             }
             this.dataUtils.toBase64(file, (base64Data) => {
-                userCustom[field] = base64Data;
-                userCustom[`${field}ContentType`] = file.type;
+                author[field] = base64Data;
+                author[`${field}ContentType`] = file.type;
             });
         }
     }
@@ -76,24 +76,24 @@ export class UserCustomDialogComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.userCustom.id !== undefined) {
+        if (this.author.id !== undefined) {
             this.subscribeToSaveResponse(
-                this.userCustomService.update(this.userCustom), false);
+                this.userCustomService.update(this.author), false);
         } else {
             this.subscribeToSaveResponse(
-                this.userCustomService.create(this.userCustom), true);
+                this.userCustomService.create(this.author), true);
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<UserCustom>, isCreated: boolean) {
-        result.subscribe((res: UserCustom) =>
+    private subscribeToSaveResponse(result: Observable<Author>, isCreated: boolean) {
+        result.subscribe((res: Author) =>
             this.onSaveSuccess(res, isCreated), (res: Response) => this.onSaveError(res));
     }
 
-    private onSaveSuccess(result: UserCustom, isCreated: boolean) {
+    private onSaveSuccess(result: Author, isCreated: boolean) {
         this.alertService.success(
-            isCreated ? 'greatBigExampleApplicationApp.userCustom.created'
-            : 'greatBigExampleApplicationApp.userCustom.updated',
+            isCreated ? 'greatBigExampleApplicationApp.author.created'
+            : 'greatBigExampleApplicationApp.author.updated',
             { param : result.id }, null);
 
         this.eventManager.broadcast({ name: 'userCustomListModification', content: 'OK'});
@@ -119,7 +119,7 @@ export class UserCustomDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackUserCustomById(index: number, item: UserCustom) {
+    trackAuthorById(index: number, item: Author) {
         return item.id;
     }
 
@@ -140,27 +140,27 @@ export class UserCustomDialogComponent implements OnInit {
 }
 
 @Component({
-    selector: 'jhi-user-custom-popup',
+    selector: 'jhi-author-popup',
     template: ''
 })
-export class UserCustomPopupComponent implements OnInit, OnDestroy {
+export class AuthorPopupComponent implements OnInit, OnDestroy {
 
     modalRef: NgbModalRef;
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private userCustomPopupService: UserCustomPopupService
+        private userCustomPopupService: AuthorPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
                 this.modalRef = this.userCustomPopupService
-                    .open(UserCustomDialogComponent, params['id']);
+                    .open(AuthorDialogComponent, params['id']);
             } else {
                 this.modalRef = this.userCustomPopupService
-                    .open(UserCustomDialogComponent);
+                    .open(AuthorDialogComponent);
             }
         });
     }

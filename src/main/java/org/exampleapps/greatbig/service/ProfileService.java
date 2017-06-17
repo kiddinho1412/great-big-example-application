@@ -1,10 +1,10 @@
 package org.exampleapps.greatbig.service;
 
 import org.exampleapps.greatbig.domain.User;
-import org.exampleapps.greatbig.domain.UserCustom;
+import org.exampleapps.greatbig.domain.Author;
 import org.exampleapps.greatbig.repository.AuthorityRepository;
 import org.exampleapps.greatbig.repository.UserRepository;
-import org.exampleapps.greatbig.repository.UserCustomRepository;
+import org.exampleapps.greatbig.repository.AuthorRepository;
 import org.exampleapps.greatbig.security.SecurityUtils;
 import org.exampleapps.greatbig.service.dto.UserDTO;
 import org.exampleapps.greatbig.service.dto.ProfileDTO;
@@ -26,11 +26,11 @@ public class ProfileService {
     private final Logger log = LoggerFactory.getLogger(ProfileService.class);
 
     private final UserRepository userRepository;
-    private final UserCustomRepository userCustomRepository;
+    private final AuthorRepository userCustomRepository;
 
     private final AuthorityRepository authorityRepository;
 
-    public ProfileService(UserRepository userRepository, UserCustomRepository userCustomRepository,
+    public ProfileService(UserRepository userRepository, AuthorRepository userCustomRepository,
             AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.userCustomRepository = userCustomRepository;
@@ -47,11 +47,11 @@ public class ProfileService {
         ProfileDTO profile = new ProfileDTO();
         Optional<User> subjectUser = userRepository.findOneByLogin(login);
         if (subjectUser.isPresent()) {
-            UserCustom subjectUserCustom = this.getUserCustom(subjectUser.get().getId());
+            Author subjectAuthor = this.getAuthor(subjectUser.get().getId());
             profile.setUsername(subjectUser.get().getLogin());
-            profile.setBio(subjectUserCustom.getBio());
+            profile.setBio(subjectAuthor.getBio());
             profile.setImage(subjectUser.get().getImageUrl());
-            profile.setFollowing(isFollowing(subjectUserCustom));
+            profile.setFollowing(isFollowing(subjectAuthor));
             log.debug("Got profile for user: ", login);
         }
         return Optional.of(profile);
@@ -69,13 +69,13 @@ public class ProfileService {
         if (currentUser.isPresent()) {
             Optional<User> subjectUser = userRepository.findOneByLogin(login);
             if (subjectUser.isPresent()) {
-                UserCustom currentUserCustom = this.getUserCustom(currentUser.get().getId());
-                UserCustom subjectUserCustom = this.getUserCustom(subjectUser.get().getId());
-                currentUserCustom.addFollowee(subjectUserCustom);
+                Author currentAuthor = this.getAuthor(currentUser.get().getId());
+                Author subjectAuthor = this.getAuthor(subjectUser.get().getId());
+                currentAuthor.addFollowee(subjectAuthor);
                 profile.setUsername(subjectUser.get().getLogin());
-                profile.setBio(subjectUserCustom.getBio());
+                profile.setBio(subjectAuthor.getBio());
                 profile.setImage(subjectUser.get().getImageUrl());
-                profile.setFollowing(isFollowing(subjectUserCustom));
+                profile.setFollowing(isFollowing(subjectAuthor));
                 log.debug("Followed user: ", login);
             }
         }
@@ -94,13 +94,13 @@ public class ProfileService {
         if (currentUser.isPresent()) {
             Optional<User> subjectUser = userRepository.findOneByLogin(login);
             if (subjectUser.isPresent()) {
-                UserCustom currentUserCustom = this.getUserCustom(currentUser.get().getId());
-                UserCustom subjectUserCustom = this.getUserCustom(subjectUser.get().getId());
-                currentUserCustom.removeFollowee(subjectUserCustom);
+                Author currentAuthor = this.getAuthor(currentUser.get().getId());
+                Author subjectAuthor = this.getAuthor(subjectUser.get().getId());
+                currentAuthor.removeFollowee(subjectAuthor);
                 profile.setUsername(subjectUser.get().getLogin());
-                profile.setBio(subjectUserCustom.getBio());
+                profile.setBio(subjectAuthor.getBio());
                 profile.setImage(subjectUser.get().getImageUrl());
-                profile.setFollowing(isFollowing(subjectUserCustom));
+                profile.setFollowing(isFollowing(subjectAuthor));
                 log.debug("Unfollowed user: ", login);
             }
         }
@@ -108,16 +108,16 @@ public class ProfileService {
     }
 
     @Transactional(readOnly = true)
-    public UserCustom getUserCustom(Long id) {
+    public Author getAuthor(Long id) {
         return userCustomRepository.findById(id);
     }
 
-    private Boolean isFollowing(UserCustom subjectUserCustom) {
+    private Boolean isFollowing(Author subjectAuthor) {
         Boolean following = false;
         Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
         if (currentUser.isPresent()) {
-            UserCustom currentUserCustom = this.getUserCustom(currentUser.get().getId());
-            following = currentUserCustom.getFollowees().contains(subjectUserCustom);
+            Author currentAuthor = this.getAuthor(currentUser.get().getId());
+            following = currentAuthor.getFollowees().contains(subjectAuthor);
         }
         return following;
     }

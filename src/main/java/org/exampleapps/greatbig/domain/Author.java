@@ -12,13 +12,13 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A UserCustom.
+ * A Author.
  */
 @Entity
-@Table(name = "user_custom")
+@Table(name = "author")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "usercustom")
-public class UserCustom implements Serializable {
+public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,18 +51,18 @@ public class UserCustom implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "user_custom_follower", joinColumns = @JoinColumn(name = "user_customs_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "followers_id", referencedColumnName = "id"))
-    private Set<UserCustom> followers = new HashSet<>();
+    @JoinTable(name = "author_follower", joinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "followers_id", referencedColumnName = "id"))
+    private Set<Author> followers = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "user_custom_favorite", joinColumns = @JoinColumn(name = "user_customs_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "favorites_id", referencedColumnName = "id"))
+    @JoinTable(name = "author_favorite", joinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "favorites_id", referencedColumnName = "id"))
     private Set<Article> favorites = new HashSet<>();
 
     @ManyToMany(mappedBy = "followers")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<UserCustom> followees = new HashSet<>();
+    private Set<Author> followees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -76,7 +76,7 @@ public class UserCustom implements Serializable {
         return login;
     }
 
-    public UserCustom login(String login) {
+    public Author login(String login) {
         this.login = login;
         return this;
     }
@@ -89,7 +89,7 @@ public class UserCustom implements Serializable {
         return bio;
     }
 
-    public UserCustom bio(String bio) {
+    public Author bio(String bio) {
         this.bio = bio;
         return this;
     }
@@ -102,7 +102,7 @@ public class UserCustom implements Serializable {
         return user;
     }
 
-    public UserCustom user(User user) {
+    public Author user(User user) {
         this.user = user;
         return this;
     }
@@ -115,18 +115,18 @@ public class UserCustom implements Serializable {
         return articles;
     }
 
-    public UserCustom articles(Set<Article> articles) {
+    public Author articles(Set<Article> articles) {
         this.articles = articles;
         return this;
     }
 
-    public UserCustom addArticle(Article article) {
+    public Author addArticle(Article article) {
         this.articles.add(article);
         article.setAuthor(this);
         return this;
     }
 
-    public UserCustom removeArticle(Article article) {
+    public Author removeArticle(Article article) {
         this.articles.remove(article);
         article.setAuthor(null);
         return this;
@@ -140,18 +140,18 @@ public class UserCustom implements Serializable {
         return comments;
     }
 
-    public UserCustom comments(Set<Comment> comments) {
+    public Author comments(Set<Comment> comments) {
         this.comments = comments;
         return this;
     }
 
-    public UserCustom addComment(Comment comment) {
+    public Author addComment(Comment comment) {
         this.comments.add(comment);
         comment.setAuthor(this);
         return this;
     }
 
-    public UserCustom removeComment(Comment comment) {
+    public Author removeComment(Comment comment) {
         this.comments.remove(comment);
         comment.setAuthor(null);
         return this;
@@ -161,28 +161,28 @@ public class UserCustom implements Serializable {
         this.comments = comments;
     }
 
-    public Set<UserCustom> getFollowers() {
+    public Set<Author> getFollowers() {
         return followers;
     }
 
-    public UserCustom followers(Set<UserCustom> userCustoms) {
+    public Author followers(Set<Author> userCustoms) {
         this.followers = userCustoms;
         return this;
     }
 
-    public UserCustom addFollower(UserCustom userCustom) {
-        this.followers.add(userCustom);
-        userCustom.getFollowees().add(this);
+    public Author addFollower(Author author) {
+        this.followers.add(author);
+        author.getFollowees().add(this);
         return this;
     }
 
-    public UserCustom removeFollower(UserCustom userCustom) {
-        this.followers.remove(userCustom);
-        userCustom.getFollowees().remove(this);
+    public Author removeFollower(Author author) {
+        this.followers.remove(author);
+        author.getFollowees().remove(this);
         return this;
     }
 
-    public void setFollowers(Set<UserCustom> userCustoms) {
+    public void setFollowers(Set<Author> userCustoms) {
         this.followers = userCustoms;
     }
 
@@ -190,18 +190,18 @@ public class UserCustom implements Serializable {
         return favorites;
     }
 
-    public UserCustom favorites(Set<Article> articles) {
+    public Author favorites(Set<Article> articles) {
         this.favorites = articles;
         return this;
     }
 
-    public UserCustom addFavorite(Article article) {
+    public Author addFavorite(Article article) {
         this.favorites.add(article);
         article.getFavoriters().add(this);
         return this;
     }
 
-    public UserCustom removeFavorite(Article article) {
+    public Author removeFavorite(Article article) {
         this.favorites.remove(article);
         article.getFavoriters().remove(this);
         return this;
@@ -211,28 +211,28 @@ public class UserCustom implements Serializable {
         this.favorites = articles;
     }
 
-    public Set<UserCustom> getFollowees() {
+    public Set<Author> getFollowees() {
         return followees;
     }
 
-    public UserCustom followees(Set<UserCustom> userCustoms) {
+    public Author followees(Set<Author> userCustoms) {
         this.followees = userCustoms;
         return this;
     }
 
-    public UserCustom addFollowee(UserCustom userCustom) {
-        this.followees.add(userCustom);
-        userCustom.getFollowers().add(this);
+    public Author addFollowee(Author author) {
+        this.followees.add(author);
+        author.getFollowers().add(this);
         return this;
     }
 
-    public UserCustom removeFollowee(UserCustom userCustom) {
-        this.followees.remove(userCustom);
-        userCustom.getFollowers().remove(this);
+    public Author removeFollowee(Author author) {
+        this.followees.remove(author);
+        author.getFollowers().remove(this);
         return this;
     }
 
-    public void setFollowees(Set<UserCustom> userCustoms) {
+    public void setFollowees(Set<Author> userCustoms) {
         this.followees = userCustoms;
     }
 
@@ -244,11 +244,11 @@ public class UserCustom implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UserCustom userCustom = (UserCustom) o;
-        if (userCustom.getId() == null || getId() == null) {
+        Author author = (Author) o;
+        if (author.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), userCustom.getId());
+        return Objects.equals(getId(), author.getId());
     }
 
     @Override
@@ -258,6 +258,6 @@ public class UserCustom implements Serializable {
 
     @Override
     public String toString() {
-        return "UserCustom{" + "id=" + getId() + ", login='" + getLogin() + "'" + ", bio='" + getBio() + "'" + "}";
+        return "Author{" + "id=" + getId() + ", login='" + getLogin() + "'" + ", bio='" + getBio() + "'" + "}";
     }
 }

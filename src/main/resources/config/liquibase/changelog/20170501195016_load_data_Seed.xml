@@ -54,9 +54,9 @@
                   tableName="note">
         </loadData>
         <loadData encoding="UTF-8"
-                  file="config/liquibase/user-custom.csv"
+                  file="config/liquibase/author.csv"
                   separator=","
-                  tableName="user_custom">
+                  tableName="author">
         </loadData>
 
     </changeSet>

@@ -25,7 +25,7 @@
         <dt><span jhiTranslate="greatBigExampleApplicationApp.comment.author">Author</span></dt>
         <dd>
             <div *ngIf="comment.author">
-                <a [routerLink]="['/user-custom', comment.author?.id]">{{comment.author?.id}}</a>
+                <a [routerLink]="['/author', comment.author?.id]">{{comment.author?.id}}</a>
             </div>
         </dd>
     </dl>
