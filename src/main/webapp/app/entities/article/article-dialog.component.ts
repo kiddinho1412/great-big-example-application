@@ -42,9 +42,13 @@ export class ArticleDialogComponent implements OnInit {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.userService.query()
-            .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: ResponseWrapper) => {
+                this.users = res.json();
+            }, (res: ResponseWrapper) => this.onError(res.json()));
         this.tagService.query()
-            .subscribe((res: ResponseWrapper) => { this.tags = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: ResponseWrapper) => {
+                this.tags = res.json;
+            }, (res: ResponseWrapper) => this.onError(res.json));
     }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
@@ -89,10 +93,10 @@ export class ArticleDialogComponent implements OnInit {
     private onSaveSuccess(result: Article, isCreated: boolean) {
         this.alertService.success(
             isCreated ? 'greatBigExampleApplicationApp.article.created'
-            : 'greatBigExampleApplicationApp.article.updated',
-            { param : result.id }, null);
+                : 'greatBigExampleApplicationApp.article.updated',
+            { param: result.id }, null);
 
-        this.eventManager.broadcast({ name: 'articleListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'articleListModification', content: 'OK' });
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -143,11 +147,11 @@ export class ArticlePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private articlePopupService: ArticlePopupService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.modalRef = this.articlePopupService
                     .open(ArticleDialogComponent, params['id']);
             } else {

@@ -32,22 +32,6 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     @Query("select article from Article article left join article.tags tags where tags.name = :tag")
     Page<Article>  findByTag(@Param("tag") String tag, Pageable pageable);
 
-    // @PersistenceContext
-    // private EntityManager em;
-
-    // @Override
-    // @SuppressWarnings("unchecked")
-    // public Page<Article> findByTag(String tag, Pageable pageable) {
-    //     // using 'join fetch' because a single query should load both owners and pets
-    //     // using 'left join fetch' because it might happen that an owner does not have pets yet
-    //     Query query = this.em.createQuery("SELECT DISTINCT article FROM Article article left join fetch article.tags tags WHERE tags.name =:tag");
-    //     query.setParameter("tag", tag);
-    //     return query.getResultList();
-    // }
-
-
-
-
     @Query("select distinct article from Article article left join article.favoriters favoriters where favoriters.id =:id")
     Page<Article>  findByFavoriter(@Param("id") Long id, Pageable pageable);
 

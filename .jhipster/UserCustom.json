@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "custom"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "followee",
+            "relationshipName": "follower",
+            "otherEntityName": "userCustom",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "favoriter",
+            "relationshipName": "favorite",
+            "otherEntityName": "article",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "followee",
+            "otherEntityName": "userCustom",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "follower"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "bio",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "changelogDate": "20170616211104",
+    "entityTableName": "user_custom",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "skipClient": true,
+    "skipServer": true
+}

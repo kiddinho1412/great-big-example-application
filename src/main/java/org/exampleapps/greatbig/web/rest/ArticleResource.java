@@ -3,6 +3,7 @@ package org.exampleapps.greatbig.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import org.exampleapps.greatbig.domain.Article;
 
+import org.exampleapps.greatbig.service.ProfileService;
 import org.exampleapps.greatbig.repository.ArticleRepository;
 import org.exampleapps.greatbig.domain.User;
 import org.exampleapps.greatbig.repository.UserRepository;
