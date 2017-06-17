@@ -2,10 +2,10 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "author",
-            "otherEntityName": "user",
-            "otherEntityField": "login"
+            "relationshipType": "one-to-many",
+            "relationshipName": "comment",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "article"
         },
         {
             "relationshipType": "many-to-many",
@@ -14,6 +14,12 @@
             "otherEntityName": "tag",
             "otherEntityField": "name",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "author",
+            "otherEntityName": "userCustom",
+            "otherEntityField": "login"
         },
         {
             "relationshipType": "many-to-many",
@@ -68,10 +74,9 @@
             ]
         }
     ],
-    "changelogDate": "20170616211103",
+    "changelogDate": "20170617015058",
     "entityTableName": "article",
     "dto": "no",
     "pagination": "infinite-scroll",
-    "service": "no",
-    "skipServer": true
+    "service": "no"
 }

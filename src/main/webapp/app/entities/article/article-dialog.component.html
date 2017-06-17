@@ -15,8 +15,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="greatBigExampleApplicationApp.article.slug" for="field_slug">Slug</label>
             <input type="text" class="form-control" name="slug" id="field_slug"
-                [(ngModel)]="article.slug"
-            required />
+                [(ngModel)]="article.slug" required />
             <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
@@ -27,8 +26,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="greatBigExampleApplicationApp.article.title" for="field_title">Title</label>
             <input type="text" class="form-control" name="title" id="field_title"
-                [(ngModel)]="article.title"
-            required />
+                [(ngModel)]="article.title" required />
             <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
@@ -39,8 +37,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="greatBigExampleApplicationApp.article.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                [(ngModel)]="article.description"
-            required />
+                [(ngModel)]="article.description" required />
             <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
@@ -95,16 +92,16 @@
         </div>
 
         <div class="form-group">
-            <label jhiTranslate="greatBigExampleApplicationApp.article.author" for="field_author">Author</label>
-            <select class="form-control" id="field_author" name="author" [(ngModel)]="article.author" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === article.author?.id ? article.author : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label jhiTranslate="greatBigExampleApplicationApp.article.tag" for="field_tag">Tag</label>
             <select class="form-control" id="field_tag" multiple name="tag" [(ngModel)]="article.tags">
                 <option [ngValue]="getSelected(article.tags, tagOption)" *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="greatBigExampleApplicationApp.article.author" for="field_author">Author</label>
+            <select class="form-control" id="field_author" name="author" [(ngModel)]="article.author" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userCustomOption.id === article.author?.id ? article.author : userCustomOption" *ngFor="let userCustomOption of usercustoms; trackBy: trackUserCustomById">{{userCustomOption.login}}</option>
             </select>
         </div>
     </div>

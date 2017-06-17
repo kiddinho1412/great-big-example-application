@@ -26,6 +26,8 @@ export class UserCustomDialogComponent implements OnInit {
 
     usercustoms: UserCustom[];
 
+    articles: Article[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: DataUtils,
@@ -43,7 +45,10 @@ export class UserCustomDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.userCustomService.query()
             .subscribe((res: ResponseWrapper) => { this.usercustoms = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.articleService.query()
+            .subscribe((res: ResponseWrapper) => { this.articles = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
+
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
@@ -53,7 +58,7 @@ export class UserCustomDialogComponent implements OnInit {
     }
 
     setFileData(event, userCustom, field, isImage) {
-        if (event.target.files && event.target.files[0]) {
+        if (event && event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
             if (isImage && !/^image\//.test(file.type)) {
                 return;
@@ -64,6 +69,7 @@ export class UserCustomDialogComponent implements OnInit {
             });
         }
     }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }
@@ -114,6 +120,10 @@ export class UserCustomDialogComponent implements OnInit {
     }
 
     trackUserCustomById(index: number, item: UserCustom) {
+        return item.id;
+    }
+
+    trackArticleById(index: number, item: Article) {
         return item.id;
     }
 

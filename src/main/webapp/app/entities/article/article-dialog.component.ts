@@ -9,8 +9,8 @@ import { EventManager, AlertService, DataUtils } from 'ng-jhipster';
 import { Article } from './article.model';
 import { ArticlePopupService } from './article-popup.service';
 import { ArticleService } from './article.service';
-import { User, UserService } from '../../shared';
 import { Tag, TagService } from '../tag';
+import { UserCustom, UserCustomService } from '../user-custom';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,17 +23,17 @@ export class ArticleDialogComponent implements OnInit {
     authorities: any[];
     isSaving: boolean;
 
-    users: User[];
-
     tags: Tag[];
+
+    usercustoms: UserCustom[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: DataUtils,
         private alertService: AlertService,
         private articleService: ArticleService,
-        private userService: UserService,
         private tagService: TagService,
+        private userCustomService: UserCustomService,
         private eventManager: EventManager
     ) {
     }
@@ -41,15 +41,12 @@ export class ArticleDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
-        this.userService.query()
-            .subscribe((res: ResponseWrapper) => {
-                this.users = res.json();
-            }, (res: ResponseWrapper) => this.onError(res.json()));
         this.tagService.query()
-            .subscribe((res: ResponseWrapper) => {
-                this.tags = res.json;
-            }, (res: ResponseWrapper) => this.onError(res.json));
+            .subscribe((res: ResponseWrapper) => { this.tags = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.userCustomService.query()
+            .subscribe((res: ResponseWrapper) => { this.usercustoms = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
+
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
@@ -59,7 +56,7 @@ export class ArticleDialogComponent implements OnInit {
     }
 
     setFileData(event, article, field, isImage) {
-        if (event.target.files && event.target.files[0]) {
+        if (event && event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
             if (isImage && !/^image\//.test(file.type)) {
                 return;
@@ -70,6 +67,7 @@ export class ArticleDialogComponent implements OnInit {
             });
         }
     }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }
@@ -93,10 +91,10 @@ export class ArticleDialogComponent implements OnInit {
     private onSaveSuccess(result: Article, isCreated: boolean) {
         this.alertService.success(
             isCreated ? 'greatBigExampleApplicationApp.article.created'
-                : 'greatBigExampleApplicationApp.article.updated',
-            { param: result.id }, null);
+            : 'greatBigExampleApplicationApp.article.updated',
+            { param : result.id }, null);
 
-        this.eventManager.broadcast({ name: 'articleListModification', content: 'OK' });
+        this.eventManager.broadcast({ name: 'articleListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -115,11 +113,11 @@ export class ArticleDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
-    trackUserById(index: number, item: User) {
+    trackTagById(index: number, item: Tag) {
         return item.id;
     }
 
-    trackTagById(index: number, item: Tag) {
+    trackUserCustomById(index: number, item: UserCustom) {
         return item.id;
     }
 
@@ -147,11 +145,11 @@ export class ArticlePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private articlePopupService: ArticlePopupService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if (params['id']) {
+            if ( params['id'] ) {
                 this.modalRef = this.articlePopupService
                     .open(ArticleDialogComponent, params['id']);
             } else {

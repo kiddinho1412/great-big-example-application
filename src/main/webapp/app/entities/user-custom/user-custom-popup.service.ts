@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UserCustom } from './user-custom.model';
 import { UserCustomService } from './user-custom.service';
+
 @Injectable()
 export class UserCustomPopupService {
     private isOpen = false;

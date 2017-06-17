@@ -50,7 +50,9 @@
                 <td>{{article.createdAt | date:'medium'}}</td>
                 <td>{{article.updatedAt | date:'medium'}}</td>
                 <td>
-                    {{article.author?.login}}
+                    <div *ngIf="article.author">
+                        <a [routerLink]="['../user-custom', article.author?.id ]" >{{article.author?.login}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -33,6 +33,7 @@
             <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.bio">Bio</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.user">User</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.follower">Follower</span></th>
+            <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.favorite">Favorite</span></th>
             <th></th>
             </tr>
             </thead>
@@ -46,6 +47,11 @@
                 <td>
                     <span *ngFor="let follower of userCustom.followers; let last = last">
                             <a class="form-control-static" [routerLink]="['../user-custom', follower?.id ]">{{follower.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let favorite of userCustom.favorites; let last = last">
+                            <a class="form-control-static" [routerLink]="['../article', favorite?.id ]">{{favorite.id}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td class="text-right">

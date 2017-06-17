@@ -4,6 +4,7 @@ import org.exampleapps.greatbig.GreatBigExampleApplicationApp;
 
 import org.exampleapps.greatbig.domain.Article;
 import org.exampleapps.greatbig.repository.ArticleRepository;
+import org.exampleapps.greatbig.repository.UserRepository;
 import org.exampleapps.greatbig.repository.search.ArticleSearchRepository;
 import org.exampleapps.greatbig.web.rest.errors.ExceptionTranslator;
 
@@ -69,6 +70,9 @@ public class ArticleResourceIntTest {
     private ArticleSearchRepository articleSearchRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -87,7 +91,7 @@ public class ArticleResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ArticleResource articleResource = new ArticleResource(articleRepository, articleSearchRepository);
+        ArticleResource articleResource = new ArticleResource(articleRepository, articleSearchRepository, userRepository);
         this.restArticleMockMvc = MockMvcBuilders.standaloneSetup(articleResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

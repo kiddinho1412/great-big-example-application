@@ -22,8 +22,10 @@
             "body": "Body",
             "createdAt": "Created At",
             "updatedAt": "Updated At",
+            "comment": "Comment",
+            "tag": "Tag",
             "author": "Author",
-            "tag": "Tag"
+            "favoriter": "Favoriter"
         }
     }
 }

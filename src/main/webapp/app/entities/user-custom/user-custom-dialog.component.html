@@ -31,6 +31,12 @@
                 <option [ngValue]="getSelected(userCustom.followers, userCustomOption)" *ngFor="let userCustomOption of usercustoms; trackBy: trackUserCustomById">{{userCustomOption.id}}</option>
             </select>
         </div>
+        <div class="form-group">
+            <label jhiTranslate="greatBigExampleApplicationApp.userCustom.favorite" for="field_favorite">Favorite</label>
+            <select class="form-control" id="field_favorite" multiple name="favorite" [(ngModel)]="userCustom.favorites">
+                <option [ngValue]="getSelected(userCustom.favorites, articleOption)" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.id}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">

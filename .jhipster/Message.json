@@ -22,7 +22,7 @@
             "fieldType": "ZonedDateTime"
         }
     ],
-    "changelogDate": "20170616211101",
+    "changelogDate": "20170617015056",
     "entityTableName": "message",
     "dto": "no",
     "pagination": "infinite-scroll",

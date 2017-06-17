@@ -32,9 +32,18 @@ public class UserCustom implements Serializable {
     private String bio;
 
     @OneToOne
-    // @MapsId
     @JoinColumn(unique = true)
     private User user;
+
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Article> articles = new HashSet<>();
+
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Comment> comments = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -87,6 +96,56 @@ public class UserCustom implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public UserCustom articles(Set<Article> articles) {
+        this.articles = articles;
+        return this;
+    }
+
+    public UserCustom addArticle(Article article) {
+        this.articles.add(article);
+        article.setAuthor(this);
+        return this;
+    }
+
+    public UserCustom removeArticle(Article article) {
+        this.articles.remove(article);
+        article.setAuthor(null);
+        return this;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public UserCustom comments(Set<Comment> comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public UserCustom addComment(Comment comment) {
+        this.comments.add(comment);
+        comment.setAuthor(this);
+        return this;
+    }
+
+    public UserCustom removeComment(Comment comment) {
+        this.comments.remove(comment);
+        comment.setAuthor(null);
+        return this;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public Set<UserCustom> getFollowers() {

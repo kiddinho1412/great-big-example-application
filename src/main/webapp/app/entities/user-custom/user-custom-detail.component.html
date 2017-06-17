@@ -18,6 +18,12 @@
                 <a [routerLink]="['/user-custom', follower?.id ]">{{follower.id}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
+        <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.favorite">Favorite</span></dt>
+        <dd>
+            <span *ngFor="let favorite of userCustom.favorites; let last = last">
+                <a [routerLink]="['/article', favorite?.id ]">{{favorite.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"

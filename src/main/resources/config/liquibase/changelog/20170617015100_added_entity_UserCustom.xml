@@ -16,7 +16,7 @@
     <!--
         Added the entity UserCustom.
     -->
-    <changeSet id="20170615150235-1" author="jhipster">
+    <changeSet id="20170617015100-1" author="jhipster">
         <createTable tableName="user_custom">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>

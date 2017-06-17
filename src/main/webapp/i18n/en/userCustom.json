@@ -18,7 +18,10 @@
             },
             "bio": "Bio",
             "user": "User",
+            "article": "Article",
+            "comment": "Comment",
             "follower": "Follower",
+            "favorite": "Favorite",
             "followee": "Followee"
         }
     }

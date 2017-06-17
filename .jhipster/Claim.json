@@ -22,7 +22,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20170616211056",
+    "changelogDate": "20170617015051",
     "entityTableName": "claim",
     "dto": "no",
     "pagination": "no",

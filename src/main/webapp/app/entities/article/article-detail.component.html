@@ -28,15 +28,17 @@
         <dd>
             <span>{{article.updatedAt | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="greatBigExampleApplicationApp.article.author">Author</span></dt>
-        <dd>
-            {{article.author?.login}}
-        </dd>
         <dt><span jhiTranslate="greatBigExampleApplicationApp.article.tag">Tag</span></dt>
         <dd>
             <span *ngFor="let tag of article.tags; let last = last">
                 <a [routerLink]="['/tag', tag?.id ]">{{tag.name}}</a>{{last ? '' : ', '}}
             </span>
+        </dd>
+        <dt><span jhiTranslate="greatBigExampleApplicationApp.article.author">Author</span></dt>
+        <dd>
+            <div *ngIf="article.author">
+                <a [routerLink]="['/user-custom', article.author?.id]">{{article.author?.login}}</a>
+            </div>
         </dd>
     </dl>
 

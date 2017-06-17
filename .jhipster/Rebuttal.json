@@ -29,7 +29,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20170616211059",
+    "changelogDate": "20170617015054",
     "entityTableName": "rebuttal",
     "dto": "no",
     "pagination": "no",

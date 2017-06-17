@@ -44,6 +44,7 @@ public class ArticleResource {
     private static final String ENTITY_NAME = "article";
 
     private final ArticleRepository articleRepository;
+
     private final UserRepository userRepository;
 
     private final ArticleSearchRepository articleSearchRepository;

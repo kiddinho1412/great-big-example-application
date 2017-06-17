@@ -15,10 +15,12 @@ import javax.persistence.EntityManager;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ArticleRepository extends JpaRepository<Article,Long> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("select article from Article article where article.author.login = ?#{principal.username}")
-    List<Article> findByAuthorIsCurrentUser();
+    // Since moving the relationship from User to UserCustom (with no login field) this doesn't work.
+    // Luckily it isn't needed yet.
+    // @Query("select article from Article article where article.author.login = ?#{principal.username}")
+    // List<Article> findByAuthorIsCurrentUser();
 
     @Query("select distinct article from Article article left join fetch article.tags")
     List<Article> findAllWithEagerRelationships();
@@ -30,12 +32,12 @@ public interface ArticleRepository extends JpaRepository<Article,Long> {
     Page<Article> findByAuthor(@Param("author") String author, Pageable pageable);
 
     @Query("select article from Article article left join article.tags tags where tags.name = :tag")
-    Page<Article>  findByTag(@Param("tag") String tag, Pageable pageable);
+    Page<Article> findByTag(@Param("tag") String tag, Pageable pageable);
 
     @Query("select distinct article from Article article left join article.favoriters favoriters where favoriters.id =:id")
-    Page<Article>  findByFavoriter(@Param("id") Long id, Pageable pageable);
+    Page<Article> findByFavoriter(@Param("id") Long id, Pageable pageable);
 
     @Query("select article from Article article")
-    Page<Article>  findAll(Pageable pageable);
+    Page<Article> findAll(Pageable pageable);
 
 }

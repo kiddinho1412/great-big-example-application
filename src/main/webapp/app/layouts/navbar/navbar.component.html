@@ -110,6 +110,12 @@
                         </a>
                         </li>
                         <li>
+                            <a class="dropdown-item" routerLink="comment" routerLinkActive="active" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.comment">Comment</span>
+                        </a>
+                        </li>
+                        <li>
                             <a class="dropdown-item" routerLink="user-custom" routerLinkActive="active" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.userCustom">User Custom</span>

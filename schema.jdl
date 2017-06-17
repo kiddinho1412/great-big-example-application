@@ -60,7 +60,6 @@ entity Message {
     updatedAt ZonedDateTime
 }
 
-paginate Message with infinite-scroll
 
 entity Tag {
 	name String required minlength(2)
@@ -75,7 +74,11 @@ entity Article {
 	updatedAt ZonedDateTime required
 }
 
-paginate Article, Tag with infinite-scroll
+entity Comment {
+	body TextBlob required,
+	createdAt ZonedDateTime required,
+	updatedAt ZonedDateTime required
+}
 
 entity UserCustom {
     bio TextBlob
@@ -90,23 +93,24 @@ entity Profile {
 
 dto Profile with mapstruct
 
+paginate Article, Tag, Message with infinite-scroll
+paginate Comment with pager
 
-relationship ManyToOne {
-	Article{author(login)} to User{article}
+relationship OneToMany {
+	UserCustom{article} to Article{author(login)}
+    Article{comment} to Comment{article}
+    UserCustom{comment} to Comment{author}
 }
 
 relationship ManyToMany {
 	Article{tag(name)} to Tag{article}
-}
-
-relationship OneToOne {
-    UserCustom{user} to User{custom}
-}
-
-relationship ManyToMany {
     UserCustom{follower} to UserCustom{followee}
     UserCustom{favorite} to Article{favoriter}
 }
 
-skipClient for * except Article
-skipServer for *
+relationship OneToOne {
+    UserCustom{user(login)} to User{custom}
+}
+
+// skipClient for * except Article, Comment, UserCustom
+// skipServer for * except Article, Comment, UserCustom

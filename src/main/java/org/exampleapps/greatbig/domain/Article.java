@@ -54,8 +54,10 @@ public class Article implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private ZonedDateTime updatedAt;
 
-    @ManyToOne
-    private User author;
+    @OneToMany(mappedBy = "article")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Comment> comments = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -63,6 +65,9 @@ public class Article implements Serializable {
                joinColumns = @JoinColumn(name="articles_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"))
     private Set<Tag> tags = new HashSet<>();
+
+    @ManyToOne
+    private UserCustom author;
 
     @ManyToMany(mappedBy = "favorites")
     @JsonIgnore
@@ -155,17 +160,29 @@ public class Article implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public User getAuthor() {
-        return author;
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public Article author(User user) {
-        this.author = user;
+    public Article comments(Set<Comment> comments) {
+        this.comments = comments;
         return this;
     }
 
-    public void setAuthor(User user) {
-        this.author = user;
+    public Article addComment(Comment comment) {
+        this.comments.add(comment);
+        comment.setArticle(this);
+        return this;
+    }
+
+    public Article removeComment(Comment comment) {
+        this.comments.remove(comment);
+        comment.setArticle(null);
+        return this;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public Set<Tag> getTags() {
@@ -191,6 +208,19 @@ public class Article implements Serializable {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public UserCustom getAuthor() {
+        return author;
+    }
+
+    public Article author(UserCustom userCustom) {
+        this.author = userCustom;
+        return this;
+    }
+
+    public void setAuthor(UserCustom userCustom) {
+        this.author = userCustom;
     }
 
     public Set<UserCustom> getFavoriters() {
