@@ -27,11 +27,15 @@ public class UserCustom implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "login")
+    private String login;
+
     @Lob
     @Column(name = "bio")
     private String bio;
 
     @OneToOne
+    @MapsId
     @JoinColumn(unique = true)
     private User user;
 
@@ -47,16 +51,12 @@ public class UserCustom implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "user_custom_follower",
-               joinColumns = @JoinColumn(name="user_customs_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
+    @JoinTable(name = "user_custom_follower", joinColumns = @JoinColumn(name = "user_customs_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "followers_id", referencedColumnName = "id"))
     private Set<UserCustom> followers = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "user_custom_favorite",
-               joinColumns = @JoinColumn(name="user_customs_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="favorites_id", referencedColumnName="id"))
+    @JoinTable(name = "user_custom_favorite", joinColumns = @JoinColumn(name = "user_customs_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "favorites_id", referencedColumnName = "id"))
     private Set<Article> favorites = new HashSet<>();
 
     @ManyToMany(mappedBy = "followers")
@@ -70,6 +70,19 @@ public class UserCustom implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public UserCustom login(String login) {
+        this.login = login;
+        return this;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getBio() {
@@ -245,9 +258,6 @@ public class UserCustom implements Serializable {
 
     @Override
     public String toString() {
-        return "UserCustom{" +
-            "id=" + getId() +
-            ", bio='" + getBio() + "'" +
-            "}";
+        return "UserCustom{" + "id=" + getId() + ", login='" + getLogin() + "'" + ", bio='" + getBio() + "'" + "}";
     }
 }

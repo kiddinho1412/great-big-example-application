@@ -81,6 +81,7 @@ entity Comment {
 }
 
 entity UserCustom {
+    login String,
     bio TextBlob
 }
 
@@ -97,20 +98,20 @@ paginate Article, Tag, Message with infinite-scroll
 paginate Comment with pager
 
 relationship OneToMany {
-	UserCustom{article} to Article{author(login)}
-    Article{comment} to Comment{article}
+	UserCustom{article} to Article{author(login)},
+    Article{comment} to Comment{article},
     UserCustom{comment} to Comment{author}
 }
 
 relationship ManyToMany {
-	Article{tag(name)} to Tag{article}
-    UserCustom{follower} to UserCustom{followee}
+	Article{tag(name)} to Tag{article},
+    UserCustom{follower} to UserCustom{followee},
     UserCustom{favorite} to Article{favoriter}
 }
 
 relationship OneToOne {
-    UserCustom{user(login)} to User{custom}
+    UserCustom{user(login)} to User{custom(login)}
 }
 
-// skipClient for * except Article, Comment, UserCustom
-// skipServer for * except Article, Comment, UserCustom
+skipClient for * except User, Profile
+skipServer for * except User, Profile

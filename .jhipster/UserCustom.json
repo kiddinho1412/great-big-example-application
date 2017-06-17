@@ -5,9 +5,9 @@
             "relationshipType": "one-to-one",
             "relationshipName": "user",
             "otherEntityName": "user",
-            "otherEntityField": "id",
+            "otherEntityField": "login",
             "ownerSide": true,
-            "otherEntityRelationshipName": "custom"
+            "otherEntityRelationshipName": "custom(login)"
         },
         {
             "relationshipType": "one-to-many",
@@ -46,6 +46,10 @@
         }
     ],
     "fields": [
+        {
+            "fieldName": "login",
+            "fieldType": "String"
+        },
         {
             "fieldName": "bio",
             "fieldType": "byte[]",

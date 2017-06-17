@@ -16,6 +16,7 @@
             "detail": {
                 "title": "User Custom"
             },
+            "login": "Login",
             "bio": "Bio",
             "user": "User",
             "article": "Article",

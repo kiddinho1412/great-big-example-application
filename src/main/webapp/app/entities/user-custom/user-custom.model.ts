@@ -4,6 +4,7 @@ import { Comment } from '../comment';
 export class UserCustom {
     constructor(
         public id?: number,
+        public login?: string,
         public bio?: any,
         public user?: User,
         public article?: Article,

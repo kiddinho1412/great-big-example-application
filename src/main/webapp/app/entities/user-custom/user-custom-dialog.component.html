@@ -13,6 +13,11 @@
                    [(ngModel)]="userCustom.id" readonly />
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="greatBigExampleApplicationApp.userCustom.login" for="field_login">Login</label>
+            <input type="text" class="form-control" name="login" id="field_login"
+                [(ngModel)]="userCustom.login"  />
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="greatBigExampleApplicationApp.userCustom.bio" for="field_bio">Bio</label>
             <textarea class="form-control" name="bio" id="field_bio"
                 [(ngModel)]="userCustom.bio"  ></textarea>
@@ -22,7 +27,7 @@
             <label jhiTranslate="greatBigExampleApplicationApp.userCustom.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" [(ngModel)]="userCustom.user" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === userCustom.user?.id ? userCustom.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                <option [ngValue]="userOption.id === userCustom.user?.id ? userCustom.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
         </div>
         <div class="form-group">

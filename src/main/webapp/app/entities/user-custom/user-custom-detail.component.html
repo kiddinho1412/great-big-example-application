@@ -4,13 +4,17 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.login">Login</span></dt>
+        <dd>
+            <span>{{userCustom.login}}</span>
+        </dd>
         <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.bio">Bio</span></dt>
         <dd>
             <span>{{userCustom.bio}}</span>
         </dd>
         <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.user">User</span></dt>
         <dd>
-            {{userCustom.user?.id}}
+            {{userCustom.user?.login}}
         </dd>
         <dt><span jhiTranslate="greatBigExampleApplicationApp.userCustom.follower">Follower</span></dt>
         <dd>

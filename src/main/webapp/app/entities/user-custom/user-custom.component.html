@@ -30,6 +30,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.login">Login</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.bio">Bio</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.user">User</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.userCustom.follower">Follower</span></th>
@@ -40,9 +41,10 @@
             <tbody>
             <tr *ngFor="let userCustom of userCustoms ;trackBy: trackId">
                 <td><a [routerLink]="['../user-custom', userCustom.id ]">{{userCustom.id}}</a></td>
+                <td>{{userCustom.login}}</td>
                 <td>{{userCustom.bio}}</td>
                 <td>
-                    {{userCustom.user?.id}}
+                    {{userCustom.user?.login}}
                 </td>
                 <td>
                     <span *ngFor="let follower of userCustom.followers; let last = last">

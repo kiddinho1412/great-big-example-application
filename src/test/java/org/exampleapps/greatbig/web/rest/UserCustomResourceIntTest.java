@@ -39,6 +39,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GreatBigExampleApplicationApp.class)
 public class UserCustomResourceIntTest {
 
+    private static final String DEFAULT_LOGIN = "AAAAAAAAAA";
+    private static final String UPDATED_LOGIN = "BBBBBBBBBB";
+
     private static final String DEFAULT_BIO = "AAAAAAAAAA";
     private static final String UPDATED_BIO = "BBBBBBBBBB";
 
@@ -82,6 +85,7 @@ public class UserCustomResourceIntTest {
      */
     public static UserCustom createEntity(EntityManager em) {
         UserCustom userCustom = new UserCustom()
+            .login(DEFAULT_LOGIN)
             .bio(DEFAULT_BIO);
         return userCustom;
     }
@@ -107,6 +111,7 @@ public class UserCustomResourceIntTest {
         List<UserCustom> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeCreate + 1);
         UserCustom testUserCustom = userCustomList.get(userCustomList.size() - 1);
+        assertThat(testUserCustom.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(testUserCustom.getBio()).isEqualTo(DEFAULT_BIO);
 
         // Validate the UserCustom in Elasticsearch
@@ -144,6 +149,7 @@ public class UserCustomResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userCustom.getId().intValue())))
+            .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
 
@@ -158,6 +164,7 @@ public class UserCustomResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(userCustom.getId().intValue()))
+            .andExpect(jsonPath("$.login").value(DEFAULT_LOGIN.toString()))
             .andExpect(jsonPath("$.bio").value(DEFAULT_BIO.toString()));
     }
 
@@ -180,6 +187,7 @@ public class UserCustomResourceIntTest {
         // Update the userCustom
         UserCustom updatedUserCustom = userCustomRepository.findOne(userCustom.getId());
         updatedUserCustom
+            .login(UPDATED_LOGIN)
             .bio(UPDATED_BIO);
 
         restUserCustomMockMvc.perform(put("/api/user-customs")
@@ -191,6 +199,7 @@ public class UserCustomResourceIntTest {
         List<UserCustom> userCustomList = userCustomRepository.findAll();
         assertThat(userCustomList).hasSize(databaseSizeBeforeUpdate);
         UserCustom testUserCustom = userCustomList.get(userCustomList.size() - 1);
+        assertThat(testUserCustom.getLogin()).isEqualTo(UPDATED_LOGIN);
         assertThat(testUserCustom.getBio()).isEqualTo(UPDATED_BIO);
 
         // Validate the UserCustom in Elasticsearch
@@ -250,6 +259,7 @@ public class UserCustomResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userCustom.getId().intValue())))
+            .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
 
