@@ -33,13 +33,13 @@ public class AuthorResource {
 
     private static final String ENTITY_NAME = "author";
 
-    private final AuthorRepository userCustomRepository;
+    private final AuthorRepository authorRepository;
 
-    private final AuthorSearchRepository userCustomSearchRepository;
+    private final AuthorSearchRepository authorSearchRepository;
 
-    public AuthorResource(AuthorRepository userCustomRepository, AuthorSearchRepository userCustomSearchRepository) {
-        this.userCustomRepository = userCustomRepository;
-        this.userCustomSearchRepository = userCustomSearchRepository;
+    public AuthorResource(AuthorRepository authorRepository, AuthorSearchRepository authorSearchRepository) {
+        this.authorRepository = authorRepository;
+        this.authorSearchRepository = authorSearchRepository;
     }
 
     /**
@@ -56,8 +56,8 @@ public class AuthorResource {
         if (author.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new author cannot already have an ID")).body(null);
         }
-        Author result = userCustomRepository.save(author);
-        userCustomSearchRepository.save(result);
+        Author result = authorRepository.save(author);
+        authorSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/authors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -79,23 +79,23 @@ public class AuthorResource {
         if (author.getId() == null) {
             return createAuthor(author);
         }
-        Author result = userCustomRepository.save(author);
-        userCustomSearchRepository.save(result);
+        Author result = authorRepository.save(author);
+        authorSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, author.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /authors : get all the userCustoms.
+     * GET  /authors : get all the authors.
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of userCustoms in body
+     * @return the ResponseEntity with status 200 (OK) and the list of authors in body
      */
     @GetMapping("/authors")
     @Timed
     public List<Author> getAllAuthors() {
         log.debug("REST request to get all Authors");
-        return userCustomRepository.findAllWithEagerRelationships();
+        return authorRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -108,7 +108,7 @@ public class AuthorResource {
     @Timed
     public ResponseEntity<Author> getAuthor(@PathVariable Long id) {
         log.debug("REST request to get Author : {}", id);
-        Author author = userCustomRepository.findOneWithEagerRelationships(id);
+        Author author = authorRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(author));
     }
 
@@ -122,8 +122,8 @@ public class AuthorResource {
     @Timed
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
         log.debug("REST request to delete Author : {}", id);
-        userCustomRepository.delete(id);
-        userCustomSearchRepository.delete(id);
+        authorRepository.delete(id);
+        authorSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
@@ -139,7 +139,7 @@ public class AuthorResource {
     public List<Author> searchAuthors(@RequestParam String query) {
         log.debug("REST request to search Authors for query {}", query);
         return StreamSupport
-            .stream(userCustomSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .stream(authorSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
 

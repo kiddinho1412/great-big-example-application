@@ -25,7 +25,7 @@ export class ArticleDialogComponent implements OnInit {
 
     tags: Tag[];
 
-    usercustoms: Author[];
+    authors: Author[];
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -33,7 +33,7 @@ export class ArticleDialogComponent implements OnInit {
         private alertService: AlertService,
         private articleService: ArticleService,
         private tagService: TagService,
-        private userCustomService: AuthorService,
+        private authorService: AuthorService,
         private eventManager: EventManager
     ) {
     }
@@ -43,8 +43,8 @@ export class ArticleDialogComponent implements OnInit {
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.tagService.query()
             .subscribe((res: ResponseWrapper) => { this.tags = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.userCustomService.query()
-            .subscribe((res: ResponseWrapper) => { this.usercustoms = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.authorService.query()
+            .subscribe((res: ResponseWrapper) => { this.authors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     byteSize(field) {

@@ -9,6 +9,8 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroPopupComponent } from './hero-dialog.component';
 import { HeroDeletePopupComponent } from './hero-delete-dialog.component';
 
+import { Principal } from '../../shared';
+
 export const heroRoute: Routes = [
     {
         path: 'hero',

@@ -1,12 +1,21 @@
 package org.exampleapps.greatbig.service.dto;
 
-
 import java.io.Serializable;
 import java.util.Objects;
+import java.time.ZonedDateTime;
 import javax.persistence.Lob;
 
 /**
  * A DTO for the Profile entity.
+ *
+ * {
+ * "profile": {
+ *   "username": "jake",
+ *   "bio": "I work at statefarm",
+ *   "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+ *   "following": false
+ * }
+ *}
  */
 public class ProfileDTO implements Serializable {
 

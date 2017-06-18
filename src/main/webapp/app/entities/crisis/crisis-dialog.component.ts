@@ -32,6 +32,7 @@ export class CrisisDialogComponent implements OnInit {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
     }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }
@@ -40,19 +41,24 @@ export class CrisisDialogComponent implements OnInit {
         this.isSaving = true;
         if (this.crisis.id !== undefined) {
             this.subscribeToSaveResponse(
-                this.crisisService.update(this.crisis));
+                this.crisisService.update(this.crisis), false);
         } else {
             this.subscribeToSaveResponse(
-                this.crisisService.create(this.crisis));
+                this.crisisService.create(this.crisis), true);
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<Crisis>) {
+    private subscribeToSaveResponse(result: Observable<Crisis>, isCreated: boolean) {
         result.subscribe((res: Crisis) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
+            this.onSaveSuccess(res, isCreated), (res: Response) => this.onSaveError(res));
     }
 
-    private onSaveSuccess(result: Crisis) {
+    private onSaveSuccess(result: Crisis, isCreated: boolean) {
+        this.alertService.success(
+            isCreated ? 'greatBigExampleApplicationApp.crisis.created'
+            : 'greatBigExampleApplicationApp.crisis.updated',
+            { param : result.id }, null);
+
         this.eventManager.broadcast({ name: 'crisisListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);

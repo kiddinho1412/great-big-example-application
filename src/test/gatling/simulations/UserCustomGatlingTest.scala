@@ -60,7 +60,7 @@ class AuthorGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all userCustoms")
+            exec(http("Get all authors")
             .get("/api/authors")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
@@ -70,16 +70,16 @@ class AuthorGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "login":"SAMPLE_TEXT", "bio":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_userCustom_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_author_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
                 exec(http("Get created author")
-                .get("${new_userCustom_url}")
+                .get("${new_author_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
             .exec(http("Delete created author")
-            .delete("${new_userCustom_url}")
+            .delete("${new_author_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

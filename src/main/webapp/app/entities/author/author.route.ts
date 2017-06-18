@@ -11,7 +11,7 @@ import { AuthorDeletePopupComponent } from './author-delete-dialog.component';
 
 import { Principal } from '../../shared';
 
-export const userCustomRoute: Routes = [
+export const authorRoute: Routes = [
     {
         path: 'author',
         component: AuthorComponent,
@@ -31,7 +31,7 @@ export const userCustomRoute: Routes = [
     }
 ];
 
-export const userCustomPopupRoute: Routes = [
+export const authorPopupRoute: Routes = [
     {
         path: 'author-new',
         component: AuthorPopupComponent,

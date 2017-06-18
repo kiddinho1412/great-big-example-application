@@ -9,6 +9,8 @@ import { NoteDetailComponent } from './note-detail.component';
 import { NotePopupComponent } from './note-dialog.component';
 import { NoteDeletePopupComponent } from './note-delete-dialog.component';
 
+import { Principal } from '../../shared';
+
 export const noteRoute: Routes = [
     {
         path: 'note',

@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Response } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { EventManager, ParseLinks, PaginationUtil, JhiLanguageService, AlertService } from 'ng-jhipster';
 
 import { Claim } from './claim.model';
 import { ClaimService } from './claim.service';
-import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
@@ -34,17 +33,17 @@ claims: Claim[];
             this.claimService.search({
                 query: this.currentSearch,
                 }).subscribe(
-                    (res: Response) => this.claims = res.json(),
-                    (res: Response) => this.onError(res.json())
+                    (res: ResponseWrapper) => this.claims = res.json,
+                    (res: ResponseWrapper) => this.onError(res.json)
                 );
             return;
        }
         this.claimService.query().subscribe(
-            (res: Response) => {
-                this.claims = res.json();
+            (res: ResponseWrapper) => {
+                this.claims = res.json;
                 this.currentSearch = '';
             },
-            (res: Response) => this.onError(res.json())
+            (res: ResponseWrapper) => this.onError(res.json)
         );
     }
 

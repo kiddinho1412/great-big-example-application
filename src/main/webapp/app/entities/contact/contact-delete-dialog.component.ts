@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager } from 'ng-jhipster';
+import { AlertService, EventManager } from 'ng-jhipster';
 
 import { Contact } from './contact.model';
 import { ContactPopupService } from './contact-popup.service';
@@ -19,6 +19,7 @@ export class ContactDeleteDialogComponent {
     constructor(
         private contactService: ContactService,
         public activeModal: NgbActiveModal,
+        private alertService: AlertService,
         private eventManager: EventManager
     ) {
     }
@@ -31,10 +32,11 @@ export class ContactDeleteDialogComponent {
         this.contactService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'contactListModification',
-                content: 'Deleted a contact'
+                content: 'Deleted an contact'
             });
             this.activeModal.dismiss(true);
         });
+        this.alertService.success('greatBigExampleApplicationApp.contact.deleted', { param : id }, null);
     }
 }
 
@@ -50,7 +52,7 @@ export class ContactDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private contactPopupService: ContactPopupService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

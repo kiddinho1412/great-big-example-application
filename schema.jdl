@@ -80,7 +80,6 @@ entity Comment {
 }
 
 entity Author {
-    login String,
     bio TextBlob
 }
 
@@ -91,7 +90,7 @@ entity Profile {
     following Boolean
 }
 
-dto Profile, Author with mapstruct
+dto Profile with mapstruct
 
 paginate Article, Tag, Message with infinite-scroll
 paginate Comment with pager
@@ -112,5 +111,7 @@ relationship OneToOne {
     Author{user(login)} to User{custom(login)}
 }
 
-skipClient for * except User, Profile
-skipServer for * except User, Profile
+// skipClient for * except User, Profile
+// skipServer for * except User, Profile
+skipClient for Profile
+skipServer for Profile

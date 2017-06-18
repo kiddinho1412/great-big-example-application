@@ -25,7 +25,7 @@ export class CommentDialogComponent implements OnInit {
 
     articles: Article[];
 
-    usercustoms: Author[];
+    authors: Author[];
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -33,7 +33,7 @@ export class CommentDialogComponent implements OnInit {
         private alertService: AlertService,
         private commentService: CommentService,
         private articleService: ArticleService,
-        private userCustomService: AuthorService,
+        private authorService: AuthorService,
         private eventManager: EventManager
     ) {
     }
@@ -43,8 +43,8 @@ export class CommentDialogComponent implements OnInit {
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.articleService.query()
             .subscribe((res: ResponseWrapper) => { this.articles = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.userCustomService.query()
-            .subscribe((res: ResponseWrapper) => { this.usercustoms = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.authorService.query()
+            .subscribe((res: ResponseWrapper) => { this.authors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     byteSize(field) {

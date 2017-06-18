@@ -10,7 +10,7 @@ export class AuthorPopupService {
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private userCustomService: AuthorService
+        private authorService: AuthorService
 
     ) {}
 
@@ -21,15 +21,15 @@ export class AuthorPopupService {
         this.isOpen = true;
 
         if (id) {
-            this.userCustomService.find(id).subscribe((author) => {
-                this.userCustomModalRef(component, author);
+            this.authorService.find(id).subscribe((author) => {
+                this.authorModalRef(component, author);
             });
         } else {
-            return this.userCustomModalRef(component, new Author());
+            return this.authorModalRef(component, new Author());
         }
     }
 
-    userCustomModalRef(component: Component, author: Author): NgbModalRef {
+    authorModalRef(component: Component, author: Author): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
         modalRef.componentInstance.author = author;
         modalRef.result.then((result) => {

@@ -17,27 +17,22 @@ import java.util.Objects;
 @Entity
 @Table(name = "author")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "usercustom")
+@Document(indexName = "author")
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @Column(name = "login")
-    private String login;
 
     @Lob
     @Column(name = "bio")
     private String bio;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(unique = true)
-    private User user;
+	@MapsId
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private User user;
 
     @OneToMany(mappedBy = "author")
     @JsonIgnore
@@ -51,18 +46,30 @@ public class Author implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "author_follower", joinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "followers_id", referencedColumnName = "id"))
+    @JoinTable(name = "author_follower",
+               joinColumns = @JoinColumn(name="authors_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
     private Set<Author> followers = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "author_favorite", joinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "favorites_id", referencedColumnName = "id"))
+    @JoinTable(name = "author_favorite",
+               joinColumns = @JoinColumn(name="authors_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="favorites_id", referencedColumnName="id"))
     private Set<Article> favorites = new HashSet<>();
 
-    @ManyToMany(mappedBy = "followers")
+    @ManyToMany
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Author> followees = new HashSet<>();
+
+    // @ManyToMany
+    // @JsonIgnore
+    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // @JoinTable(name = "author_follower",
+    //            joinColumns = @JoinColumn(name="authors_id", referencedColumnName="id"),
+    //            inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
+    // private Set<Author> followees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -70,19 +77,6 @@ public class Author implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public Author login(String login) {
-        this.login = login;
-        return this;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getBio() {
@@ -165,8 +159,8 @@ public class Author implements Serializable {
         return followers;
     }
 
-    public Author followers(Set<Author> userCustoms) {
-        this.followers = userCustoms;
+    public Author followers(Set<Author> authors) {
+        this.followers = authors;
         return this;
     }
 
@@ -182,8 +176,8 @@ public class Author implements Serializable {
         return this;
     }
 
-    public void setFollowers(Set<Author> userCustoms) {
-        this.followers = userCustoms;
+    public void setFollowers(Set<Author> authors) {
+        this.followers = authors;
     }
 
     public Set<Article> getFavorites() {
@@ -215,8 +209,8 @@ public class Author implements Serializable {
         return followees;
     }
 
-    public Author followees(Set<Author> userCustoms) {
-        this.followees = userCustoms;
+    public Author followees(Set<Author> authors) {
+        this.followees = authors;
         return this;
     }
 
@@ -232,8 +226,8 @@ public class Author implements Serializable {
         return this;
     }
 
-    public void setFollowees(Set<Author> userCustoms) {
-        this.followees = userCustoms;
+    public void setFollowees(Set<Author> authors) {
+        this.followees = authors;
     }
 
     @Override
@@ -258,6 +252,9 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + getId() + ", login='" + getLogin() + "'" + ", bio='" + getBio() + "'" + "}";
+        return "Author{" +
+            "id=" + getId() +
+            ", bio='" + getBio() + "'" +
+            "}";
     }
 }

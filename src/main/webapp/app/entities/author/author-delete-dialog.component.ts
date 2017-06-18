@@ -17,7 +17,7 @@ export class AuthorDeleteDialogComponent {
     author: Author;
 
     constructor(
-        private userCustomService: AuthorService,
+        private authorService: AuthorService,
         public activeModal: NgbActiveModal,
         private alertService: AlertService,
         private eventManager: EventManager
@@ -29,9 +29,9 @@ export class AuthorDeleteDialogComponent {
     }
 
     confirmDelete(id: number) {
-        this.userCustomService.delete(id).subscribe((response) => {
+        this.authorService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
-                name: 'userCustomListModification',
+                name: 'authorListModification',
                 content: 'Deleted an author'
             });
             this.activeModal.dismiss(true);
@@ -51,12 +51,12 @@ export class AuthorDeletePopupComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private userCustomPopupService: AuthorPopupService
+        private authorPopupService: AuthorPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            this.modalRef = this.userCustomPopupService
+            this.modalRef = this.authorPopupService
                 .open(AuthorDeleteDialogComponent, params['id']);
         });
     }

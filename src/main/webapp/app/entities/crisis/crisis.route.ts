@@ -9,6 +9,8 @@ import { CrisisDetailComponent } from './crisis-detail.component';
 import { CrisisPopupComponent } from './crisis-dialog.component';
 import { CrisisDeletePopupComponent } from './crisis-delete-dialog.component';
 
+import { Principal } from '../../shared';
+
 export const crisisRoute: Routes = [
     {
         path: 'crisis',

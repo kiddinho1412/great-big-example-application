@@ -19,7 +19,7 @@ export class AuthorDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: EventManager,
         private dataUtils: DataUtils,
-        private userCustomService: AuthorService,
+        private authorService: AuthorService,
         private route: ActivatedRoute
     ) {
     }
@@ -32,7 +32,7 @@ export class AuthorDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.userCustomService.find(id).subscribe((author) => {
+        this.authorService.find(id).subscribe((author) => {
             this.author = author;
         });
     }
@@ -54,7 +54,7 @@ export class AuthorDetailComponent implements OnInit, OnDestroy {
 
     registerChangeInAuthors() {
         this.eventSubscriber = this.eventManager.subscribe(
-            'userCustomListModification',
+            'authorListModification',
             (response) => this.load(this.author.id)
         );
     }

@@ -39,17 +39,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GreatBigExampleApplicationApp.class)
 public class AuthorResourceIntTest {
 
-    private static final String DEFAULT_LOGIN = "AAAAAAAAAA";
-    private static final String UPDATED_LOGIN = "BBBBBBBBBB";
-
     private static final String DEFAULT_BIO = "AAAAAAAAAA";
     private static final String UPDATED_BIO = "BBBBBBBBBB";
 
     @Autowired
-    private AuthorRepository userCustomRepository;
+    private AuthorRepository authorRepository;
 
     @Autowired
-    private AuthorSearchRepository userCustomSearchRepository;
+    private AuthorSearchRepository authorSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -70,8 +67,8 @@ public class AuthorResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        AuthorResource userCustomResource = new AuthorResource(userCustomRepository, userCustomSearchRepository);
-        this.restAuthorMockMvc = MockMvcBuilders.standaloneSetup(userCustomResource)
+        AuthorResource authorResource = new AuthorResource(authorRepository, authorSearchRepository);
+        this.restAuthorMockMvc = MockMvcBuilders.standaloneSetup(authorResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -85,21 +82,20 @@ public class AuthorResourceIntTest {
      */
     public static Author createEntity(EntityManager em) {
         Author author = new Author()
-            .login(DEFAULT_LOGIN)
             .bio(DEFAULT_BIO);
         return author;
     }
 
     @Before
     public void initTest() {
-        userCustomSearchRepository.deleteAll();
+        authorSearchRepository.deleteAll();
         author = createEntity(em);
     }
 
     @Test
     @Transactional
     public void createAuthor() throws Exception {
-        int databaseSizeBeforeCreate = userCustomRepository.findAll().size();
+        int databaseSizeBeforeCreate = authorRepository.findAll().size();
 
         // Create the Author
         restAuthorMockMvc.perform(post("/api/authors")
@@ -108,21 +104,20 @@ public class AuthorResourceIntTest {
             .andExpect(status().isCreated());
 
         // Validate the Author in the database
-        List<Author> userCustomList = userCustomRepository.findAll();
-        assertThat(userCustomList).hasSize(databaseSizeBeforeCreate + 1);
-        Author testAuthor = userCustomList.get(userCustomList.size() - 1);
-        assertThat(testAuthor.getLogin()).isEqualTo(DEFAULT_LOGIN);
+        List<Author> authorList = authorRepository.findAll();
+        assertThat(authorList).hasSize(databaseSizeBeforeCreate + 1);
+        Author testAuthor = authorList.get(authorList.size() - 1);
         assertThat(testAuthor.getBio()).isEqualTo(DEFAULT_BIO);
 
         // Validate the Author in Elasticsearch
-        Author userCustomEs = userCustomSearchRepository.findOne(testAuthor.getId());
-        assertThat(userCustomEs).isEqualToComparingFieldByField(testAuthor);
+        Author authorEs = authorSearchRepository.findOne(testAuthor.getId());
+        assertThat(authorEs).isEqualToComparingFieldByField(testAuthor);
     }
 
     @Test
     @Transactional
     public void createAuthorWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = userCustomRepository.findAll().size();
+        int databaseSizeBeforeCreate = authorRepository.findAll().size();
 
         // Create the Author with an existing ID
         author.setId(1L);
@@ -134,22 +129,21 @@ public class AuthorResourceIntTest {
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
-        List<Author> userCustomList = userCustomRepository.findAll();
-        assertThat(userCustomList).hasSize(databaseSizeBeforeCreate);
+        List<Author> authorList = authorRepository.findAll();
+        assertThat(authorList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     public void getAllAuthors() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(author);
+        authorRepository.saveAndFlush(author);
 
-        // Get all the userCustomList
+        // Get all the authorList
         restAuthorMockMvc.perform(get("/api/authors?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(author.getId().intValue())))
-            .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
 
@@ -157,14 +151,13 @@ public class AuthorResourceIntTest {
     @Transactional
     public void getAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(author);
+        authorRepository.saveAndFlush(author);
 
         // Get the author
         restAuthorMockMvc.perform(get("/api/authors/{id}", author.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(author.getId().intValue()))
-            .andExpect(jsonPath("$.login").value(DEFAULT_LOGIN.toString()))
             .andExpect(jsonPath("$.bio").value(DEFAULT_BIO.toString()));
     }
 
@@ -180,14 +173,13 @@ public class AuthorResourceIntTest {
     @Transactional
     public void updateAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(author);
-        userCustomSearchRepository.save(author);
-        int databaseSizeBeforeUpdate = userCustomRepository.findAll().size();
+        authorRepository.saveAndFlush(author);
+        authorSearchRepository.save(author);
+        int databaseSizeBeforeUpdate = authorRepository.findAll().size();
 
         // Update the author
-        Author updatedAuthor = userCustomRepository.findOne(author.getId());
+        Author updatedAuthor = authorRepository.findOne(author.getId());
         updatedAuthor
-            .login(UPDATED_LOGIN)
             .bio(UPDATED_BIO);
 
         restAuthorMockMvc.perform(put("/api/authors")
@@ -196,21 +188,20 @@ public class AuthorResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the Author in the database
-        List<Author> userCustomList = userCustomRepository.findAll();
-        assertThat(userCustomList).hasSize(databaseSizeBeforeUpdate);
-        Author testAuthor = userCustomList.get(userCustomList.size() - 1);
-        assertThat(testAuthor.getLogin()).isEqualTo(UPDATED_LOGIN);
+        List<Author> authorList = authorRepository.findAll();
+        assertThat(authorList).hasSize(databaseSizeBeforeUpdate);
+        Author testAuthor = authorList.get(authorList.size() - 1);
         assertThat(testAuthor.getBio()).isEqualTo(UPDATED_BIO);
 
         // Validate the Author in Elasticsearch
-        Author userCustomEs = userCustomSearchRepository.findOne(testAuthor.getId());
-        assertThat(userCustomEs).isEqualToComparingFieldByField(testAuthor);
+        Author authorEs = authorSearchRepository.findOne(testAuthor.getId());
+        assertThat(authorEs).isEqualToComparingFieldByField(testAuthor);
     }
 
     @Test
     @Transactional
     public void updateNonExistingAuthor() throws Exception {
-        int databaseSizeBeforeUpdate = userCustomRepository.findAll().size();
+        int databaseSizeBeforeUpdate = authorRepository.findAll().size();
 
         // Create the Author
 
@@ -221,17 +212,17 @@ public class AuthorResourceIntTest {
             .andExpect(status().isCreated());
 
         // Validate the Author in the database
-        List<Author> userCustomList = userCustomRepository.findAll();
-        assertThat(userCustomList).hasSize(databaseSizeBeforeUpdate + 1);
+        List<Author> authorList = authorRepository.findAll();
+        assertThat(authorList).hasSize(databaseSizeBeforeUpdate + 1);
     }
 
     @Test
     @Transactional
     public void deleteAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(author);
-        userCustomSearchRepository.save(author);
-        int databaseSizeBeforeDelete = userCustomRepository.findAll().size();
+        authorRepository.saveAndFlush(author);
+        authorSearchRepository.save(author);
+        int databaseSizeBeforeDelete = authorRepository.findAll().size();
 
         // Get the author
         restAuthorMockMvc.perform(delete("/api/authors/{id}", author.getId())
@@ -239,27 +230,26 @@ public class AuthorResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
-        boolean userCustomExistsInEs = userCustomSearchRepository.exists(author.getId());
-        assertThat(userCustomExistsInEs).isFalse();
+        boolean authorExistsInEs = authorSearchRepository.exists(author.getId());
+        assertThat(authorExistsInEs).isFalse();
 
         // Validate the database is empty
-        List<Author> userCustomList = userCustomRepository.findAll();
-        assertThat(userCustomList).hasSize(databaseSizeBeforeDelete - 1);
+        List<Author> authorList = authorRepository.findAll();
+        assertThat(authorList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
     @Test
     @Transactional
     public void searchAuthor() throws Exception {
         // Initialize the database
-        userCustomRepository.saveAndFlush(author);
-        userCustomSearchRepository.save(author);
+        authorRepository.saveAndFlush(author);
+        authorSearchRepository.save(author);
 
         // Search the author
         restAuthorMockMvc.perform(get("/api/_search/authors?query=id:" + author.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(author.getId().intValue())))
-            .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
             .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
 
@@ -267,14 +257,14 @@ public class AuthorResourceIntTest {
     @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Author.class);
-        Author userCustom1 = new Author();
-        userCustom1.setId(1L);
-        Author userCustom2 = new Author();
-        userCustom2.setId(userCustom1.getId());
-        assertThat(userCustom1).isEqualTo(userCustom2);
-        userCustom2.setId(2L);
-        assertThat(userCustom1).isNotEqualTo(userCustom2);
-        userCustom1.setId(null);
-        assertThat(userCustom1).isNotEqualTo(userCustom2);
+        Author author1 = new Author();
+        author1.setId(1L);
+        Author author2 = new Author();
+        author2.setId(author1.getId());
+        assertThat(author1).isEqualTo(author2);
+        author2.setId(2L);
+        assertThat(author1).isNotEqualTo(author2);
+        author1.setId(null);
+        assertThat(author1).isNotEqualTo(author2);
     }
 }

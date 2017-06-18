@@ -7,8 +7,10 @@ import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager, AlertService, DataUtils } from 'ng-jhipster';
 
 import { Author } from './author.model';
+import { Article } from '../article/article.model';
 import { AuthorPopupService } from './author-popup.service';
 import { AuthorService } from './author.service';
+import { ArticleService } from '../article/article.service';
 import { User, UserService } from '../../shared';
 import { ResponseWrapper } from '../../shared';
 
@@ -24,7 +26,7 @@ export class AuthorDialogComponent implements OnInit {
 
     users: User[];
 
-    usercustoms: Author[];
+    authors: Author[];
 
     articles: Article[];
 
@@ -32,8 +34,9 @@ export class AuthorDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private dataUtils: DataUtils,
         private alertService: AlertService,
-        private userCustomService: AuthorService,
+        private authorService: AuthorService,
         private userService: UserService,
+        private articleService: ArticleService,
         private eventManager: EventManager
     ) {
     }
@@ -43,8 +46,8 @@ export class AuthorDialogComponent implements OnInit {
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.userService.query()
             .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.userCustomService.query()
-            .subscribe((res: ResponseWrapper) => { this.usercustoms = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.authorService.query()
+            .subscribe((res: ResponseWrapper) => { this.authors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.articleService.query()
             .subscribe((res: ResponseWrapper) => { this.articles = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
@@ -78,10 +81,10 @@ export class AuthorDialogComponent implements OnInit {
         this.isSaving = true;
         if (this.author.id !== undefined) {
             this.subscribeToSaveResponse(
-                this.userCustomService.update(this.author), false);
+                this.authorService.update(this.author), false);
         } else {
             this.subscribeToSaveResponse(
-                this.userCustomService.create(this.author), true);
+                this.authorService.create(this.author), true);
         }
     }
 
@@ -93,10 +96,10 @@ export class AuthorDialogComponent implements OnInit {
     private onSaveSuccess(result: Author, isCreated: boolean) {
         this.alertService.success(
             isCreated ? 'greatBigExampleApplicationApp.author.created'
-            : 'greatBigExampleApplicationApp.author.updated',
-            { param : result.id }, null);
+                : 'greatBigExampleApplicationApp.author.updated',
+            { param: result.id }, null);
 
-        this.eventManager.broadcast({ name: 'userCustomListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'authorListModification', content: 'OK' });
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -150,16 +153,16 @@ export class AuthorPopupComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private userCustomPopupService: AuthorPopupService
-    ) {}
+        private authorPopupService: AuthorPopupService
+    ) { }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
-                this.modalRef = this.userCustomPopupService
+            if (params['id']) {
+                this.modalRef = this.authorPopupService
                     .open(AuthorDialogComponent, params['id']);
             } else {
-                this.modalRef = this.userCustomPopupService
+                this.modalRef = this.authorPopupService
                     .open(AuthorDialogComponent);
             }
         });

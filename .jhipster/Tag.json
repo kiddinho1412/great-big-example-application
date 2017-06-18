@@ -20,11 +20,9 @@
             "fieldValidateRulesMinlength": 2
         }
     ],
-    "changelogDate": "20170617015057",
+    "changelogDate": "20170617213420",
     "entityTableName": "tag",
     "dto": "no",
     "pagination": "infinite-scroll",
-    "service": "no",
-    "skipClient": true,
-    "skipServer": true
+    "service": "no"
 }

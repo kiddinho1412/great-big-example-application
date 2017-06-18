@@ -20,6 +20,15 @@ import java.util.Objects;
 @Table(name = "article")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "article")
+// @NamedQuery(name = "Article.findByTag", query = "select Article art inner join art.tags tags, new org.exampleapps.greatbig.service.dto.ProfileDTO("
+//                     + "u.login,"
+//                     + "a.bio,"
+//                     + "u.imageUrl,"
+//                     + ") "
+//                     + "from Author a inner join a.user u "
+//                     + "where tags.name = :tag")
+// @NamedQuery(name = "Article.findByTag", query = "select Article art inner join art.tags tags "
+//                     + "where tags.name = :tag")
 public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -227,8 +236,8 @@ public class Article implements Serializable {
         return favoriters;
     }
 
-    public Article favoriters(Set<Author> userCustoms) {
-        this.favoriters = userCustoms;
+    public Article favoriters(Set<Author> authors) {
+        this.favoriters = authors;
         return this;
     }
 
@@ -244,8 +253,8 @@ public class Article implements Serializable {
         return this;
     }
 
-    public void setFavoriters(Set<Author> userCustoms) {
-        this.favoriters = userCustoms;
+    public void setFavoriters(Set<Author> authors) {
+        this.favoriters = authors;
     }
 
     @Override

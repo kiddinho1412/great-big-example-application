@@ -10,11 +10,9 @@
             ]
         }
     ],
-    "changelogDate": "20170617015052",
+    "changelogDate": "20170617213415",
     "entityTableName": "contact",
     "dto": "no",
     "pagination": "no",
-    "service": "no",
-    "skipClient": true,
-    "skipServer": true
+    "service": "no"
 }

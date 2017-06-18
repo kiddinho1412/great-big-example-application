@@ -12,13 +12,13 @@ import {
     AuthorPopupComponent,
     AuthorDeletePopupComponent,
     AuthorDeleteDialogComponent,
-    userCustomRoute,
-    userCustomPopupRoute,
+    authorRoute,
+    authorPopupRoute,
 } from './';
 
 const ENTITY_STATES = [
-    ...userCustomRoute,
-    ...userCustomPopupRoute,
+    ...authorRoute,
+    ...authorPopupRoute,
 ];
 
 @NgModule({

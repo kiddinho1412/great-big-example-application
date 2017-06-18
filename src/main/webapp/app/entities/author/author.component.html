@@ -1,10 +1,10 @@
 <div>
     <h2>
-        <span jhiTranslate="greatBigExampleApplicationApp.author.home.title">User Customs</span>
+        <span jhiTranslate="greatBigExampleApplicationApp.author.home.title">Authors</span>
         <button class="btn btn-primary float-right create-author" [routerLink]="['/', { outlets: { popup: ['author-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down"  jhiTranslate="greatBigExampleApplicationApp.author.home.createLabel">
-            Create new User Custom
+            Create new Author
             </span>
         </button>
     </h2>
@@ -25,12 +25,11 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="userCustoms">
+    <div class="table-responsive" *ngIf="authors">
         <table class="table table-striped">
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="greatBigExampleApplicationApp.author.login">Login</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.author.bio">Bio</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.author.user">User</span></th>
             <th><span jhiTranslate="greatBigExampleApplicationApp.author.follower">Follower</span></th>
@@ -39,9 +38,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let author of userCustoms ;trackBy: trackId">
+            <tr *ngFor="let author of authors ;trackBy: trackId">
                 <td><a [routerLink]="['../author', author.id ]">{{author.id}}</a></td>
-                <td>{{author.login}}</td>
                 <td>{{author.bio}}</td>
                 <td>
                     {{author.user?.login}}

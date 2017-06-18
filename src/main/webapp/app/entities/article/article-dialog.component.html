@@ -101,7 +101,7 @@
             <label jhiTranslate="greatBigExampleApplicationApp.article.author" for="field_author">Author</label>
             <select class="form-control" id="field_author" name="author" [(ngModel)]="article.author" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="userCustomOption.id === article.author?.id ? article.author : userCustomOption" *ngFor="let userCustomOption of usercustoms; trackBy: trackAuthorById">{{userCustomOption.login}}</option>
+                <option [ngValue]="authorOption.id === article.author?.id ? article.author : authorOption" *ngFor="let authorOption of authors; trackBy: trackAuthorById">{{authorOption.login}}</option>
             </select>
         </div>
     </div>

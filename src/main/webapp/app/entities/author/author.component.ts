@@ -13,13 +13,13 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
     templateUrl: './author.component.html'
 })
 export class AuthorComponent implements OnInit, OnDestroy {
-userCustoms: Author[];
+authors: Author[];
     currentAccount: any;
     eventSubscriber: Subscription;
     currentSearch: string;
 
     constructor(
-        private userCustomService: AuthorService,
+        private authorService: AuthorService,
         private alertService: AlertService,
         private dataUtils: DataUtils,
         private eventManager: EventManager,
@@ -31,17 +31,17 @@ userCustoms: Author[];
 
     loadAll() {
         if (this.currentSearch) {
-            this.userCustomService.search({
+            this.authorService.search({
                 query: this.currentSearch,
                 }).subscribe(
-                    (res: ResponseWrapper) => this.userCustoms = res.json,
+                    (res: ResponseWrapper) => this.authors = res.json,
                     (res: ResponseWrapper) => this.onError(res.json)
                 );
             return;
        }
-        this.userCustomService.query().subscribe(
+        this.authorService.query().subscribe(
             (res: ResponseWrapper) => {
-                this.userCustoms = res.json;
+                this.authors = res.json;
                 this.currentSearch = '';
             },
             (res: ResponseWrapper) => this.onError(res.json)
@@ -84,7 +84,7 @@ userCustoms: Author[];
         return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInAuthors() {
-        this.eventSubscriber = this.eventManager.subscribe('userCustomListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('authorListModification', (response) => this.loadAll());
     }
 
     private onError(error) {

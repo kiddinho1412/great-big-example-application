@@ -9,6 +9,8 @@ import { MessageDetailComponent } from './message-detail.component';
 import { MessagePopupComponent } from './message-dialog.component';
 import { MessageDeletePopupComponent } from './message-delete-dialog.component';
 
+import { Principal } from '../../shared';
+
 export const messageRoute: Routes = [
     {
         path: 'message',

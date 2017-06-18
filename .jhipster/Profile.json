@@ -20,7 +20,7 @@
             "fieldType": "Boolean"
         }
     ],
-    "changelogDate": "20170617015101",
+    "changelogDate": "20170617213424",
     "entityTableName": "profile",
     "dto": "mapstruct",
     "pagination": "no",

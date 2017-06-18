@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager } from 'ng-jhipster';
+import { AlertService, EventManager } from 'ng-jhipster';
 
 import { ClaimRebuttal } from './claim-rebuttal.model';
 import { ClaimRebuttalPopupService } from './claim-rebuttal-popup.service';
@@ -19,6 +19,7 @@ export class ClaimRebuttalDeleteDialogComponent {
     constructor(
         private claimRebuttalService: ClaimRebuttalService,
         public activeModal: NgbActiveModal,
+        private alertService: AlertService,
         private eventManager: EventManager
     ) {
     }
@@ -35,6 +36,7 @@ export class ClaimRebuttalDeleteDialogComponent {
             });
             this.activeModal.dismiss(true);
         });
+        this.alertService.success('greatBigExampleApplicationApp.claimRebuttal.deleted', { param : id }, null);
     }
 }
 

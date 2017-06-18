@@ -33,7 +33,7 @@ describe('Component Tests', () => {
                     EventManager
                 ]
             }).overrideTemplate(MessageDetailComponent, '')
-                .compileComponents();
+            .compileComponents();
         }));
 
         beforeEach(() => {

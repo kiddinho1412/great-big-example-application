@@ -39,6 +39,7 @@ export class TagDialogComponent implements OnInit {
         this.articleService.query()
             .subscribe((res: ResponseWrapper) => { this.articles = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }
