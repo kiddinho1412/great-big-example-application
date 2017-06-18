@@ -393,6 +393,10 @@ If successful, you'd likely do nothing that the user sees. However, if you hadn'
 object would not have all the transient attributes of the object in the request. So, for example, if its location on the screen were a transient attribute, then the user would see it 
 jump to a default location since the former location would be lost.
 
+## 4) Why is it necessary to copy objects before posting to the server?
+
+In the [convert](https://github.com/jhipster/generator-jhipster/blob/master/generators/entity/templates/client/angular/src/main/webapp/app/entities/_entity.service.ts#L138) method, when there are date fields (Instant, ZonedDateTime, LocalDate), it's necessary to convert the date to the sever format. If you use the original entity object, the values displayed in the form also change (fields appear empty and validation triggers). By copying the object, the changes to date fields only affect the object sent to the server
+
 Any other questions?  Just ask.
 
 # Demonstrations, Features and Selling Points
