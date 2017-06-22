@@ -166,13 +166,13 @@ public class Author implements Serializable {
 
     public Author addFollower(Author author) {
         this.followers.add(author);
-        author.getTheFollowees().add(this);
+        author.getFollowees().add(this);
         return this;
     }
 
     public Author removeFollower(Author author) {
         this.followers.remove(author);
-        author.getTheFollowees().remove(this);
+        author.getFollowees().remove(this);
         return this;
     }
 
@@ -205,7 +205,7 @@ public class Author implements Serializable {
         this.favorites = articles;
     }
 
-    public Set<Author> getTheFollowees() {
+    public Set<Author> getFollowees() {
         return followees;
     }
 
