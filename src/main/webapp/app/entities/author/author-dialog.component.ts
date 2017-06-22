@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, AlertService, DataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { Author } from './author.model';
 import { Article } from '../article/article.model';
@@ -32,12 +32,12 @@ export class AuthorDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: DataUtils,
-        private alertService: AlertService,
+        private dataUtils: JhiDataUtils,
+        private alertService: JhiAlertService,
         private authorService: AuthorService,
-        private userService: UserService,
         private articleService: ArticleService,
-        private eventManager: EventManager
+        private userService: UserService,
+        private eventManager: JhiEventManager
     ) {
     }
 

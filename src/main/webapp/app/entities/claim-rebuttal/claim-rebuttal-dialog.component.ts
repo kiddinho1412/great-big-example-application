@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, AlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { ClaimRebuttal } from './claim-rebuttal.model';
 import { ClaimRebuttalPopupService } from './claim-rebuttal-popup.service';
@@ -22,9 +22,9 @@ export class ClaimRebuttalDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private alertService: AlertService,
+        private alertService: JhiAlertService,
         private claimRebuttalService: ClaimRebuttalService,
-        private eventManager: EventManager
+        private eventManager: JhiEventManager
     ) {
     }
 

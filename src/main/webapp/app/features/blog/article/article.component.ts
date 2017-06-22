@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { EventManager } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,7 +12,7 @@ import { Comment } from '../../../core/store/comment/comment.model';
 import { User } from '../../../core/store/user/user.model';
 import { slices } from '../../../core/store/util';
 import * as EntityActions from '../../../core/store/entity/entity.actions';
-import { AlertService } from 'ng-jhipster';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-article-component',
@@ -32,9 +32,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     isDeleting = false;
 
     constructor(
-        private eventManager: EventManager,
+        private eventManager: JhiEventManager,
         private store: Store<fromRoot.RootState>,
-        private alertService: AlertService,
+        private alertService: JhiAlertService,
         private route: ActivatedRoute,
         private router: Router
     ) { }

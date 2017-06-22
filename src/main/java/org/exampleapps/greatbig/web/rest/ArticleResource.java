@@ -112,6 +112,8 @@ public class ArticleResource {
         Page<Article> page;
         if(parameters.containsKey("tag")) {
             page = articleRepository.findByTag(parameters.getFirst("tag"), pageable);
+
+            //
         } else if(parameters.containsKey("author")) {
             page = articleRepository.findByAuthor(parameters.getFirst("author"), pageable);
         } else if(parameters.containsKey("favorited")) {

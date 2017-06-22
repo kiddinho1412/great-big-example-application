@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { DateUtils } from 'ng-jhipster';
+import { JhiDateUtils } from 'ng-jhipster';
 
 import { Rebuttal } from './rebuttal.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
@@ -12,7 +12,7 @@ export class RebuttalService {
     private resourceUrl = 'api/rebuttals';
     private resourceSearchUrl = 'api/_search/rebuttals';
 
-    constructor(private http: Http, private dateUtils: DateUtils) { }
+    constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
     create(rebuttal: Rebuttal): Observable<Rebuttal> {
         const copy = this.convert(rebuttal);

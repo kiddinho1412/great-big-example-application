@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import { DateUtils, DataUtils, EventManager } from 'ng-jhipster';
+import { JhiDateUtils, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { GreatBigExampleApplicationTestModule } from '../../../test.module';
 import { MockActivatedRoute } from '../../../helpers/mock-route.service';
 import { CommentDetailComponent } from '../../../../../../main/webapp/app/entities/comment/comment-detail.component';
@@ -22,18 +22,18 @@ describe('Component Tests', () => {
                 imports: [GreatBigExampleApplicationTestModule],
                 declarations: [CommentDetailComponent],
                 providers: [
-                    DateUtils,
-                    DataUtils,
+                    JhiDateUtils,
+                    JhiDataUtils,
                     DatePipe,
                     {
                         provide: ActivatedRoute,
-                        useValue: new MockActivatedRoute({id: 123})
+                        useValue: new MockActivatedRoute({ id: 123 })
                     },
                     CommentService,
-                    EventManager
+                    JhiEventManager
                 ]
             }).overrideTemplate(CommentDetailComponent, '')
-            .compileComponents();
+                .compileComponents();
         }));
 
         beforeEach(() => {
@@ -45,16 +45,16 @@ describe('Component Tests', () => {
 
         describe('OnInit', () => {
             it('Should call load all on init', () => {
-            // GIVEN
+                // GIVEN
 
-            spyOn(service, 'find').and.returnValue(Observable.of(new Comment(10)));
+                spyOn(service, 'find').and.returnValue(Observable.of(new Comment(10)));
 
-            // WHEN
-            comp.ngOnInit();
+                // WHEN
+                comp.ngOnInit();
 
-            // THEN
-            expect(service.find).toHaveBeenCalledWith(123);
-            expect(comp.comment).toEqual(jasmine.objectContaining({id:10}));
+                // THEN
+                expect(service.find).toHaveBeenCalledWith(123);
+                expect(comp.comment).toEqual(jasmine.objectContaining({ id: 10 }));
             });
         });
     });

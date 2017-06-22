@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { EventManager, ParseLinks, PaginationUtil, JhiLanguageService, AlertService, DataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Article } from './article.model';
 import { ArticleService } from './article.service';
@@ -28,10 +28,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     constructor(
         private articleService: ArticleService,
-        private alertService: AlertService,
-        private dataUtils: DataUtils,
-        private eventManager: EventManager,
-        private parseLinks: ParseLinks,
+        private alertService: JhiAlertService,
+        private dataUtils: JhiDataUtils,
+        private eventManager: JhiEventManager,
+        private parseLinks: JhiParseLinks,
         private activatedRoute: ActivatedRoute,
         private principal: Principal
     ) {

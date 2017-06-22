@@ -1,16 +1,15 @@
-import { User } from '../../shared';
-import { Article } from '../article';
-import { Comment } from '../comment';
-export class Author {
+import { BaseEntity, User } from './../../shared';
+
+export class Author implements BaseEntity {
     constructor(
         public id?: number,
         public bio?: any,
         public user?: User,
-        public article?: Article,
-        public comment?: Comment,
-        public follower?: Author,
-        public favorite?: Article,
-        public followee?: Author,
+        public articles?: BaseEntity[],
+        public comments?: BaseEntity[],
+        public followers?: BaseEntity[],
+        public favorites?: BaseEntity[],
+        public followees?: BaseEntity[],
     ) {
     }
 }

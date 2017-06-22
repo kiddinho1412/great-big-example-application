@@ -1,3 +1,6 @@
+// References
+// http://dontpanic.42.nl/2011/06/spring-data-jpa-with-querydsl.html
+
 package org.exampleapps.greatbig.repository;
 
 import org.exampleapps.greatbig.domain.Article;
@@ -28,46 +31,45 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("select article from Article article left join fetch article.tags where article.id = :id")
     Article findOneWithEagerRelationships(@Param("id") Long id);
 
-    // @Query("select article from Article article where article.author.login = :author")
-    // Page<Article> findByAuthor(@Param("author") String author, Pageable pageable);
-    @Query("select new org.exampleapps.greatbig.service.dto.ArticleDTO("
-        + "a.slug,"
-        + "a.title,"
-        + "a.description,"
-        + "a.body,"
-        + "null,"
-        // + "a.tagList,"
-        + "a.createdAt,"
-        + "a.updatedAt,"
-        + "false,"
-        // + "a.favorited,"
-        + "0,"
-        // + "a.favoritesCount,"
-        + "null)"
-        + "from Article a inner join a.author author inner join author.user where user.login = :author")
+    @Query("select article from Article article inner join Author author inner join User user where user.login = :author")
+    // @Query("select new org.exampleapps.greatbig.service.dto.ArticleDTO("
+    //     + "a.slug,"
+    //     + "a.title,"
+    //     + "a.description,"
+    //     + "a.body,"
+    //     + "null,"
+    //     // + "a.tagList,"
+    //     + "a.createdAt,"
+    //     + "a.updatedAt,"
+    //     + "false,"
+    //     // + "a.favorited,"
+    //     + "0,"
+    //     // + "a.favoritesCount,"
+    //     + "null)"
+    //     + "from Article a inner join a.author author inner join author.user where user.login = :author")
     Page<Article> findByAuthor(@Param("author") String author, Pageable pageable);
 
-    // @Query("select article from Article article left join article.tags tags where tags.name = :tag")
-    @Query("select new org.exampleapps.greatbig.service.dto.ArticleDTO("
-        + "a.slug,"
-        + "a.title,"
-        + "a.description,"
-        + "a.body,"
-        + "null,"
-        // + "a.tagList,"
-        + "a.createdAt,"
-        + "a.updatedAt,"
-        + "false,"
-        // + "a.favorited,"
-        + "0,"
-        // + "a.favoritesCount,"
-        // + "new org.exampleapps.greatbig.service.dto.ProfileDTO("
-        // + "user.login,"
-        // + "author.bio,"
-        // + "user.image,"
-        // + "false))"
-        + "null)"
-        + "from Article a inner join a.author author inner join a.tags inner join author.user user where tags.name = :tag")
+    @Query("select article from Article article left join article.tags tags where tags.name = :tag")
+    // @Query("select new org.exampleapps.greatbig.service.dto.ArticleDTO("
+    //     + "a.slug,"
+    //     + "a.title,"
+    //     + "a.description,"
+    //     + "a.body,"
+    //     + "null,"
+    //     // + "a.tagList,"
+    //     + "a.createdAt,"
+    //     + "a.updatedAt,"
+    //     + "false,"
+    //     // + "a.favorited,"
+    //     + "0,"
+    //     // + "a.favoritesCount,"
+    //     // + "new org.exampleapps.greatbig.service.dto.ProfileDTO("
+    //     // + "user.login,"
+    //     // + "author.bio,"
+    //     // + "user.image,"
+    //     // + "false))"
+    //     + "null)"
+    //     + "from Article a inner join a.author author inner join a.tags inner join author.user user where tags.name = :tag")
     Page<Article> findByTag(@Param("tag") String tag, Pageable pageable);
 
     @Query("select distinct article from Article article left join article.favoriters favoriters where favoriters.id =:id")

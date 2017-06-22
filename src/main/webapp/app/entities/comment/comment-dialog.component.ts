@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, AlertService, DataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Comment } from './comment.model';
 import { CommentPopupService } from './comment-popup.service';
@@ -29,12 +29,12 @@ export class CommentDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: DataUtils,
-        private alertService: AlertService,
+        private dataUtils: JhiDataUtils,
+        private alertService: JhiAlertService,
         private commentService: CommentService,
         private articleService: ArticleService,
         private authorService: AuthorService,
-        private eventManager: EventManager
+        private eventManager: JhiEventManager
     ) {
     }
 

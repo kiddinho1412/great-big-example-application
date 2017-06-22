@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, EventManager } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
 import { Claim } from './claim.model';
 import { ClaimPopupService } from './claim-popup.service';
@@ -19,8 +19,8 @@ export class ClaimDeleteDialogComponent {
     constructor(
         private claimService: ClaimService,
         public activeModal: NgbActiveModal,
-        private alertService: AlertService,
-        private eventManager: EventManager
+        private alertService: JhiAlertService,
+        private eventManager: JhiEventManager
     ) {
     }
 
@@ -36,7 +36,7 @@ export class ClaimDeleteDialogComponent {
             });
             this.activeModal.dismiss(true);
         });
-        this.alertService.success('greatBigExampleApplicationApp.claim.deleted', { param : id }, null);
+        this.alertService.success('greatBigExampleApplicationApp.claim.deleted', { param: id }, null);
     }
 }
 
@@ -52,7 +52,7 @@ export class ClaimDeletePopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private claimPopupService: ClaimPopupService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {

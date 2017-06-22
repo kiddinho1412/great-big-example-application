@@ -1,4 +1,6 @@
-export class Claim {
+import { BaseEntity } from './../../shared';
+
+export class Claim implements BaseEntity {
     constructor(
         public id?: number,
         public name?: string,

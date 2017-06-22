@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { EventManager , DataUtils } from 'ng-jhipster';
+import { JhiEventManager , JhiDataUtils } from 'ng-jhipster';
 
 import { Author } from './author.model';
 import { AuthorService } from './author.service';
@@ -17,8 +17,8 @@ export class AuthorDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
 
     constructor(
-        private eventManager: EventManager,
-        private dataUtils: DataUtils,
+        private eventManager: JhiEventManager,
+        private dataUtils: JhiDataUtils,
         private authorService: AuthorService,
         private route: ActivatedRoute
     ) {

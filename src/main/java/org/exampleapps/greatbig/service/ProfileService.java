@@ -117,7 +117,7 @@ public class ProfileService {
     Optional<User> currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
     if (currentUser.isPresent()) {
       Author currentAuthor = this.getAuthor(currentUser.get().getId());
-      following = currentAuthor.getFollowees().contains(subjectAuthor);
+      following = currentAuthor.getTheFollowees().contains(subjectAuthor);
     }
     return following;
   }

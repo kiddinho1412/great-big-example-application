@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, AlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Tag } from './tag.model';
 import { TagPopupService } from './tag-popup.service';
@@ -26,10 +26,10 @@ export class TagDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private alertService: AlertService,
+        private alertService: JhiAlertService,
         private tagService: TagService,
         private articleService: ArticleService,
-        private eventManager: EventManager
+        private eventManager: JhiEventManager
     ) {
     }
 
@@ -63,10 +63,10 @@ export class TagDialogComponent implements OnInit {
     private onSaveSuccess(result: Tag, isCreated: boolean) {
         this.alertService.success(
             isCreated ? 'greatBigExampleApplicationApp.tag.created'
-            : 'greatBigExampleApplicationApp.tag.updated',
-            { param : result.id }, null);
+                : 'greatBigExampleApplicationApp.tag.updated',
+            { param: result.id }, null);
 
-        this.eventManager.broadcast({ name: 'tagListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'tagListModification', content: 'OK' });
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -113,11 +113,11 @@ export class TagPopupComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private tagPopupService: TagPopupService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.modalRef = this.tagPopupService
                     .open(TagDialogComponent, params['id']);
             } else {

@@ -1,7 +1,6 @@
-import { Comment } from '../comment';
-import { Tag } from '../tag';
-import { Author } from '../author';
-export class Article {
+import { BaseEntity } from './../../shared';
+
+export class Article implements BaseEntity {
     constructor(
         public id?: number,
         public slug?: string,
@@ -10,10 +9,10 @@ export class Article {
         public body?: any,
         public createdAt?: any,
         public updatedAt?: any,
-        public comment?: Comment,
-        public tag?: Tag,
-        public author?: Author,
-        public favoriter?: Author,
+        public comments?: BaseEntity[],
+        public tags?: BaseEntity[],
+        public author?: BaseEntity,
+        public favoriters?: BaseEntity[],
     ) {
     }
 }

@@ -1,13 +1,13 @@
-import { Article } from '../article';
-import { Author } from '../author';
-export class Comment {
+import { BaseEntity } from './../../shared';
+
+export class Comment implements BaseEntity {
     constructor(
         public id?: number,
         public body?: any,
         public createdAt?: any,
         public updatedAt?: any,
-        public article?: Article,
-        public author?: Author,
+        public article?: BaseEntity,
+        public author?: BaseEntity,
     ) {
     }
 }

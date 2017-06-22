@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, AlertService, DataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Article } from './article.model';
 import { ArticlePopupService } from './article-popup.service';
@@ -29,12 +29,12 @@ export class ArticleDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: DataUtils,
-        private alertService: AlertService,
+        private dataUtils: JhiDataUtils,
+        private alertService: JhiAlertService,
         private articleService: ArticleService,
         private tagService: TagService,
         private authorService: AuthorService,
-        private eventManager: EventManager
+        private eventManager: JhiEventManager
     ) {
     }
 
