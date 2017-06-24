@@ -22,6 +22,7 @@ import { AppConfig } from '../../app.config';
  * approach uses plurals so this takes care of that.
  */
 const endpoints = {
+    article: 'articles',
     claim: 'claims',
     claimRebuttal: 'claim-rebuttals',
     contact: 'contacts',

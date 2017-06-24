@@ -45,6 +45,7 @@ public class Author implements Serializable {
     private Set<Comment> comments = new HashSet<>();
 
     @ManyToMany
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "author_follower",
                joinColumns = @JoinColumn(name="authors_id", referencedColumnName="id"),
@@ -61,15 +62,10 @@ public class Author implements Serializable {
     @ManyToMany
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "author_follower",
+               joinColumns = @JoinColumn(name="authors_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
     private Set<Author> followees = new HashSet<>();
-
-    // @ManyToMany
-    // @JsonIgnore
-    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    // @JoinTable(name = "author_follower",
-    //            joinColumns = @JoinColumn(name="authors_id", referencedColumnName="id"),
-    //            inverseJoinColumns = @JoinColumn(name="followers_id", referencedColumnName="id"))
-    // private Set<Author> followees = new HashSet<>();
 
     public Long getId() {
         return id;

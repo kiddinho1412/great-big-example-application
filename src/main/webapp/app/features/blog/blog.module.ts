@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 import { BlogPage } from './blog.page';
 import { ArticleModule } from './article/article.module';
@@ -12,6 +13,7 @@ import { customHttpProvider } from '../../blocks/interceptor/http.provider';
 import { SharedModule } from './shared/shared.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { ArticleEffects } from '../../core/store/article/article.effects';
 
 @NgModule({
     imports: [
@@ -20,7 +22,8 @@ import { HeaderComponent } from './shared/header/header.component';
         EditorModule,
         HomeModule,
         ProfileModule,
-        SharedModule
+        SharedModule,
+        EffectsModule.run(ArticleEffects),
     ],
     declarations: [
         BlogPage,

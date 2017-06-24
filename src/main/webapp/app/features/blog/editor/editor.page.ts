@@ -41,9 +41,13 @@ export class EditorPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.articleSub = this.store.select(fromRoot.getSelectedArticle).subscribe((article) => {
             if (article) {
+                this.article = article;
                 this.articleForm.patchValue(article);
             }
         });
+        if (this.route.snapshot.url.length == 1) {
+            this.store.dispatch(new EntityActions.AddTemp(slices.ARTICLE));
+        }
     }
 
     addTag() {
@@ -64,11 +68,14 @@ export class EditorPage implements OnInit, OnDestroy {
     submitForm() {
         this.isSubmitting = true;
 
-        this.store.dispatch(new EntityActions.Update(slices.ARTICLE, this.articleForm.value));
+        this.store.dispatch(new EntityActions.Add(slices.ARTICLE, this.articleForm.value));
         // (article) => this.router.navigateByUrl('/article/' + article.slug),  TODO: handle routing on success
     }
 
     ngOnDestroy() {
         this.articleSub && this.articleSub.unsubscribe();
+        if (this.articleForm.value.id === EntityActions.TEMP) {
+            this.store.dispatch(new EntityActions.DeleteTemp(slices.CONTACT));
+        }
     }
 }

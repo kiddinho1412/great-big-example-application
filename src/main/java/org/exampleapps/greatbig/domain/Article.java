@@ -1,9 +1,12 @@
 package org.exampleapps.greatbig.domain;
+import org.exampleapps.greatbig.repository.UserRepository;
 
+import org.exampleapps.greatbig.security.SecurityUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -12,6 +15,7 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A Article.
@@ -257,6 +261,23 @@ public class Article implements Serializable {
         this.favoriters = authors;
     }
 
+    public Integer getFavoritesCount() {
+        return 5;
+        // return getFavoriters().size();
+    }
+
+    // @Autowired
+    // private UserRepository userRepository;
+
+    public Boolean getFavorited() {
+    //   String login = SecurityUtils.getCurrentUserLogin();
+    //   Optional<User> currentUser = userRepository.findOneByLogin(login);
+    //   if (currentUser.isPresent()) {
+    //     return this.getFavoriters().contains(currentUser);
+    //   }
+      return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -284,6 +305,7 @@ public class Article implements Serializable {
             ", slug='" + getSlug() + "'" +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
+            ", tag='" + getTags() + "'" +
             ", body='" + getBody() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

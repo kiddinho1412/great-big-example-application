@@ -8,6 +8,7 @@ import org.exampleapps.greatbig.repository.ArticleRepository;
 import org.exampleapps.greatbig.domain.User;
 import org.exampleapps.greatbig.repository.UserRepository;
 import org.exampleapps.greatbig.repository.search.ArticleSearchRepository;
+import org.exampleapps.greatbig.security.SecurityUtils;
 import org.exampleapps.greatbig.web.rest.util.HeaderUtil;
 import org.exampleapps.greatbig.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -110,6 +111,13 @@ public class ArticleResource {
     public ResponseEntity<List<Article>> getAllArticles(@ApiParam Pageable pageable, @RequestParam MultiValueMap<String, String> parameters) {
         log.debug("REST request to get a page of Articles");
         Page<Article> page;
+
+        // if(parameters.containsKey("limit")) {
+        //     pageable.setLimit(parameters.getFirst("limit"));
+        // }
+        // if(parameters.containsKey("offset")) {
+        //     pageable.setOffset(parameters.getFirst("offset"));
+        // }
         if(parameters.containsKey("tag")) {
             page = articleRepository.findByTag(parameters.getFirst("tag"), pageable);
 
@@ -124,6 +132,22 @@ public class ArticleResource {
             page = articleRepository.findAll(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /articles/feed : get articles of followed authors
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of articles in body
+     */
+    @GetMapping("/articles/feed")
+    @Timed
+    public ResponseEntity<List<Article>> getFeed(@ApiParam Pageable pageable, @RequestParam MultiValueMap<String, String> parameters) {
+        log.debug("REST request to get a page of Articles");
+        String currentUser = SecurityUtils.getCurrentUserLogin();
+        Page<Article> page = articleRepository.findByFollowed(currentUser, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles/feed");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
