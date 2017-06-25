@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import org.exampleapps.greatbig.domain.Article;
 
 import org.exampleapps.greatbig.service.ProfileService;
+import org.exampleapps.greatbig.service.dto.ArticleDTO;
 import org.exampleapps.greatbig.repository.ArticleRepository;
 import org.exampleapps.greatbig.domain.User;
 import org.exampleapps.greatbig.repository.UserRepository;
@@ -29,8 +30,11 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import java.time.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 /**
@@ -63,6 +67,22 @@ public class ArticleResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new article, or with status 400 (Bad Request) if the article has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
+    // @PostMapping("/articles")
+    // @Timed
+    // public ResponseEntity<Article> createArticle(@Valid @RequestBody ArticleDTO articleDTO) throws URISyntaxException {
+    //     ZonedDateTime zoneDateTime=ZonedDateTime.now();
+
+	// 	System.out.println("ZONEDATETIME: " + zoneDateTime);
+    //     Article article = new Article();
+    //     article.setSlug(articleDTO.getSlug());
+    //     article.setTitle(articleDTO.getTitle());
+    //     article.setDescription(articleDTO.getDescription());
+    //     article.setBody(articleDTO.getBody());
+    //     article.setCreatedAt(zoneDateTime);
+    //     article.setUpdatedAt(zoneDateTime);
+    //     return createArticle(article);
+    // }
+
     @PostMapping("/articles")
     @Timed
     public ResponseEntity<Article> createArticle(@Valid @RequestBody Article article) throws URISyntaxException {
@@ -70,6 +90,7 @@ public class ArticleResource {
         if (article.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new article cannot already have an ID")).body(null);
         }
+
         Article result = articleRepository.save(article);
         articleSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/articles/" + result.getId()))

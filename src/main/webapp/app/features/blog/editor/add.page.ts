@@ -11,10 +11,10 @@ import { slices } from '../../../core/store/util';
 import * as EntityActions from '../../../core/store/entity/entity.actions';
 
 @Component({
-    selector: 'jhi-editor-page',
-    templateUrl: './editor.page.html'
+    selector: 'jhi-add-page',
+    templateUrl: './add.page.html'
 })
-export class EditorPage implements OnInit, OnDestroy {
+export class AddPage implements OnInit, OnDestroy {
     articleSub: Subscription;
     article: Article;
     articleForm: FormGroup;
@@ -39,12 +39,15 @@ export class EditorPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.articleSub = this.store.select(fromRoot.getSelectedArticle).subscribe((article) => {
+        this.articleSub = this.store.select(fromRoot.getTempArticle).subscribe((article) => {
             if (article) {
                 this.article = article;
                 this.articleForm.patchValue(article);
             }
         });
+        if (this.route.snapshot.url.length == 1) {
+            this.store.dispatch(new EntityActions.AddTemp(slices.ARTICLE));
+        }
     }
 
     addTag() {
@@ -64,12 +67,15 @@ export class EditorPage implements OnInit, OnDestroy {
 
     submitForm() {
         this.isSubmitting = true;
-
-        this.store.dispatch(new EntityActions.Add(slices.ARTICLE, this.articleForm.value));
+        const submission = { ...this.articleForm.value, slug: this.articleForm.value.title.replace(' ', '_').toLowerCase() }; // TODO: This should happen serverside
+        this.store.dispatch(new EntityActions.Add(slices.ARTICLE, submission));
         // (article) => this.router.navigateByUrl('/article/' + article.slug),  TODO: handle routing on success
     }
 
     ngOnDestroy() {
         this.articleSub && this.articleSub.unsubscribe();
+        if (this.articleForm.value.id === EntityActions.TEMP) {
+            this.store.dispatch(new EntityActions.DeleteTemp(slices.CONTACT));
+        }
     }
 }

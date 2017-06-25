@@ -400,6 +400,7 @@ export const getArticleEntities = createSelector(getArticlesState, fromArticles.
 export const getArticleIds = createSelector(getArticlesState, fromArticles.getIds);
 export const getSelectedArticleId = createSelector(getArticlesState, fromArticles.getSelectedId);
 export const getSelectedArticle = createSelector(getArticlesState, fromArticles.getSelected);
+export const getTempArticle = createSelector(getArticlesState, fromArticles.getTemp);
 export const getArticles = createSelector(getArticleEntities, getArticleIds, (entities, ids) => {
     return ids.map((id) => entities[id]);
 });
@@ -409,7 +410,7 @@ export const getArticlesForQuery = createSelector(getArticles, getBlogPageLayout
             !blogPageLayout.filters.tag || article.tagList.some((tag) => tag === blogPageLayout.filters.tag);
     })
 })
-export const getCommensForSelectedArticle = createSelector(getComments, getSelectedArticleId, (comments, articleId) => {
+export const getCommentsForSelectedArticle = createSelector(getComments, getSelectedArticleId, (comments, articleId) => {
     return comments.filter((comment) => comment.articleId === articleId)
 })
 

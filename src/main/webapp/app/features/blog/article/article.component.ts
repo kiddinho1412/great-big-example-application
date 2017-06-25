@@ -41,7 +41,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.user$ = this.store.select(fromRoot.getUserState);
-        this.comments$ = this.store.select(fromRoot.getCommensForSelectedArticle);
+        this.comments$ = this.store.select(fromRoot.getCommentsForSelectedArticle);
         this.commentsSub = this.comments$.subscribe((comments) => this.comments = comments);
 
         // Retreive the prefetched article

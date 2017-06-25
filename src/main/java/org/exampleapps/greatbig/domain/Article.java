@@ -43,7 +43,7 @@ public class Article implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "slug", nullable = false)
+    @Column(name = "slug", unique = true, nullable = false)
     private String slug;
 
     @NotNull
@@ -86,6 +86,18 @@ public class Article implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Author> favoriters = new HashSet<>();
+
+    public Article() {}
+
+    public Article(String body, String description, String title) {
+        this.body = body;
+        this.description = description;
+        this.title = title;
+        this.slug = title.replace(' ', '_').toLowerCase();
+        ZonedDateTime zoneDateTime=ZonedDateTime.now();
+        this.setCreatedAt(zoneDateTime);
+        this.setUpdatedAt(zoneDateTime);
+    }
 
     public Long getId() {
         return id;

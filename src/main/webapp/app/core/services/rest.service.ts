@@ -76,7 +76,9 @@ export class RESTService {
     }
 
     prepareRecord(record: any) {
-        return record;
+        let newRecord = { ...record };
+        delete newRecord.dirty;
+        return newRecord;
     }
 
     extractData(res: any) {

@@ -40,8 +40,9 @@ export const getIds = (state: Entities<Article>): string[] => state.ids;
 export const getSelectedId = (state: Entities<Article>): string => state.selectedEntityId;
 
 export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
-    if (entities[EntityActions.TEMP]) {
-        return entities[EntityActions.TEMP]
-    }
     return entities[selectedId];
+});
+
+export const getTemp = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
+    return entities[EntityActions.TEMP]
 });

@@ -17,6 +17,8 @@
                 "article": "Article",
                 "tag": "Tag",
                 "message": "Message",
+                "comment": "Comment",
+                "author": "Author",
                 "jhipster-needle-menu-add-article": "JHipster will add additional entities here (do not translate!)"
             },
             "features": {
@@ -111,7 +113,8 @@
         },
         "ribbon": {
             "dev": "Development"
-        }
+        },
+        "item-count": "Ergebnis {{first}} - {{second}} von {{total}} Elemente."
     },
     "entity": {
         "action": {
@@ -155,5 +158,6 @@
         "emailexists": "Email wird bereits verwendet!",
         "idexists": "Ein neuer {{entityName}} kann noch keine ID haben"
     },
-    "footer": "Dies ist Ihre Fußzeile"
+    "footer": "Dies ist Ihre Fußzeile",
+    "item-count": ""
 }

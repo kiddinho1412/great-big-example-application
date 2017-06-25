@@ -17,6 +17,8 @@
                 "article": "Article",
                 "tag": "Tag",
                 "message": "Message",
+                "comment": "Comentario",
+                "author": "Autor",
                 "jhipster-needle-menu-add-article": "JHipster will add additional entities here (do not translate!)"
             },
             "features": {
@@ -111,7 +113,8 @@
         },
         "ribbon": {
             "dev": "Development"
-        }
+        },
+        "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos."
     },
     "entity": {
         "action": {
