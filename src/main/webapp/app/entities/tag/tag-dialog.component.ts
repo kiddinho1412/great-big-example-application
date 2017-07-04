@@ -63,10 +63,10 @@ export class TagDialogComponent implements OnInit {
     private onSaveSuccess(result: Tag, isCreated: boolean) {
         this.alertService.success(
             isCreated ? 'greatBigExampleApplicationApp.tag.created'
-                : 'greatBigExampleApplicationApp.tag.updated',
-            { param: result.id }, null);
+            : 'greatBigExampleApplicationApp.tag.updated',
+            { param : result.id }, null);
 
-        this.eventManager.broadcast({ name: 'tagListModification', content: 'OK' });
+        this.eventManager.broadcast({ name: 'tagListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }

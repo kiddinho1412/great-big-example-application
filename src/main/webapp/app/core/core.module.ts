@@ -8,7 +8,13 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule, TranslateLoader, TranslateParser, MissingTranslationHandler } from '@ngx-translate/core';
+import { TranslateHttpLoader, } from '@ngx-translate/http-loader';
+import { translatePartialLoader, missingTranslationHandler } from 'ng-jhipster';
+import { Http } from '@angular/http';
 
+import { NgaModule } from '../theme/nga.module';
 import { reducer } from './store';
 
 /**
@@ -32,9 +38,17 @@ import { UserService } from './services/user.service';
 import { customHttpProvider } from '../blocks/interceptor/http.provider';
 import { StoreRouterConnectingModule } from './store-router-connecting.module';
 
+import { AppState, InternalStateType } from '../app.service';
+import { GlobalState } from '../global.state';
+
+// Application wide providers
+// const APP_PROVIDERS = [
+//     AppState,
+//     GlobalState
+// ];
 // Reset the root state for HMR
 function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-    return function(state, action) {
+    return function (state, action) {
         if (action.type === 'SET_ROOT_STATE') {
             return action.payload;
         }
@@ -45,7 +59,10 @@ function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
 const rootReducer = compose(stateSetter, combineReducers)({
     reducer
 });
-
+// AoT requires an exported function for factories
+// export function HttpLoaderFactory(http: Http) {
+//     return new TranslateHttpLoader(http);
+// }
 const imports = [
     // BrowserModule,
     BrowserAnimationsModule,
@@ -55,6 +72,8 @@ const imports = [
     RouterModule,
     GreatBigExampleApplicationSharedModule,
     MaterialModule,
+    NgaModule.forRoot(),
+    NgbModule.forRoot(),
     FlexLayoutModule,
 
     // StoreLogMonitorModule,
@@ -91,7 +110,7 @@ const imports = [
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
      * service available.
      */
-    DBModule.provideDB(schema),
+    DBModule.provideDB(schema)
 ];
 
 // Enable HMR and ngrx/devtools in hot reload mode
@@ -115,7 +134,8 @@ if (process.env === 'dev') {
         RESTService,
         SocketService,
         UserService,
-        customHttpProvider()
+        customHttpProvider(), // expose our Services and Providers into Angular's dependency injection
+        // APP_PROVIDERS
     ]
 })
 

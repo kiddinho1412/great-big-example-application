@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { WindowRef } from './tracker/window.service';
+import { WindowRef } from './services/window.service';
 import {
     GreatBigExampleApplicationSharedLibsModule,
     JhiLanguageHelper,

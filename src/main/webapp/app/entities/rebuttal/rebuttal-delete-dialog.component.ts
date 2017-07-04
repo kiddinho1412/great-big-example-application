@@ -36,7 +36,7 @@ export class RebuttalDeleteDialogComponent {
             });
             this.activeModal.dismiss(true);
         });
-        this.alertService.success('greatBigExampleApplicationApp.rebuttal.deleted', { param: id }, null);
+        this.alertService.success('greatBigExampleApplicationApp.rebuttal.deleted', { param : id }, null);
     }
 }
 

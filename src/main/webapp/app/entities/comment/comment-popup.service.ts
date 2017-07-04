@@ -14,7 +14,7 @@ export class CommentPopupService {
         private router: Router,
         private commentService: CommentService
 
-    ) {}
+    ) { }
 
     open(component: Component, id?: number | any): NgbModalRef {
         if (this.isOpen) {
@@ -36,13 +36,13 @@ export class CommentPopupService {
     }
 
     commentModalRef(component: Component, comment: Comment): NgbModalRef {
-        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
+        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.comment = comment;
         modalRef.result.then((result) => {
-            this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true });
+            this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true });
             this.isOpen = false;
         }, (reason) => {
-            this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true });
+            this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true });
             this.isOpen = false;
         });
         return modalRef;

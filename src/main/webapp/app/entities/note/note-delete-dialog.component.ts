@@ -36,7 +36,7 @@ export class NoteDeleteDialogComponent {
             });
             this.activeModal.dismiss(true);
         });
-        this.alertService.success('greatBigExampleApplicationApp.note.deleted', { param: id }, null);
+        this.alertService.success('greatBigExampleApplicationApp.note.deleted', { param : id }, null);
     }
 }
 

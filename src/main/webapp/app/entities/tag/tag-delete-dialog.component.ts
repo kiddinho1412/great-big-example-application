@@ -36,7 +36,7 @@ export class TagDeleteDialogComponent {
             });
             this.activeModal.dismiss(true);
         });
-        this.alertService.success('greatBigExampleApplicationApp.tag.deleted', { param: id }, null);
+        this.alertService.success('greatBigExampleApplicationApp.tag.deleted', { param : id }, null);
     }
 }
 

@@ -36,7 +36,7 @@ export class MessageDeleteDialogComponent {
             });
             this.activeModal.dismiss(true);
         });
-        this.alertService.success('greatBigExampleApplicationApp.message.deleted', { param: id }, null);
+        this.alertService.success('greatBigExampleApplicationApp.message.deleted', { param : id }, null);
     }
 }
 

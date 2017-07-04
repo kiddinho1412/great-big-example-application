@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
 
 import { Author } from './author.model';
 import { AuthorService } from './author.service';
@@ -13,7 +13,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
     templateUrl: './author.component.html'
 })
 export class AuthorComponent implements OnInit, OnDestroy {
-authors: Author[];
+    authors: Author[];
     currentAccount: any;
     eventSubscriber: Subscription;
     currentSearch: string;
@@ -21,7 +21,6 @@ authors: Author[];
     constructor(
         private authorService: AuthorService,
         private alertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private activatedRoute: ActivatedRoute,
         private principal: Principal
@@ -33,12 +32,12 @@ authors: Author[];
         if (this.currentSearch) {
             this.authorService.search({
                 query: this.currentSearch,
-                }).subscribe(
-                    (res: ResponseWrapper) => this.authors = res.json,
-                    (res: ResponseWrapper) => this.onError(res.json)
+            }).subscribe(
+                (res: ResponseWrapper) => this.authors = res.json,
+                (res: ResponseWrapper) => this.onError(res.json)
                 );
             return;
-       }
+        }
         this.authorService.query().subscribe(
             (res: ResponseWrapper) => {
                 this.authors = res.json;
@@ -76,13 +75,13 @@ authors: Author[];
         return item.id;
     }
 
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
+    // byteSize(field) {
+    //     return this.dataUtils.byteSize(field);
+    // }
 
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
+    // openFile(contentType, field) {
+    //     return this.dataUtils.openFile(contentType, field);
+    // }
     registerChangeInAuthors() {
         this.eventSubscriber = this.eventManager.subscribe('authorListModification', (response) => this.loadAll());
     }
