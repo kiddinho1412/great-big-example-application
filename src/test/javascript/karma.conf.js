@@ -38,11 +38,17 @@ module.exports = (config) => {
             module: {
                 rules: [
                     {
-                        test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader', exclude: /(test|node_modules)/
+                        test: /\.ts$/,
+                        enforce: 'pre',
+                        loader: 'tslint-loader',
+                        exclude: /(test|node_modules)/
                     },
                     {
                         test: /\.ts$/,
-                        loaders: ['awesome-typescript-loader', 'angular2-template-loader?keepUrl=true'],
+                        loaders: [
+                            'awesome-typescript-loader',
+                            'angular2-template-loader?keepUrl=true'
+                        ],
                         exclude: /node_modules/
                     },
                     {
@@ -128,7 +134,7 @@ module.exports = (config) => {
 
         // Ensure all browsers can run tests written in .ts files
         mime: {
-            'text/x-typescript': ['ts','tsx']
+            'text/x-typescript': ['ts', 'tsx']
         },
 
         // Continuous Integration mode

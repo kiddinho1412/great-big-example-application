@@ -33,7 +33,10 @@ module.exports = (options) => {
         },
         module: {
             rules: [
-                { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports-loader?jQuery=jquery' },
+                {
+                    test: /bootstrap\/dist\/js\/umd\//,
+                    loader: 'imports-loader?jQuery=jquery'
+                },
                 {
                     test: /\.ts$/,
                     use: [
@@ -61,7 +64,7 @@ module.exports = (options) => {
                         'to-string-loader', // creates a string array for Angular to consume via the styles property
                         'css-loader',
                         'sass-loader'
-                        ],
+                    ],
                     exclude: /(vendor\.scss|global\.scss)/
                 },
                 {
