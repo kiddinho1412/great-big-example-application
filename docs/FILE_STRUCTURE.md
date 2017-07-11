@@ -389,7 +389,7 @@
 │   │       │   ├── app.module.ts
 │   │       │   ├── app.route.ts
 │   │       │   ├── app.service.ts
-│   │       │   ├── blocks
+│   │       │   ├── core
 │   │       │   │   ├── config
 │   │       │   │   │   ├── prod.config.ts
 │   │       │   │   │   └── uib-pagination.config.ts

@@ -55,6 +55,12 @@ export const features = [
         tags: ['animation']
     },
     {
+        id: 'meals',
+        link: 'meals',
+        source: 'https://github.com/adriancarriger/clean-to-the-core',
+        tags: ['firebase', 'offline', 'accessible', 'notifications', 'lazy routes']
+    },
+    {
         id: 'message',
         link: 'messages',
         source: 'https://github.com/implustech/famn',

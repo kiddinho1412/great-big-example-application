@@ -14,25 +14,25 @@ import { HeroModule } from './hero/hero.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HeroEffects } from '../../core/store/hero/hero.effects';
 import { CrisisEffects } from '../../core/store/crisis/crisis.effects';
-import { customHttpProvider } from '../../blocks/interceptor/http.provider';
+import { customHttpProvider } from '../../core/interceptor/http.provider';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        HeroesRouting,
-        EffectsModule.run(HeroEffects),
-        EffectsModule.run(CrisisEffects),
-        CrisisCenterModule,
-        HeroModule,
-        DashboardModule,
-        GreatBigExampleApplicationSharedModule,
-    ],
-    declarations: [HeroesPage],
-    providers: [
-        customHttpProvider(),
-        TwainService,
-        UserService]
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeroesRouting,
+    EffectsModule.run(HeroEffects),
+    EffectsModule.run(CrisisEffects),
+    CrisisCenterModule,
+    HeroModule,
+    DashboardModule,
+    GreatBigExampleApplicationSharedModule,
+  ],
+  declarations: [HeroesPage],
+  providers: [
+    customHttpProvider(),
+    TwainService,
+    UserService]
 })
 export class HeroesModule { }
 

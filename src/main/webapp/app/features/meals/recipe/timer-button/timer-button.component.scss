@@ -1,0 +1,17 @@
+@import '../../../../theme/sass/conf/conf';
+
+app-button-clear {
+  color: $link-color;
+  padding: 0 4px;
+}
+
+app-icon-time {
+  bottom: -2px;
+  display: inline-block;
+  fill: $link-color;
+  position: relative;
+}
+
+.stop {
+  color: $visible-red;
+}

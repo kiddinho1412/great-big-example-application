@@ -17,6 +17,13 @@ import { Http } from '@angular/http';
 import { NgaModule } from '../theme/nga.module';
 import { reducer } from './store';
 
+
+import { ModuleWithProviders } from '@angular/core';
+import { PushNotificationsModule } from 'angular2-notifications';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireOfflineModule } from 'angularfire2-offline';
+
+
 /**
  * Import ngrx
  */
@@ -35,10 +42,20 @@ import { schema } from './store/db';
 import { RESTService } from './services/rest.service';
 import { SocketService } from './services/socket.service';
 import { UserService } from './services/user.service';
-import { customHttpProvider } from '../blocks/interceptor/http.provider';
+import { customHttpProvider } from '../core/interceptor/http.provider';
 
 import { AppState, InternalStateType } from '../app.service';
 import { GlobalState } from '../global.state';
+
+import { firebaseConfig } from './firebase-config';
+import { ApiService } from './api/api.service';
+import { GlobalEventsService } from './global-events/global-events.service';
+import { StatusBarAwareDirective } from '../shared/status-bar/status-bar-aware.directive';
+import { StatusBarComponent } from '../shared/status-bar/status-bar.component';
+import { StatusBarService } from '../shared/status-bar/status-bar.service';
+import { TimerComponent } from '../shared/timer/timer.component';
+import { TimerService } from '../shared/timer/timer.service';
+import { SkipNavComponent } from '../shared/skip-nav/skip-nav.component';
 
 // Application wide providers
 // const APP_PROVIDERS = [
@@ -108,7 +125,17 @@ const imports = [
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
      * service available.
      */
-    DBModule.provideDB(schema)
+    DBModule.provideDB(schema),
+
+    /**
+     * from meals
+     */
+    AngularFireModule.initializeApp(firebaseConfig),
+    CommonModule,
+    PushNotificationsModule,
+    RouterModule,
+    GreatBigExampleApplicationSharedModule
+
 ];
 
 // Enable HMR and ngrx/devtools in hot reload mode
@@ -127,17 +154,46 @@ if (process.env === 'dev') {
 @NgModule({
     imports,
     declarations: [
+        StatusBarComponent,
+        StatusBarAwareDirective,
+        TimerComponent,
+        SkipNavComponent
     ],
     providers: [
-        RESTService,
-        SocketService,
-        UserService,
-        customHttpProvider(), // expose our Services and Providers into Angular's dependency injection
-        // APP_PROVIDERS
     ]
 })
 
 export class CoreModule {
+    /**
+     * The root {@link AppModule} imports the {@link CoreModule} and adds the `providers` to the {@link AppModule}
+     * providers. Recommended in the
+     * [Angular 2 docs - CoreModule.forRoot](https://angular.io/docs/ts/latest/guide/ngmodule.html#core-for-root)
+     */
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: CoreModule,
+            providers: [
+                RESTService,
+                SocketService,
+                UserService,
+                customHttpProvider(), // expose our Services and Providers into Angular's dependency injection
+                // APP_PROVIDERS
+                ApiService,
+                GlobalEventsService,
+                StatusBarService,
+                TimerService,
+                { provide: 'Document', useValue: document },
+                { provide: 'Window', useValue: window }
+            ]
+        };
+    }
+    /**
+     * Prevent reimport of CoreModule
+     * [STYLE 04-11](https://angular.io/styleguide#04-12)
+     * @param parentModule will be `null` if {@link CoreModule} is not reimported by another module,
+     * otherwise it will throw an error.
+     * @see [Angular 2 docs - Prevent reimport of the CoreModule](https://angular.io/docs/ts/latest/guide/ngmodule.html#prevent-reimport)
+     */
     constructor( @Optional() @SkipSelf() parentModule: CoreModule,
         public appRef: ApplicationRef,
         private store: Store<any>) {
@@ -146,6 +202,7 @@ export class CoreModule {
                 'CoreModule is already loaded. Import it in the AppModule only');
         }
     }
+
     hmrOnInit(store) {
         if (!store || !store.rootState) {
             return;

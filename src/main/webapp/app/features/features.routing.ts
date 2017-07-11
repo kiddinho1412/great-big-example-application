@@ -13,6 +13,7 @@ const routes: Routes = [
         component: FeaturesComponent,
         children: [
             { path: '', component: HomePage },
+            { path: 'about', loadChildren: './about/about.module#AboutModule' },
             { path: 'bernie', loadChildren: './bernie/bernie.module#BernieModule' },
             { path: 'books', loadChildren: './books/books.module#BooksModule' },
             { path: 'chat', loadChildren: './chat/chat.module#ChatModule' },
@@ -33,6 +34,8 @@ const routes: Routes = [
             },
             { path: 'game', loadChildren: './game/game.module#GameModule' },
             { path: 'heroes', loadChildren: './heroes/heroes.module#HeroesModule' },
+            { path: 'legal', loadChildren: './legal/legal.module#LegalModule' },
+            { path: 'meals', loadChildren: './meals/meals.module#MealsModule' },
             { path: 'messages', loadChildren: './messages/messages.module#MessagesModule' },
             { path: 'notes', loadChildren: './notes/notes.module#NotesModule' },
             { path: 'wiki', loadChildren: './wiki/wiki.module#WikiModule' }

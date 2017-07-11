@@ -11,7 +11,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "outDir": "target/www/app",
         "lib": [
-            "es6",
+            "es2017",
             "dom"
         ],
         "typeRoots": [

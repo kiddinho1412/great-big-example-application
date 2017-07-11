@@ -12,8 +12,8 @@ import { GreatBigExampleApplicationEntityModule } from './entities/entity.module
 import { StoreLogMonitorModule } from '@ngrx/store-log-monitor';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { customHttpProvider } from './blocks/interceptor/http.provider';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import { customHttpProvider } from './core/interceptor/http.provider';
+import { PaginationConfig } from './core/config/uib-pagination.config';
 import { FeaturesModule } from './features/features.module';
 import { CoreModule } from './core/core.module';
 import { AppConfig } from './app.config';
@@ -44,7 +44,7 @@ import {
         GreatBigExampleApplicationAccountModule,
         GreatBigExampleApplicationEntityModule,
         FeaturesModule,
-        CoreModule,
+        CoreModule.forRoot(),
         StoreLogMonitorModule,
         TranslateModule.forRoot()
         // jhipster-needle-angular-add-module JHipster will add new module here
