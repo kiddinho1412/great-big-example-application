@@ -13,7 +13,7 @@ import { StatusBarService } from './status-bar.service';
  * html of this component. 
  */
 @Component({
-  selector: 'app-status-bar',
+  selector: 'jhi-status-bar',
   templateUrl: './status-bar.component.html',
   styleUrls: ['./status-bar.component.scss']
 })

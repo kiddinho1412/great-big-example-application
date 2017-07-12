@@ -3,9 +3,9 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { PushNotificationsService } from 'angular2-notifications';
 
-import { TimerService } from '../../../../../../main/webapp/app/shared/timer/timer.service';
-import { StatusBarService } from '../../../../../../main/webapp/app/shared/status-bar/status-bar.service';
-import { MockStatusBarService } from '../status-bar/mock-status-bar.service.spec';
+import { TimerService } from '../../../../../../../main/webapp/app/features/meals/timer/timer.service';
+import { StatusBarService } from '../../../../../../../main/webapp/app/shared/status-bar/status-bar.service';
+import { MockStatusBarService } from '../../../shared/status-bar/mock-status-bar.service.spec';
 import { MockPushService } from './mock-push.service.spec';
 
 describe('Service: Timer', () => {

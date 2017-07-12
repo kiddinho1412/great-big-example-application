@@ -3,12 +3,12 @@
  */ /** */
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
-import { TimerService } from '../../../../shared/timer/timer.service';
+import { TimerService } from '../../timer/timer.service';
 /**
  * @whatItDoes creates a button to toggle the timer.
  */
 @Component({
-    selector: 'app-timer-button',
+    selector: 'jhi-recipe-timer-button',
     templateUrl: './timer-button.component.html',
     styleUrls: ['./timer-button.component.scss']
 })

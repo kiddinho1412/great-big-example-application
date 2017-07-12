@@ -35,6 +35,9 @@ import { AwesomePipe } from './awesome/awesome.pipe';
 import { WelcomeComponent } from './welcome/welcome.component';
 // import { GameComponent } from '../features/game/game.component';
 // import { TimerComponent } from '../features/game/timer/timer.component';
+import { StatusBarComponent } from './status-bar/status-bar.component';
+
+import { UiModule } from './ui/ui.module';
 
 export const components = [
     DraggableDirective,
@@ -52,13 +55,15 @@ export const components = [
     // TwainComponent,
     WelcomeComponent,
     // GameComponent,
-    // TimerComponent
+    // TimerComponent,
+    StatusBarComponent
 ];
 
 @NgModule({
     imports: [
         GreatBigExampleApplicationSharedLibsModule,
-        GreatBigExampleApplicationSharedCommonModule
+        GreatBigExampleApplicationSharedCommonModule,
+        UiModule
     ],
     declarations: [
         JhiSocialComponent,
@@ -82,6 +87,7 @@ export const components = [
     exports: [
         // GreatBigExampleApplicationSharedLibsModule,
         GreatBigExampleApplicationSharedCommonModule,
+        UiModule,
         JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,

@@ -5,8 +5,8 @@ import { DebugElement } from '@angular/core';
 
 import { TimerButtonComponent } from '../../../../../../../../main/webapp/app/features/meals/recipe/timer-button/timer-button.component';
 import { GreatBigExampleApplicationSharedModule } from '../../../../../../../../main/webapp/app/shared/shared.module';
-import { TimerService } from '../../../../../../../../main/webapp/app/shared/timer/timer.service';
-import { MockTimerService } from '../../../../shared/timer/mock-timer.service.spec';
+import { TimerService } from '../../../../../../../../main/webapp/app/features/meals/timer/timer.service';
+import { MockTimerService } from '../../timer/mock-timer.service.spec';
 
 describe('TimerButtonComponent', () => {
     let component: TimerButtonComponent;

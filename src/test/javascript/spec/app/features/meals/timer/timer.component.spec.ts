@@ -5,11 +5,11 @@ import { DebugElement } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { TimerComponent } from '../../../../../../main/webapp/app/shared/timer/timer.component';
-import { TimerService } from '../../../../../../main/webapp/app/shared/timer/timer.service';
+import { TimerComponent } from '../../../../../../../main/webapp/app/features/meals/timer/timer.component';
+import { TimerService } from '../../../../../../../main/webapp/app/features/meals/timer/timer.service';
 import { MockTimerService } from './mock-timer.service.spec';
-import { GreatBigExampleApplicationSharedModule } from '../../../../../../main/webapp/app/shared/shared.module';
-import { StatusBarService } from '../../../../../../main/webapp/app/shared/status-bar/status-bar.service';
+import { GreatBigExampleApplicationSharedModule } from '../../../../../../../main/webapp/app/shared/shared.module';
+import { StatusBarService } from '../../../../../../../main/webapp/app/shared/status-bar/status-bar.service';
 
 describe('TimerComponent', () => {
     let component: TimerComponent;

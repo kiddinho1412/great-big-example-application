@@ -53,8 +53,6 @@ import { GlobalEventsService } from './global-events/global-events.service';
 import { StatusBarAwareDirective } from '../shared/status-bar/status-bar-aware.directive';
 import { StatusBarComponent } from '../shared/status-bar/status-bar.component';
 import { StatusBarService } from '../shared/status-bar/status-bar.service';
-import { TimerComponent } from '../shared/timer/timer.component';
-import { TimerService } from '../shared/timer/timer.service';
 import { SkipNavComponent } from '../shared/skip-nav/skip-nav.component';
 
 // Application wide providers
@@ -154,10 +152,6 @@ if (process.env === 'dev') {
 @NgModule({
     imports,
     declarations: [
-        StatusBarComponent,
-        StatusBarAwareDirective,
-        TimerComponent,
-        SkipNavComponent
     ],
     providers: [
     ]
@@ -181,7 +175,6 @@ export class CoreModule {
                 ApiService,
                 GlobalEventsService,
                 StatusBarService,
-                TimerService,
                 { provide: 'Document', useValue: document },
                 { provide: 'Window', useValue: window }
             ]
