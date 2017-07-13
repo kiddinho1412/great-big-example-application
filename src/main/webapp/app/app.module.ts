@@ -33,8 +33,6 @@ import {
     ErrorComponent
 } from './layouts';
 
-import { LayoutComponent } from './layouts/layout/layout.component';
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -52,7 +50,6 @@ import { LayoutComponent } from './layouts/layout/layout.component';
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
-        LayoutComponent,
         JhiMainComponent,
         NavbarComponent,
         ErrorComponent,

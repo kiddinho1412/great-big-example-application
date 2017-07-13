@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {
     AccountService,
@@ -36,8 +37,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
 // import { GameComponent } from '../features/game/game.component';
 // import { TimerComponent } from '../features/game/timer/timer.component';
 import { StatusBarComponent } from './status-bar/status-bar.component';
-
+import { NavComponent } from './nav/nav.component';
+import { SkipNavComponent } from './skip-nav/skip-nav.component';
 import { UiModule } from './ui/ui.module';
+import { LayoutComponent } from '../layouts/layout/layout.component';
 
 export const components = [
     DraggableDirective,
@@ -56,14 +59,18 @@ export const components = [
     WelcomeComponent,
     // GameComponent,
     // TimerComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    NavComponent,
+    SkipNavComponent,
+    LayoutComponent
 ];
 
 @NgModule({
     imports: [
         GreatBigExampleApplicationSharedLibsModule,
         GreatBigExampleApplicationSharedCommonModule,
-        UiModule
+        UiModule,
+        RouterModule
     ],
     declarations: [
         JhiSocialComponent,

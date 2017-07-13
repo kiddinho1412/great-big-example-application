@@ -21,6 +21,7 @@
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "features": {
+                "about": "Über",
                 "bernie": "Bernie",
                 "books": "Bücher",
                 "booksFind": "Bücher finden",
@@ -30,6 +31,7 @@
                 "dashboard": "Instrumententafel",
                 "game": "Spiel",
                 "heroes": "Helden",
+                "legal": "Legal",
                 "main": "Eigenschaften",
                 "meals": "Mahlzeiten",
                 "message": "Meldungen",

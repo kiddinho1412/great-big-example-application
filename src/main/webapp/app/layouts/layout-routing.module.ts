@@ -6,6 +6,8 @@ import { errorRoute } from './';
 
 const LAYOUT_ROUTES = [
     navbarRoute,
+    { path: 'legal', loadChildren: '../features/legal/legal.module#LegalModule' },
+    { path: 'meals', loadChildren: '../features/meals/meals.module#MealsModule' },
     ...errorRoute
 ];
 
@@ -17,4 +19,4 @@ const LAYOUT_ROUTES = [
         RouterModule
     ]
 })
-export class LayoutRoutingModule {}
+export class LayoutRoutingModule { }

@@ -5,7 +5,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 /**
  * @whatItDoes Provides a shortcut button to skip the main navigation for accessibility purposes.
- * 
+ *
  * **Features:**
  * - Only shows the skip button on focus (usually the first tab keypress)
  * - Can Automatically skip navigation on route changes if the page has already loaded.
@@ -14,7 +14,7 @@ import { Router, NavigationEnd } from '@angular/router';
  * so you can just drop in any navigation component and it should work as expected.
  */
 @Component({
-  selector: 'app-skip-nav',
+  selector: 'jhi-skip-nav',
   templateUrl: './skip-nav.component.html',
   styleUrls: ['./skip-nav.component.scss']
 })

@@ -1,9 +1,11 @@
-<app-skip-nav>
-  <app-nav [style.z-index]="layout?.zIndex !== '' ? layout?.zIndex : null" appWatchHeight (heightChange)="onHeightChange('top', $event, 10)" appStatusBarAware></app-nav>
-</app-skip-nav>
+<jhi-skip-nav>
+    <jhi-nav [style.z-index]="layout?.zIndex !== '' ? layout?.zIndex : null" appWatchHeight (heightChange)="onHeightChange('top', $event, 10)"
+        appStatusBarAware></jhi-nav>
+</jhi-skip-nav>
 <div class="content-container">
-  <div [style.padding-top]="layout?.paddingTop !== false ? padding.top + 'px' : null" [style.padding-bottom]="padding.bottom + 'px'" class="content-area" appStatusBarAware statusBarExclude="['/']">
-    <router-outlet></router-outlet>
-  </div>
+    <div [style.padding-top]="layout?.paddingTop !== false ? padding.top + 'px' : null" [style.padding-bottom]="padding.bottom + 'px'"
+        class="content-area" appStatusBarAware statusBarExclude="['/']">
+        <router-outlet></router-outlet>
+    </div>
 </div>
-<app-footer appWatchHeight (heightChange)="onHeightChange('bottom', $event, 80)" appStatusBarAware></app-footer>
+<jhi-footer appWatchHeight (heightChange)="onHeightChange('bottom', $event, 80)" appStatusBarAware></jhi-footer>

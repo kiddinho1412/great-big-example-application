@@ -10,7 +10,7 @@ import { FilterPipe } from './filter/filter.pipe';
 import { FilterUtilitiesService } from './filter/filter-utilities.service';
 import { RemapPipe } from './filter/remap.pipe';
 import { HomeComponent } from './home.component';
-import { HomeRoutingModule } from './home-routing.module';
+import { HomeRouting } from './home.routing';
 import { LimitToPipe } from './limit-to.pipe';
 import { RecipeAdComponent } from './recipe-ad/recipe-ad.component';
 import { StickyScrollComponent } from './sticky-scroll/sticky-scroll.component';
@@ -21,7 +21,7 @@ import { SharedModule } from '../shared/shared.module';
  */
 @NgModule({
   imports: [
-    HomeRoutingModule,
+    HomeRouting,
     InfiniteScrollModule,
     SharedModule
   ],

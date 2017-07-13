@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AboutComponent } from './about.component';
-import { AboutRoutingModule } from './about-routing.module';
+import { AboutRouting } from './about.routing';
 import { GreatBigExampleApplicationSharedModule } from '../../shared/shared.module';
 import { UiModule } from '../../shared/ui/ui.module';
 /**
@@ -15,7 +15,7 @@ import { UiModule } from '../../shared/ui/ui.module';
  */
 @NgModule({
     imports: [
-        AboutRoutingModule,
+        AboutRouting,
         CommonModule,
         GreatBigExampleApplicationSharedModule,
         UiModule

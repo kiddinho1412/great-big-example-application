@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../core/api/api.service';
 /**
  * @whatItDoes Returns the {@link AboutComponent} view.
- * @consumers {@link AboutModule},  {@link AboutRoutingModule}
+ * @consumers {@link AboutModule},  {@link AboutRouting}
  */
 @Component({
     selector: 'app-about',

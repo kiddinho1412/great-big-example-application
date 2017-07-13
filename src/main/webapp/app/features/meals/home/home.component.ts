@@ -9,7 +9,7 @@ import { StatusBarService } from '../../../shared/status-bar/status-bar.service'
 import { WatchHeightDirective } from '../shared/watch-height/watch-height.directive';
 /**
  * @whatItDoes Returns the {@link HomeComponent} view.
- * @consumers {@link HomeModule},  {@link HomeRoutingModule}
+ * @consumers {@link HomeModule},  {@link HomeRouting}
  */
 @Component({
     selector: 'app-home',

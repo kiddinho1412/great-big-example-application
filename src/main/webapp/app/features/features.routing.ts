@@ -34,7 +34,7 @@ const routes: Routes = [
             },
             { path: 'game', loadChildren: './game/game.module#GameModule' },
             { path: 'heroes', loadChildren: './heroes/heroes.module#HeroesModule' },
-            { path: 'legal', loadChildren: './legal/legal.module#LegalModule' },
+            // { path: 'legal', loadChildren: './legal/legal.module#LegalModule' },
             { path: 'meals', loadChildren: './meals/meals.module#MealsModule' },
             { path: 'messages', loadChildren: './messages/messages.module#MessagesModule' },
             { path: 'notes', loadChildren: './notes/notes.module#NotesModule' },

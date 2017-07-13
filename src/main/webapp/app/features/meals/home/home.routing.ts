@@ -21,4 +21,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class HomeRoutingModule { }
+export class HomeRouting { }
