@@ -21,7 +21,6 @@ import { reducer } from './store';
 import { ModuleWithProviders } from '@angular/core';
 import { PushNotificationsModule } from 'angular2-notifications';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireOfflineModule } from 'angularfire2-offline';
 
 
 /**

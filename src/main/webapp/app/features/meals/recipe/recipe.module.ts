@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { MomentModule } from 'angular2-moment';
 
 import { RecipeComponent } from './recipe.component';
-import { RecipeRoutingModule } from './recipe-routing.module';
+import { RecipeRouting } from './recipe.routing';
 import { SharedModule } from '../shared/shared.module';
 import { TimerButtonComponent } from './timer-button/timer-button.component';
 /**
@@ -14,11 +14,11 @@ import { TimerButtonComponent } from './timer-button/timer-button.component';
  * @consumers {@link AppRoutingModule} (on demand)
  */
 @NgModule({
-  imports: [
-    MomentModule,
-    RecipeRoutingModule,
-    SharedModule
-  ],
-  declarations: [RecipeComponent, TimerButtonComponent]
+    imports: [
+        MomentModule,
+        RecipeRouting,
+        SharedModule
+    ],
+    declarations: [RecipeComponent, TimerButtonComponent]
 })
 export class RecipeModule { }

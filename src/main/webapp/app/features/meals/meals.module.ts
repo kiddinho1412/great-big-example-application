@@ -4,7 +4,6 @@
  */ /** */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AngularFireOfflineModule } from 'angularfire2-offline';
 import { CommonModule } from '@angular/common';
 
 import { GreatBigExampleApplicationSharedModule } from '../../shared/shared.module';
@@ -23,7 +22,6 @@ import { SharedModule } from './shared/shared.module';
     imports: [
         GreatBigExampleApplicationSharedModule,
         SharedModule,
-        AngularFireOfflineModule,
         MealsRouting,
         CommonModule
     ],

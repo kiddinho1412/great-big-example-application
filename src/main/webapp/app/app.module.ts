@@ -3,6 +3,7 @@ import './vendor.ts';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
+import { AngularFireOfflineModule } from 'angularfire2-offline';
 
 import { GreatBigExampleApplicationSharedModule, UserRouteAccessService } from './shared';
 import { GreatBigExampleApplicationHomeModule } from './home/home.module';
@@ -44,6 +45,7 @@ import {
         GreatBigExampleApplicationAccountModule,
         GreatBigExampleApplicationEntityModule,
         FeaturesModule,
+        AngularFireOfflineModule,
         CoreModule.forRoot(),
         StoreLogMonitorModule,
         TranslateModule.forRoot()
