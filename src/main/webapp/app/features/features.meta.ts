@@ -68,7 +68,7 @@ export const features = [
     },
     {
         id: 'meals',
-        link: 'features/meals',
+        link: 'meals',
         source: 'https://github.com/adriancarriger/clean-to-the-core',
         tags: ['firebase', 'offline', 'accessible', 'notifications', 'lazy routes']
     },

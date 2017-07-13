@@ -8,7 +8,8 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Renderer } from '@angular/core';
+  Renderer
+} from '@angular/core';
 /**
  * @whatItDoes Creates an image that covers the element.
  * @consumers {@link HomeModule}
@@ -22,7 +23,7 @@ import {
  * optimized with the `cover` style.
  */
 @Component({
-  selector: 'app-image-cover',
+  selector: 'jhi-image-cover',
   templateUrl: './image-cover.component.html',
   styleUrls: ['./image-cover.component.scss']
 })

@@ -1,4 +1,4 @@
-<app-image-cover [src]="recipe.image" [alt]="recipe.title"></app-image-cover>
+<jhi-image-cover [src]="recipe.image" [alt]="recipe.title"></jhi-image-cover>
 <h2 class="recipe-title">{{recipe.title}}</h2>
 <ul class="allergens" aria-label="Allergy free items for this recipe">
   <ng-template ngFor let-allergen [ngForOf]="recipe.allergens" let-i="index">

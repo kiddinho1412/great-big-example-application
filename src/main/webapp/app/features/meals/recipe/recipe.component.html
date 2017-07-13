@@ -8,7 +8,7 @@
         <div *ngIf="(recipe | async)?.author" class="author">Author: {{(recipe | async)?.author}}</div>
         <div class="blurb">{{(recipe | async)?.blurb}}</div>
         <app-labels [labels]="(recipe | async)?.labels" label="Allergy free items for this recipe"></app-labels>
-        <app-image-cover [src]="(recipe | async)?.image" [alt]="(recipe | async)?.title"></app-image-cover>
+        <jhi-image-cover [src]="(recipe | async)?.image" [alt]="(recipe | async)?.title"></jhi-image-cover>
       </section>
       <section *ngIf="(recipe | async)?.text" class="recipe-text">{{(recipe | async)?.text}}</section>
       <section *ngFor="let item of (recipe | async)?.items; let itemIndex = index" class="recipe-item">

@@ -18,6 +18,7 @@ import { PaginationConfig } from './core/config/uib-pagination.config';
 import { FeaturesModule } from './features/features.module';
 import { CoreModule } from './core/core.module';
 import { AppConfig } from './app.config';
+import { AppRouting } from './app.routing';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 /** TODO: remove when work-around is not needed*/
@@ -25,7 +26,6 @@ import 'hammerjs';
 
 import {
     JhiMainComponent,
-    LayoutRoutingModule,
     NavbarComponent,
     FooterComponent,
     ProfileService,
@@ -37,7 +37,7 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
-        LayoutRoutingModule,
+        AppRouting,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         GreatBigExampleApplicationSharedModule,
         GreatBigExampleApplicationHomeModule,
