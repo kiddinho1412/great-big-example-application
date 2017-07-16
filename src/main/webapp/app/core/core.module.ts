@@ -17,11 +17,9 @@ import { Http } from '@angular/http';
 import { NgaModule } from '../theme/nga.module';
 import { reducer } from './store';
 
-
 import { ModuleWithProviders } from '@angular/core';
 import { PushNotificationsModule } from 'angular2-notifications';
 import { AngularFireModule } from 'angularfire2';
-
 
 /**
  * Import ngrx
@@ -61,7 +59,7 @@ import { SkipNavComponent } from '../shared/skip-nav/skip-nav.component';
 // ];
 // Reset the root state for HMR
 function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-    return function (state, action) {
+    return function(state, action) {
         if (action.type === 'SET_ROOT_STATE') {
             return action.payload;
         }

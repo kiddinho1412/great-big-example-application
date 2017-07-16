@@ -7,10 +7,10 @@ import { StatusBarService } from './status-bar.service';
 /**
  * @whatItDoes provides app status messages by pushing app content down from the top revealing
  * this component.
- * 
+ *
  * **Features:**
  * - Reusable: uses Angular 2 content projection so you can just insert a status bar inside the
- * html of this component. 
+ * html of this component.
  */
 @Component({
   selector: 'jhi-status-bar',
@@ -26,7 +26,7 @@ export class StatusBarComponent implements AfterViewInit {
    * Creates the {@link StatusBarComponent}.
    * @param elementRef an element reference of the {@link StatusBarComponent}
    * @param statusBarService app wide service that notifies this componenet of changes to the
-   * {@link StatusBarComponent}. 
+   * {@link StatusBarComponent}.
    */
   constructor(
     private elementRef: ElementRef,

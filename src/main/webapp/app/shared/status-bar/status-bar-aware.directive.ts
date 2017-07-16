@@ -8,7 +8,7 @@ import { StatusBarService } from './status-bar.service';
 /**
  * @whatItDoes moves a fixed position host element with respect to the {@link StatusBarComponent}'s
  * position.
- * 
+ *
  * **Features:**
  * - Uses the same animation to move as the {@link StatusBarComponent}
  * - Uses translate3d for smoother animation
@@ -22,7 +22,7 @@ export class StatusBarAwareDirective implements OnDestroy, OnInit {
    */
   @Input() statusBarExclude: Array<string>;
   /**
-   * Holds the subscription for the {@link statusBarService}'s `.service` notifications. 
+   * Holds the subscription for the {@link statusBarService}'s `.service` notifications.
    */
   subscription: Subscription;
   /**
@@ -41,19 +41,19 @@ export class StatusBarAwareDirective implements OnDestroy, OnInit {
   constructor(
     private statusBarService: StatusBarService) { }
   /**
-   * 
+   *
    */
   ngOnDestroy() {
     if (this.subscription !== undefined) { this.subscription.unsubscribe(); }
   }
   /**
    * Subscribes to that {@link StatusBarService}'s notification Observable OnInit
-   * 
+   *
    * On a status update, if the {@link StatusBarComponent} is animating, then this will set the
-   * host componenet's style to animate in sync with the {@link StatusBarComponent} 
+   * host componenet's style to animate in sync with the {@link StatusBarComponent}
    */
   ngOnInit() {
-    this.subscription = this.statusBarService.status.subscribe(status => {
+    this.subscription = this.statusBarService.status.subscribe((status) => {
       this.transform = this.barActive(status) ? `translate3d(0, ${status.height}px, 0)` : null;
       if (this.statusBarService.animate) {
         this.transition = '1s transform';
@@ -63,7 +63,7 @@ export class StatusBarAwareDirective implements OnDestroy, OnInit {
   }
   /**
    * Returns true if the {@link StatusBarComponent} is active.
-   * 
+   *
    * - It will return false if the current
    * route is excluded via {@link statusBarExclude}.
    */

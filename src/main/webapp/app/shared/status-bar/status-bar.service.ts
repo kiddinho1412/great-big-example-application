@@ -45,12 +45,12 @@ export class StatusBarService {
   /**
    * On service creation a subscription is made to the router and an updated status is sent
    * on route change.
-   * 
+   *
    * - Needed if for the {@link StatusBarAwareDirective} if it needs to exlude application for
    * specific routes.
    */
   onInit() {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentStatus.route = event.url;
         this.updateStatus();

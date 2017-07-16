@@ -20,7 +20,7 @@ export class FilterPipe implements PipeTransform {
     private filterUtilitiesService: FilterUtilitiesService) { }
   /**
    * Filters the input `value` according to the `filteredInput`.
-   *  
+   *
    * @param value input data
    * @param updateTime the timestamp of the last update. Needed because pure pipes do not
    * detect updates to object properties
@@ -47,11 +47,11 @@ export class FilterPipe implements PipeTransform {
     // Meta data used to filter each item in the input `value`.
     const meta = {
       input: filterInput,
-      searchQueries: searchQueries,
+      searchQueries,
       checkSearch: filtering.search,
       searchFields: filteredMeta.searchFields
     };
-    const filtered = value.filter(item => this.filterItem(item, meta));
+    const filtered = value.filter((item) => this.filterItem(item, meta));
     filteredMeta.count = filtered.length;
     filteredMeta.query = this.readableQueries(filterInput);
     return filtered;
@@ -82,11 +82,11 @@ export class FilterPipe implements PipeTransform {
     return searchQueries
       .toLowerCase()
       .split(' ')
-      .filter(item => !this.stopWords().includes(item));
+      .filter((item) => !this.stopWords().includes(item));
   }
   /**
    * The actual filter logic applied to each item.
-   * 
+   *
    * - Filters out non search queries first (e.g. select box queries)
    * - If filtering by search, then it finds the searchable text and checks if it matches
    * any queries.
@@ -94,18 +94,18 @@ export class FilterPipe implements PipeTransform {
   private filterItem(item: Object, meta) {
     // Filter by select terms
     if (Object.keys(meta.input)
-      .filter(x => x !== 'search' && meta.input[x] !== 'all')
-      .find(y => !this.flatArray(item[y]).includes(meta.input[y]))) { return; }
+      .filter((x) => x !== 'search' && meta.input[x] !== 'all')
+      .find((y) => !this.flatArray(item[y]).includes(meta.input[y]))) { return; }
     // Filter by search terms
     if (meta.checkSearch) {
       const searchable = meta.searchFields
-        .filter(x => item[x] !== undefined)
+        .filter((x) => item[x] !== undefined)
         .reduce((a, b) => {
           return a + ' ' + this.flatArray(item[b])
             .reduce((e, f) => e + ' ' + f, '')
             .toLowerCase();
         }, '');
-      if (meta.searchQueries.find(x => !searchable.includes(x))) { return; }
+      if (meta.searchQueries.find((x) => !searchable.includes(x))) { return; }
     }
     return item;
   }
@@ -120,8 +120,8 @@ export class FilterPipe implements PipeTransform {
    */
   private readableQueries(inputs: Object): string {
     return Object.keys(inputs)
-      .map(key => inputs[key])
-      .filter(input => !['', 'all'].includes(input))
+      .map((key) => inputs[key])
+      .filter((input) => !['', 'all'].includes(input))
       .reduce(this.readableList, '');
   }
   /**

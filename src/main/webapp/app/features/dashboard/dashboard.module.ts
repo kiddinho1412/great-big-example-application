@@ -28,7 +28,6 @@ import { TrafficChartService } from './traffic-chart/traffic-chart.service';
 import { UsersMapService } from './users-map/users-map.service';
 import { customHttpProvider } from '../../core/interceptor/http.provider';
 
-
 // AoT requires an exported function for factories
 // export function HttpLoaderFactory(http: Http) {
 //     return new TranslateHttpLoader(http, 'content/i18n/', '.json');

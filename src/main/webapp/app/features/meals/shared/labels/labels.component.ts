@@ -22,7 +22,7 @@ export class LabelsComponent implements OnChanges {
   @Input() labels: Array<Label>;
   /**
    * EventEmitter for any changes that occure.
-   * 
+   *
    * This can notify other components to check for
    * updates that this component might effect (e.g. if this componenet's height change is needed
    * in a parent or sibling component).

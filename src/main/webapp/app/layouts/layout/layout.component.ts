@@ -69,7 +69,7 @@ export class LayoutComponent implements OnInit {
      * Sets up the route change listener.
      */
     ngOnInit() {
-        this.router.events.subscribe(event => {
+        this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.onNewRoute();
             }

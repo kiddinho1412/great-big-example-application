@@ -15,8 +15,8 @@
             "index": "index.html",
             "main": "app/app.main.ts",
             "polyfills": "app/polyfills.ts",
-            "test": "",
-            "tsconfig": "./tsconfig.json",
+            "test": "../../../test.ts",
+            "tsconfig": "../../../tsconfig.json",
             "prefix": "jhi",
             "mobile": false,
             "styles": [
@@ -35,15 +35,17 @@
     },
     "lint": [
         {
-            "project": "./tsconfig.json"
+            "project": "./tsconfig.json",
+            "exclude": "**/node_modules/**/*"
         },
         {
-            "project": "./tsconfig-aot.json"
+            "project": "./tsconfig-aot.json",
+            "exclude": "**/node_modules/**/*"
         }
     ],
     "test": {
         "karma": {
-            "config": "src/test/javascript/karma.conf.js"
+            "config": "./karma.conf.js"
         }
     },
     "defaults": {

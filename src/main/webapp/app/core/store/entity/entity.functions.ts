@@ -228,3 +228,24 @@ export function deleteFromRemote$(actions$: Actions, slice: string, dataService,
             return Observable.of(new EntityActions.DeleteFail(slice, err));
         })
 }
+
+//  Load if not loaded
+//
+// @Effect()
+// load$: Observable<Action> = this.actions$
+//     .ofType( actions.LOAD )
+//     .map( toPayload )
+//     .withLatestFrom( this.store.select( fromRoot.getEssentialItems ) )
+//     // filter on whether it is already loaded or loading
+//     .filter( this.shouldLoadItem )
+//     .mergeMap( ( [payload, items] ) => {
+//         const loadBegunAction = Observable.of( new actions.LoadBegunAction(  payload ) );
+//         const loadedAction = this.itemsService.getEssentialItem( payload.item )
+//             .map( successPayload => new actions.LoadSuccessAction( successPayload ) );
+//         return Observable.merge( loadBegunAction, loadedAction );
+//     } );
+
+// shouldLoadItem( [ payload, items ] ) {
+//     const item = _.get( items, [payload.item.type, payload.item.id] );
+//     return !_.get( item, 'loaded' ) && ! _.get( item, 'loading' );
+// }

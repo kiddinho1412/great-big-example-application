@@ -83,7 +83,7 @@ export class HomeComponent implements OnDestroy, OnInit {
      * Updates search fields from api
      */
     ngOnInit() {
-        this.filterSubscription = this.apiService.filterOptions.subscribe(options => {
+        this.filterSubscription = this.apiService.filterOptions.subscribe((options) => {
             this.filteredMeta.searchFields = options['searchFields'];
         });
     }

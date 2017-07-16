@@ -37,7 +37,7 @@ export class StickyScrollComponent implements AfterViewInit, OnChanges, OnDestro
     /**
      * Set to `true` if the host element should be fixed to the top of the screen.
      */
-    fixed: boolean = false;
+    fixed = false;
     /**
      * The actual content that gets fixed on scroll
      */

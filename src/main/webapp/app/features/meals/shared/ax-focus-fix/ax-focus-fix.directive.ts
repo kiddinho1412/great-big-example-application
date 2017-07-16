@@ -64,8 +64,8 @@ export class AxFocusFixDirective implements OnDestroy, OnInit {
      */
     ngOnInit() {
         this.skipIfHome();
-        this.document.addEventListener('keydown', e => this.onKeyDown(e));
-        this.document.addEventListener('keyup', e => this.onKeyUp(e));
+        this.document.addEventListener('keydown', (e) => this.onKeyDown(e));
+        this.document.addEventListener('keyup', (e) => this.onKeyUp(e));
         this.scrollSubscription = this.globalEventsService.emitters$['scroll']
             .subscribe(() => this.onScroll());
         this.onScroll();
@@ -74,7 +74,7 @@ export class AxFocusFixDirective implements OnDestroy, OnInit {
      * This directive only applies to the home route
      */
     private skipIfHome() {
-        this.routerSubscription = this.router.events.subscribe(event => {
+        this.routerSubscription = this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.skipRoute = event.url !== '/';
             }

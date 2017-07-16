@@ -184,6 +184,7 @@
   "scripts": {
     "lint": "tslint 'src/main/webapp/app/**/*.ts'",
     "lint:fix": "tslint 'src/main/webapp/app/**/*.ts' --fix",
+    "sassLint": "sass-lint 'src/**/*.scss' -v --max-warnings=0",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "xxxngc": "ngc -p tsconfig-aot.json",
@@ -196,7 +197,8 @@
     "webpack:dev": "webpack-dev-server --config webpack/webpack.dev.js  --progress --inline --hot --profile --port=9070",
     "webpack:test": "yarn run ngc && yarn run test",
     "webpack:prod": "yarn run ngc && webpack -p --config webpack/webpack.vendor.js && webpack -p --config webpack/webpack.prod.js",
-    "test": "karma start src/test/javascript/karma.conf.js",
+    "test": "karma start karma.conf.js",
+    "test:full": "ng lint && npm run sassLint && ng test --watch=false --code-coverage",
     "test:watch": "karma start src/test/javascript/karma.conf.js --watch",
     "e2e": "protractor src/test/javascript/protractor.conf.js",
     "postinstall": "webdriver-manager update && node node_modules/phantomjs-prebuilt/install.js && yarn run webpack:build",

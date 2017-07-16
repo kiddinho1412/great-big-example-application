@@ -45,7 +45,7 @@ export class SkipNavComponent implements OnInit {
    * Sets up route listener on component creation.
    */
   ngOnInit() {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.autoSkipNav();
         this.initalLoadComplete = true;

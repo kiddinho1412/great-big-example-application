@@ -37,7 +37,7 @@ export class RecipeAdComponent implements OnInit {
   }
   /**
    * Run once on component creation
-   * 
+   *
    * - Gets the blurb arrow color
    */
   ngOnInit() {

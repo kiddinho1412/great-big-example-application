@@ -13,12 +13,12 @@ import {
 /**
  * @whatItDoes Creates an image that covers the element.
  * @consumers {@link HomeModule}
- * 
+ *
  * Features:
  * - Covers the entire element using `background-size: cover`
  * - Creates an `img` that can be right clicked and saved
  * - `img` can have `alt` text
- * 
+ *
  * The `img` element is not visible to the user. Instead the user sees the `background-image`
  * optimized with the `cover` style.
  */
@@ -50,7 +50,7 @@ export class ImageCoverComponent implements AfterViewInit, OnChanges, OnInit {
   @Input() src: string;
   /**
    * Creates the {@link ImageCoverComponent}
-   * @param renderer used to update the DOM 
+   * @param renderer used to update the DOM
    * [Angular 2 - Renderer](https://angular.io/docs/ts/latest/api/core/index/Renderer-class.html)
    * @param element a reference to the host element
    */
@@ -77,7 +77,7 @@ export class ImageCoverComponent implements AfterViewInit, OnChanges, OnInit {
   }
   /**
    * Sets the host element's `background-image` style to the {@link src} Input
-   * 
+   *
    * this helped!: http://stackoverflow.com/a/22374423/5357459
    */
   private updateImage() {
