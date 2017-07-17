@@ -3,6 +3,7 @@ import { MockBackend } from '@angular/http/testing';
 import { Http, BaseRequestOptions } from '@angular/http';
 import { JhiLanguageService } from 'ng-jhipster';
 import { MockLanguageService } from './mock-language.service';
+import { AppConfig } from '../app/app.config';
 
 @NgModule({
     providers: [
@@ -18,7 +19,8 @@ import { MockLanguageService } from './mock-language.service';
                 return new Http(backendInstance, defaultOptions);
             },
             deps: [MockBackend, BaseRequestOptions]
-        }
+        },
+        AppConfig
     ]
 })
 export class GreatBigExampleApplicationTestModule { }

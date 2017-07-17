@@ -30,7 +30,7 @@
     "packages": [],
     "e2e": {
         "protractor": {
-            "config": "src/test/javascript/protractor.conf.js"
+            "config": "protractor.conf.js"
         }
     },
     "lint": [
