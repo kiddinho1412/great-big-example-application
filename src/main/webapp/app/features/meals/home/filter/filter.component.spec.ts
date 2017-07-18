@@ -9,6 +9,7 @@ import { FilterUtilitiesService } from './filter-utilities.service';
 import { GlobalEventsService } from '../../../../core/global-events/global-events.service';
 import { MockGlobalEventsService } from '../../../../core/global-events/mock-global-events.service.spec';
 import { GreatBigExampleApplicationSharedModule } from '../../../../shared/shared.module';
+import { MealsSharedModule } from '../../shared/shared.module';
 import { MockWindowService } from '../../../../../mocks/mock-window.service.spec';
 
 import { RemapPipe } from './remap.pipe';
@@ -22,7 +23,7 @@ describe('FilterComponent', () => {
         mockWindowService = new MockWindowService();
         mockGlobalEventsService = new MockGlobalEventsService();
         TestBed.configureTestingModule({
-            imports: [GreatBigExampleApplicationSharedModule],
+            imports: [GreatBigExampleApplicationSharedModule, MealsSharedModule],
             declarations: [FilterComponent, RemapPipe],
             providers: [
                 FilterUtilitiesService,

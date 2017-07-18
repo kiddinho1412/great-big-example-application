@@ -83,7 +83,9 @@ should be taught using big examples:
 
 I've had a peculiarly difficult time making the case to software development educators to provide 
 a single, giant example app for their students akin to what they work on every day for their clients 
-and employers. So here's this attempt at one from unemployed me. No NDA needed to see it.
+and employers. I'm not sure why, but it can be pretty hard to find out exactly how the best in this business
+[do things](https://gitter.im/angular/angular?at=596d4193f5b3458e3057ea73). So here's this attempt at one from 
+unemployed me. No NDA needed to see it.
 
 # How did this great big app happen?
 

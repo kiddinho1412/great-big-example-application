@@ -40,4 +40,4 @@ import { WatchHeightDirective } from './watch-height/watch-height.directive';
         WatchHeightDirective
     ]
 })
-export class SharedModule { }
+export class MealsSharedModule { }

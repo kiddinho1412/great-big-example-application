@@ -15,7 +15,9 @@ module.exports = (WATCH) => ({
             // },
             {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader', 'angular2-template-loader?keepUrl=true'],
+                // removing keepUrl=true fixed error "This test module uses the component StatusBarComponent which is using a "templateUrl" or "styleUrls", but they were never compiled. Please call "TestBed.compileComponents" before your test."
+                // loaders: ['awesome-typescript-loader', 'angular2-template-loader?keepUrl=true'],
+                loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
                 // exclude: /node_modules/
             },
             {

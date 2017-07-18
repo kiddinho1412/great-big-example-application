@@ -3,13 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecipeAdComponent } from './recipe-ad.component';
 import { GreatBigExampleApplicationSharedModule } from '../../../../shared/shared.module';
+import { MealsSharedModule } from '../../shared/shared.module';
 
 describe('RecipeAdComponent', () => {
     let component: RecipeAdComponent;
     let fixture: ComponentFixture<RecipeAdComponent>;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [GreatBigExampleApplicationSharedModule],
+            imports: [
+                GreatBigExampleApplicationSharedModule,
+                MealsSharedModule
+            ],
             declarations: [RecipeAdComponent]
         })
             .compileComponents();

@@ -11,6 +11,7 @@ import { TimerButtonComponent } from '../recipe/timer-button/timer-button.compon
 import { ApiService } from '../../../core/api/api.service';
 import { MockApiService } from '../../../core/api/mock-api.service.spec';
 import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
+import { MealsSharedModule } from '../shared/shared.module';
 import { MockRouter } from '../../../../mocks/mock-router.spec';
 
 @Injectable()
@@ -31,7 +32,11 @@ describe('RecipeComponent', () => {
     beforeEach(async(() => {
         mockRouter = new MockRouter();
         TestBed.configureTestingModule({
-            imports: [MomentModule, GreatBigExampleApplicationSharedModule],
+            imports: [
+                MomentModule,
+                GreatBigExampleApplicationSharedModule,
+                MealsSharedModule
+            ],
             declarations: [
                 RecipeComponent,
                 TimerButtonComponent

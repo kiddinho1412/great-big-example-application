@@ -9,6 +9,7 @@ import { TimerComponent } from './timer.component';
 import { TimerService } from './timer.service';
 import { MockTimerService } from './mock-timer.service.spec';
 import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
+import { MealsSharedModule } from '../shared/shared.module';
 import { StatusBarService } from '../../../shared/status-bar/status-bar.service';
 
 describe('TimerComponent', () => {
@@ -24,7 +25,8 @@ describe('TimerComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes(config),
-                GreatBigExampleApplicationSharedModule
+                GreatBigExampleApplicationSharedModule,
+                MealsSharedModule
             ],
             declarations: [TimerComponent],
             providers: [
