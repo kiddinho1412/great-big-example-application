@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import { Account, LoginModalService, Principal } from '../../shared';
 
 @Component({
     selector: 'jhi-home',
-    templateUrl: './home.component.html',
+    templateUrl: 'home.component.html',
     styleUrls: [
         'home.scss'
     ]
