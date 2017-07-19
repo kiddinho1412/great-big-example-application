@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ImageCoverComponent } from './image-cover.component';
-import { LoadingComponent } from '../../../../shared/ui/loading/loading.component';
+import { LoadingComponent } from '../ui/loading/loading.component';
 
 describe('ImageCoverComponent', () => {
     let component: ImageCoverComponent;

@@ -6,6 +6,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 
 const routes: Routes = [
     { path: '', component: NavbarComponent, outlet: 'navbar' },
+    { path: 'about', loadChildren: './features/about/about.module#AboutModule' },
     { path: 'legal', loadChildren: './features/legal/legal.module#LegalModule' },
     { path: 'meals', loadChildren: './features/meals/meals.module#MealsModule' },
     ...errorRoute

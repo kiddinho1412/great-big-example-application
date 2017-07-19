@@ -41,6 +41,7 @@ import { NavComponent } from './nav/nav.component';
 import { SkipNavComponent } from './skip-nav/skip-nav.component';
 import { UiModule } from './ui/ui.module';
 import { LayoutComponent } from '../layouts/layout/layout.component';
+import { ImageCoverComponent } from './image-cover/image-cover.component';
 
 export const components = [
     DraggableDirective,
@@ -62,7 +63,8 @@ export const components = [
     StatusBarComponent,
     NavComponent,
     SkipNavComponent,
-    LayoutComponent
+    LayoutComponent,
+    ImageCoverComponent
 ];
 
 @NgModule({

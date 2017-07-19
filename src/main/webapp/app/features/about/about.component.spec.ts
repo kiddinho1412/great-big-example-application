@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { AboutComponent } from './about.component';
 import { ApiService } from '../../core/api/api.service';
-import { ImageCoverComponent } from '../meals/shared/image-cover/image-cover.component';
+import { ImageCoverComponent } from '../../shared/image-cover/image-cover.component';
 import { LoadingComponent } from '../../shared/ui/loading/loading.component';
 
 @Injectable()

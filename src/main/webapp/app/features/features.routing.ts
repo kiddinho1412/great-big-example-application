@@ -13,7 +13,7 @@ const routes: Routes = [
         component: FeaturesComponent,
         children: [
             { path: '', component: HomePage },
-            { path: 'about', loadChildren: './about/about.module#AboutModule' },
+            // { path: 'about', loadChildren: './about/about.module#AboutModule' },
             { path: 'bernie', loadChildren: './bernie/bernie.module#BernieModule' },
             { path: 'books', loadChildren: './books/books.module#BooksModule' },
             { path: 'chat', loadChildren: './chat/chat.module#ChatModule' },

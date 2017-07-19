@@ -7,10 +7,14 @@ import { CommonModule } from '@angular/common';
 
 import { AxFocusFixDirective } from './ax-focus-fix/ax-focus-fix.directive';
 import { ButtonClearComponent } from './button-clear/button-clear.component';
-import { ImageCoverComponent } from './image-cover/image-cover.component';
 import { LabelsComponent } from './labels/labels.component';
 import { UiModule } from '../../../shared/ui/ui.module';
 import { WatchHeightDirective } from './watch-height/watch-height.directive';
+import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
+import { ImageCoverComponent } from '../../../shared/image-cover/image-cover.component';
+import { StatusBarComponent } from '../../../layouts/status-bar/status-bar.component';
+import { LayoutComponent } from '../../../layouts/layout/layout.component';
+
 /**
  * @whatItDoes {@link SharedModule} exists to hold the common components, directives, and pipes
  * and share them with the modules that need them.
@@ -21,12 +25,12 @@ import { WatchHeightDirective } from './watch-height/watch-height.directive';
 @NgModule({
     imports: [
         CommonModule,
-        UiModule
+        UiModule,
+        GreatBigExampleApplicationSharedModule
     ],
     declarations: [
         AxFocusFixDirective,
         ButtonClearComponent,
-        ImageCoverComponent,
         LabelsComponent,
         WatchHeightDirective
     ],
@@ -34,10 +38,12 @@ import { WatchHeightDirective } from './watch-height/watch-height.directive';
         AxFocusFixDirective,
         ButtonClearComponent,
         CommonModule,
-        ImageCoverComponent,
         LabelsComponent,
         UiModule,
-        WatchHeightDirective
+        WatchHeightDirective,
+        ImageCoverComponent,
+        StatusBarComponent,
+        LayoutComponent
     ]
 })
 export class MealsSharedModule { }
