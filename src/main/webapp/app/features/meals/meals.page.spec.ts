@@ -13,7 +13,7 @@ import { MealsSharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { TimerComponent } from './timer/timer.component';
-import { StatusBarService } from '../../shared/status-bar/status-bar.service';
+import { StatusBarService } from '../../layouts/status-bar/status-bar.service';
 import { TimerService } from './timer/timer.service';
 
 @Component({

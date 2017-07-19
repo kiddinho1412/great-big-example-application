@@ -36,7 +36,7 @@ import { AwesomePipe } from './awesome/awesome.pipe';
 import { WelcomeComponent } from './welcome/welcome.component';
 // import { GameComponent } from '../features/game/game.component';
 // import { TimerComponent } from '../features/game/timer/timer.component';
-import { StatusBarComponent } from './status-bar/status-bar.component';
+import { StatusBarComponent } from '../layouts/status-bar/status-bar.component';
 import { NavComponent } from './nav/nav.component';
 import { SkipNavComponent } from './skip-nav/skip-nav.component';
 import { UiModule } from './ui/ui.module';

@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Rx';
 import { StickyScrollComponent } from './sticky-scroll.component';
 import { GlobalEventsService } from '../../../../core/global-events/global-events.service';
 import { MockGlobalEventsService } from '../../../../core/global-events/mock-global-events.service.spec';
-import { StatusBarService } from '../../../../shared/status-bar/status-bar.service';
+import { StatusBarService } from '../../../../layouts/status-bar/status-bar.service';
 
 @Component({
     template: `<app-sticky-scroll #stickyScroll [stickyOffset]="stickyOffset"></app-sticky-scroll>`

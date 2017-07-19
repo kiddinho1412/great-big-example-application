@@ -14,7 +14,7 @@ import { StatusBarService } from './status-bar.service';
  */
 @Component({
   selector: 'jhi-status-bar',
-  templateUrl: './status-bar.component.html',
+  templateUrl: 'status-bar.component.html',
   styleUrls: ['./status-bar.component.scss']
 })
 export class StatusBarComponent implements AfterViewInit {

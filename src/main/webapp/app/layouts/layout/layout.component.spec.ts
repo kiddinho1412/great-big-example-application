@@ -16,7 +16,7 @@ import { HomeComponent } from '../../home/home.component';
 import { GreatBigExampleApplicationHomeModule } from '../../home/home.module';
 import { ApiService } from '../../core/api/api.service';
 import { MockApiService } from '../../core/api/mock-api.service.spec';
-import { StatusBarService } from '../../shared/status-bar/status-bar.service';
+import { StatusBarService } from '../status-bar/status-bar.service';
 import { MockDocumentService } from '../../../mocks/mock-document.service.spec';
 
 describe('LayoutComponent', () => {

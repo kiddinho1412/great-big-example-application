@@ -1,4 +1,4 @@
-import './vendor.ts';
+import './vendor';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,47 +25,47 @@ import { AppRouting } from './app.routing';
 import 'hammerjs';
 
 import {
-    JhiMainComponent,
-    NavbarComponent,
-    FooterComponent,
-    ProfileService,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    ErrorComponent
+  JhiMainComponent,
+  NavbarComponent,
+  FooterComponent,
+  ProfileService,
+  PageRibbonComponent,
+  ActiveMenuDirective,
+  ErrorComponent
 } from './layouts';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        AppRouting,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
-        GreatBigExampleApplicationSharedModule,
-        GreatBigExampleApplicationHomeModule,
-        GreatBigExampleApplicationAdminModule,
-        GreatBigExampleApplicationAccountModule,
-        GreatBigExampleApplicationEntityModule,
-        FeaturesModule,
-        AngularFireOfflineModule,
-        CoreModule.forRoot(),
-        StoreLogMonitorModule,
-        TranslateModule.forRoot()
-        // jhipster-needle-angular-add-module JHipster will add new module here
-    ],
-    declarations: [
-        JhiMainComponent,
-        NavbarComponent,
-        ErrorComponent,
-        PageRibbonComponent,
-        ActiveMenuDirective,
-        FooterComponent
-    ],
-    providers: [
-        AppConfig,
-        ProfileService,
-        // customHttpProvider(),
-        PaginationConfig,
-        UserRouteAccessService
-    ],
-    bootstrap: [JhiMainComponent]
+  imports: [
+    BrowserModule,
+    AppRouting,
+    Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
+    GreatBigExampleApplicationSharedModule,
+    GreatBigExampleApplicationHomeModule,
+    GreatBigExampleApplicationAdminModule,
+    GreatBigExampleApplicationAccountModule,
+    GreatBigExampleApplicationEntityModule,
+    FeaturesModule,
+    AngularFireOfflineModule,
+    CoreModule.forRoot(),
+    StoreLogMonitorModule,
+    TranslateModule.forRoot()
+    // jhipster-needle-angular-add-module JHipster will add new module here
+  ],
+  declarations: [
+    JhiMainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent
+  ],
+  providers: [
+    AppConfig,
+    ProfileService,
+    // customHttpProvider(),
+    PaginationConfig,
+    UserRouteAccessService
+  ],
+  bootstrap: [JhiMainComponent]
 })
 export class GreatBigExampleApplicationAppModule { }

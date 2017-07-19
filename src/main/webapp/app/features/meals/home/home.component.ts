@@ -5,7 +5,7 @@ import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@an
 import { Subscription } from 'rxjs/Subscription';
 
 import { ApiService } from '../../../core/api/api.service';
-import { StatusBarService } from '../../../shared/status-bar/status-bar.service';
+import { StatusBarService } from '../../../layouts/status-bar/status-bar.service';
 import { WatchHeightDirective } from '../shared/watch-height/watch-height.directive';
 /**
  * @whatItDoes Returns the {@link HomeComponent} view.

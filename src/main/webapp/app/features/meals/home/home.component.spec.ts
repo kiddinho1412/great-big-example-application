@@ -12,7 +12,7 @@ import { ApiService } from '../../../core/api/api.service';
 import { MockApiService } from '../../../core/api/mock-api.service.spec';
 import { GlobalEventsService } from '../../../core/global-events/global-events.service';
 import { CoreModule } from '../../../core/core.module';
-import { StatusBarService } from '../../../shared/status-bar/status-bar.service';
+import { StatusBarService } from '../../../layouts/status-bar/status-bar.service';
 import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
 import { MockDocumentService } from '../../../../mocks/mock-document.service.spec';
 import { MockWindowService } from '../../../../mocks/mock-window.service.spec';

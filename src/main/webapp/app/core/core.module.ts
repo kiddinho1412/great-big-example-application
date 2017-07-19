@@ -47,9 +47,9 @@ import { GlobalState } from '../global.state';
 import { firebaseConfig } from './firebase-config';
 import { ApiService } from './api/api.service';
 import { GlobalEventsService } from './global-events/global-events.service';
-import { StatusBarAwareDirective } from '../shared/status-bar/status-bar-aware.directive';
-import { StatusBarComponent } from '../shared/status-bar/status-bar.component';
-import { StatusBarService } from '../shared/status-bar/status-bar.service';
+import { StatusBarAwareDirective } from '../layouts/status-bar/status-bar-aware.directive';
+import { StatusBarComponent } from '../layouts/status-bar/status-bar.component';
+import { StatusBarService } from '../layouts/status-bar/status-bar.service';
 import { SkipNavComponent } from '../shared/skip-nav/skip-nav.component';
 
 // Application wide providers

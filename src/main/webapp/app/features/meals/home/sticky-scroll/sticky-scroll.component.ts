@@ -13,7 +13,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { StatusBarService } from '../../../../shared/status-bar/status-bar.service';
+import { StatusBarService } from '../../../../layouts/status-bar/status-bar.service';
 import { GlobalEventsService } from '../../../../core/global-events/global-events.service';
 /**
  * @whatItDoes Sets the {@link positionContainer} fixed to top when it reaches the top while the
