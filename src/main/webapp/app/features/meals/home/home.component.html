@@ -1,4 +1,3 @@
-XXXXXXXXXXX
 <header class="fixed-content" appWatchHeight (heightChange)="fixedHeight = $event" [style.transition]="statusBarService.animate ? 'padding-top 1s' : null"
     [style.padding-top]="statusBarService.currentStatus.height + 'px'">
     <app-loading *ngIf="!(apiService.latest | async)"></app-loading>
@@ -10,7 +9,6 @@ XXXXXXXXXXX
         <app-labels (change)="wh.updateHeight()" [labels]="(apiService.latest | async)?.labels" label="Allergy free items for this recipe"></app-labels>
     </section>
 </header>
-YYYYYY
 <div class="home-content" [style.transition]="statusBarService.animate ? 'margin-top 1s' : null" [style.margin-top]="(fixedHeight + statusBarService.currentStatus.height) + 'px'">
     <app-sticky-scroll #stickyScroll [stickyOffset]="fixedHeight">
         <app-filter (change)="filterStamp = $event; onFilterUpdate(fixedHeight)" (update)="filterValues = $event" (drawerEvent)="stickyScroll.manualHeightCheck()"
