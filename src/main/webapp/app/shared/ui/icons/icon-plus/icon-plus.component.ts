@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/ios-plus-empty.svg)
  */
 @Component({
-  selector: 'app-icon-plus',
+  selector: 'c2c-icon-plus',
   templateUrl: './icon-plus.component.html',
   styleUrls: ['./icon-plus.component.scss']
 })

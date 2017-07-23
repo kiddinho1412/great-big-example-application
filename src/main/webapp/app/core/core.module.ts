@@ -50,7 +50,7 @@ import { GlobalEventsService } from './global-events/global-events.service';
 import { StatusBarAwareDirective } from '../layouts/status-bar/status-bar-aware.directive';
 import { StatusBarComponent } from '../layouts/status-bar/status-bar.component';
 import { StatusBarService } from '../layouts/status-bar/status-bar.service';
-import { SkipNavComponent } from '../shared/skip-nav/skip-nav.component';
+import { SkipNavComponent } from '../layouts/skip-nav/skip-nav.component';
 
 // Application wide providers
 // const APP_PROVIDERS = [
@@ -59,7 +59,7 @@ import { SkipNavComponent } from '../shared/skip-nav/skip-nav.component';
 // ];
 // Reset the root state for HMR
 function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-    return function(state, action) {
+    return function (state, action) {
         if (action.type === 'SET_ROOT_STATE') {
             return action.payload;
         }
@@ -134,7 +134,7 @@ const imports = [
 ];
 
 // Enable HMR and ngrx/devtools in hot reload mode
-if (process.env === 'dev') {
+if (process.env.NODE_ENV === 'dev') {
     imports.push(...[
         StoreDevtoolsModule.instrumentStore({
             monitor: useLogMonitor({

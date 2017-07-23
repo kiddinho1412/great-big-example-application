@@ -12,7 +12,7 @@ import { MockGlobalEventsService } from '../../../../core/global-events/mock-glo
 import { StatusBarService } from '../../../../layouts/status-bar/status-bar.service';
 
 @Component({
-    template: `<app-sticky-scroll #stickyScroll [stickyOffset]="stickyOffset"></app-sticky-scroll>`
+    template: `<c2c-sticky-scroll #stickyScroll [stickyOffset]="stickyOffset"></c2c-sticky-scroll>`
 })
 export class ContainerComponent {
     stickyOffset = 0;

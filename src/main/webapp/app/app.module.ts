@@ -20,19 +20,13 @@ import { CoreModule } from './core/core.module';
 import { AppConfig } from './app.config';
 import { AppRouting } from './app.routing';
 
+import { MealsModule } from './features/meals/meals.module'; // for the timer
+import { LayoutsModule } from './layouts/layouts.module';
+import { JhiMainComponent, ProfileService } from './layouts';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 /** TODO: remove when work-around is not needed*/
 import 'hammerjs';
-
-import {
-    JhiMainComponent,
-    NavbarComponent,
-    FooterComponent,
-    ProfileService,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    ErrorComponent
-} from './layouts';
 
 @NgModule({
     imports: [
@@ -48,16 +42,12 @@ import {
         AngularFireOfflineModule,
         CoreModule.forRoot(),
         StoreLogMonitorModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        MealsModule,
+        LayoutsModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
-        JhiMainComponent,
-        NavbarComponent,
-        ErrorComponent,
-        PageRibbonComponent,
-        ActiveMenuDirective,
-        FooterComponent
     ],
     providers: [
         AppConfig,

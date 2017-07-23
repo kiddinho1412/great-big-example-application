@@ -36,11 +36,12 @@ import { AwesomePipe } from './awesome/awesome.pipe';
 import { WelcomeComponent } from './welcome/welcome.component';
 // import { GameComponent } from '../features/game/game.component';
 // import { TimerComponent } from '../features/game/timer/timer.component';
-import { StatusBarComponent } from '../layouts/status-bar/status-bar.component';
-import { NavComponent } from './nav/nav.component';
-import { SkipNavComponent } from './skip-nav/skip-nav.component';
+import { LayoutsModule } from '../layouts/layouts.module';
+// import { StatusBarComponent } from '../layouts/status-bar/status-bar.component';
+import { NavComponent } from '../layouts/nav/nav.component';
+import { SkipNavComponent } from '../layouts/skip-nav/skip-nav.component';
 import { UiModule } from './ui/ui.module';
-import { LayoutComponent } from '../layouts/layout/layout.component';
+import { MealsLayoutComponent } from '../layouts/meals-layout/meals-layout.component';
 import { ImageCoverComponent } from './image-cover/image-cover.component';
 
 export const components = [
@@ -60,10 +61,9 @@ export const components = [
     WelcomeComponent,
     // GameComponent,
     // TimerComponent,
-    StatusBarComponent,
     NavComponent,
     SkipNavComponent,
-    LayoutComponent,
+    // MealsLayoutComponent,
     ImageCoverComponent
 ];
 
@@ -72,6 +72,7 @@ export const components = [
         GreatBigExampleApplicationSharedLibsModule,
         GreatBigExampleApplicationSharedCommonModule,
         UiModule,
+        // LayoutsModule,
         RouterModule
     ],
     declarations: [
@@ -101,6 +102,7 @@ export const components = [
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         DatePipe,
+        // LayoutsModule,
         ...components
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

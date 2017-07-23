@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/heart.svg)
  */
 @Component({
-  selector: 'app-icon-heart',
+  selector: 'c2c-icon-heart',
   templateUrl: './icon-heart.component.html',
   styleUrls: ['./icon-heart.component.scss']
 })

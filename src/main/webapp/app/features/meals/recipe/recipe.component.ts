@@ -13,7 +13,7 @@ import { ApiService } from '../../../core/api/api.service';
  * @consumers {@link RecipeModule}, {@link RecipeRouting}
  */
 @Component({
-    selector: 'app-recipe',
+    selector: 'c2c-recipe',
     templateUrl: './recipe.component.html',
     styleUrls: ['./recipe.component.scss']
 })
@@ -39,7 +39,7 @@ export class RecipeComponent implements OnDestroy, OnInit {
      *
      */
     ngOnDestroy() {
-        this.routerSubscription.unsubscribe();
+        this.routerSubscription && this.routerSubscription.unsubscribe();
     }
     /**
      * Gets the current recipe slug on init

@@ -9,7 +9,7 @@ import { ApiService } from '../../core/api/api.service';
  * @consumers {@link AboutModule},  {@link AboutRouting}
  */
 @Component({
-    selector: 'app-about',
+    selector: 'c2c-about',
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.scss']
 })

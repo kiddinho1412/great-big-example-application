@@ -12,7 +12,7 @@ import {
  * @whatItDoes Returns a simple ui component as defined in the {@link UiModule}.
  */
 @Component({
-  selector: 'app-input',
+  selector: 'c2c-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })

@@ -11,7 +11,7 @@ import { TimerService } from './timer.service';
  * - Can stop and reset the timer, and can increase and decrease the timer amount.
  */
 @Component({
-    selector: 'jhi-recipe-timer',
+    selector: 'c2c-recipe-timer',
     templateUrl: 'timer.component.html',
     styleUrls: ['./timer.component.scss']
 })

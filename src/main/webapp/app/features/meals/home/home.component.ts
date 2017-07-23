@@ -12,7 +12,7 @@ import { WatchHeightDirective } from '../shared/watch-height/watch-height.direct
  * @consumers {@link HomeModule},  {@link HomeRouting}
  */
 @Component({
-    selector: 'app-home',
+    selector: 'c2c-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
@@ -77,7 +77,7 @@ export class HomeComponent implements OnDestroy, OnInit {
      * Unsubscribes from the {@link filterSubscription} to prevent memeory leaks.
      */
     ngOnDestroy() {
-        this.filterSubscription.unsubscribe();
+        this.filterSubscription && this.filterSubscription.unsubscribe();
     }
     /**
      * Updates search fields from api

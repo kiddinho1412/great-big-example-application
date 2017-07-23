@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
  * @consumers {@link LegalModule},  {@link LegalRouting}
  */
 @Component({
-    selector: 'app-legal',
+    selector: 'c2c-legal',
     templateUrl: './legal.component.html',
     styleUrls: ['./legal.component.scss']
 })

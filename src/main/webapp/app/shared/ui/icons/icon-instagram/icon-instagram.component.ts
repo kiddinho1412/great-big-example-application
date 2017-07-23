@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/social-instagram-outline.svg)
  */
 @Component({
-  selector: 'app-icon-instagram',
+  selector: 'c2c-icon-instagram',
   templateUrl: './icon-instagram.component.html',
   styleUrls: ['./icon-instagram.component.scss']
 })

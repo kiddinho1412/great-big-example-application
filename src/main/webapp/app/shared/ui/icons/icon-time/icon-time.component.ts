@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/ios-stopwatch-outline.svg)
  */
 @Component({
-  selector: 'app-icon-time',
+  selector: 'c2c-icon-time',
   templateUrl: './icon-time.component.html',
   styleUrls: ['./icon-time.component.scss']
 })

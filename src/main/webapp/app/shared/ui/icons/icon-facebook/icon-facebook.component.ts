@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/social-facebook.svg)
  */
 @Component({
-  selector: 'app-icon-facebook',
+  selector: 'c2c-icon-facebook',
   templateUrl: './icon-facebook.component.html',
   styleUrls: ['./icon-facebook.component.scss']
 })

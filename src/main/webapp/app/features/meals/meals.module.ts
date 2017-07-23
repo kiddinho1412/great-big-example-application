@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 import { MealsRouting } from './meals.routing';
-import { MealsPage } from './meals.page';
 import { TimerComponent } from './timer/timer.component';
 import { TimerService } from './timer/timer.service';
 import { MealsSharedModule } from './shared/shared.module';
@@ -23,11 +22,13 @@ import { MealsSharedModule } from './shared/shared.module';
         CommonModule
     ],
     declarations: [
-        MealsPage,
         TimerComponent
     ],
     providers: [
         TimerService
+    ],
+    exports: [
+        TimerComponent
     ]
 })
 export class MealsModule { }

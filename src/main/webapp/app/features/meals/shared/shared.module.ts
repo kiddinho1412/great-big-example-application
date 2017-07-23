@@ -13,7 +13,6 @@ import { WatchHeightDirective } from './watch-height/watch-height.directive';
 import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
 import { ImageCoverComponent } from '../../../shared/image-cover/image-cover.component';
 import { StatusBarComponent } from '../../../layouts/status-bar/status-bar.component';
-import { LayoutComponent } from '../../../layouts/layout/layout.component';
 
 /**
  * @whatItDoes {@link SharedModule} exists to hold the common components, directives, and pipes
@@ -26,7 +25,7 @@ import { LayoutComponent } from '../../../layouts/layout/layout.component';
     imports: [
         CommonModule,
         UiModule,
-        GreatBigExampleApplicationSharedModule
+        GreatBigExampleApplicationSharedModule,
     ],
     declarations: [
         AxFocusFixDirective,
@@ -42,8 +41,7 @@ import { LayoutComponent } from '../../../layouts/layout/layout.component';
         UiModule,
         WatchHeightDirective,
         ImageCoverComponent,
-        StatusBarComponent,
-        LayoutComponent
+        GreatBigExampleApplicationSharedModule
     ]
 })
 export class MealsSharedModule { }

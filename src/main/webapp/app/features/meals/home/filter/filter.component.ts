@@ -22,7 +22,7 @@ import { FilterUtilitiesService } from './filter-utilities.service';
  * @consumers {@link HomeComponent}
  */
 @Component({
-    selector: 'app-filter',
+    selector: 'c2c-filter',
     templateUrl: './filter.component.html',
     styleUrls: ['./filter.component.scss']
 })
@@ -100,7 +100,7 @@ export class FilterComponent implements AfterViewInit, OnDestroy, OnInit {
      * Removes the resize subscription on destroy to prevent memory leaks.
      */
     ngOnDestroy() {
-        this.resizeSubscription.unsubscribe();
+        this.resizeSubscription && this.resizeSubscription.unsubscribe();
     }
     /**
      * - Subscribes to the global scroll event.

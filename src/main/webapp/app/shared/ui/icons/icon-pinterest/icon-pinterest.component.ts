@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/social-pinterest-outline.svg)
  */
 @Component({
-  selector: 'app-icon-pinterest',
+  selector: 'c2c-icon-pinterest',
   templateUrl: './icon-pinterest.component.html',
   styleUrls: ['./icon-pinterest.component.scss']
 })

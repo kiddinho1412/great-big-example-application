@@ -8,7 +8,7 @@ import { TimerService } from '../../timer/timer.service';
  * @whatItDoes creates a button to toggle the timer.
  */
 @Component({
-    selector: 'jhi-recipe-timer-button',
+    selector: 'c2c-recipe-timer-button',
     templateUrl: './timer-button.component.html',
     styleUrls: ['./timer-button.component.scss']
 })

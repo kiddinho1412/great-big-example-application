@@ -21,7 +21,7 @@ import { GlobalEventsService } from '../../../../core/global-events/global-event
  * @consumers {@link FilterComponent}
  */
 @Component({
-    selector: 'app-sticky-scroll',
+    selector: 'c2c-sticky-scroll',
     templateUrl: './sticky-scroll.component.html',
     styleUrls: ['./sticky-scroll.component.scss']
 })
@@ -93,8 +93,8 @@ export class StickyScrollComponent implements AfterViewInit, OnChanges, OnDestro
      * - Removes fixed styling if it exists
      */
     ngOnDestroy() {
-        this.subscriptions.resize.unsubscribe();
-        this.subscriptions.scroll.unsubscribe();
+        this.subscriptions.resize && this.subscriptions.resize.unsubscribe();
+        this.subscriptions.scroll && this.subscriptions.scroll.unsubscribe();
         if (this.fixed) {
             // this.removeSticky();
             this.fixed = false;

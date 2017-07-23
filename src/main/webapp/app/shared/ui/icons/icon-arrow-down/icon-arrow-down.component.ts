@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/ios-arrow-down.svg)
  */
 @Component({
-  selector: 'app-icon-arrow-down',
+  selector: 'c2c-icon-arrow-down',
   templateUrl: './icon-arrow-down.component.html',
   styleUrls: ['./icon-arrow-down.component.scss']
 })

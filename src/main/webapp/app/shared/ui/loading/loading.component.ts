@@ -6,7 +6,7 @@ import { Component, HostBinding } from '@angular/core';
  * @whatItDoes Returns a loading ui component with accessibility attributes.
  */
 @Component({
-  selector: 'app-loading',
+  selector: 'c2c-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })

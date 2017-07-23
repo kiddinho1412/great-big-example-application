@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/ios-search-strong.svg)
  */
 @Component({
-  selector: 'app-icon-search',
+  selector: 'c2c-icon-search',
   templateUrl: './icon-search.component.html',
   styleUrls: ['./icon-search.component.scss']
 })

@@ -12,7 +12,7 @@ import {
  * @whatItDoes Returns a simple ui component as defined in the {@link UiModule}.
  */
 @Component({
-  selector: 'app-select',
+  selector: 'c2c-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })

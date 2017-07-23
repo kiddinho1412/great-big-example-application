@@ -33,7 +33,7 @@ $image-height: 50%;
       margin-bottom: $header-margin;
     }
 
-    app-labels {
+    c2c-labels {
       display: block;
       margin: $header-margin auto;
       margin-top: 0;
@@ -67,20 +67,20 @@ $image-height: 50%;
     margin: 0 auto;
     width: 84%;
 
-    .app-recipe-ad {
+    .c2c-recipe-ad {
       padding: 8px 4px;
       width: 33.33%;
     }
     @media (max-width: $mobile-break-point) {
       width: 100%;
 
-      .app-recipe-ad {
+      .c2c-recipe-ad {
         padding: 8px 0;
         width: 100%;
       }
     }
     @media (min-width: $mobile-break-point + 1) and (max-width: $desktop-break-point) {
-      .app-recipe-ad {
+      .c2c-recipe-ad {
         width: 50%;
       }
     }

@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
  * [Source](https://github.com/driftyco/ionicons/blob/master/src/navicon.svg)
  */
 @Component({
-  selector: 'app-icon-nav',
+  selector: 'c2c-icon-nav',
   templateUrl: './icon-nav.component.html',
   styleUrls: ['./icon-nav.component.scss']
 })

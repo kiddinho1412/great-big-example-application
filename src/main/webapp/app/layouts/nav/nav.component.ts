@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
  * Shown at the top of each page.
  */
 @Component({
-  selector: 'jhi-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+    selector: 'c2c-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss']
 })
 export class NavComponent { }

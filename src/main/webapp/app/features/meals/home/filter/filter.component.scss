@@ -54,7 +54,7 @@ $spacing: 15px;
   .search {
     width: 35%;
 
-    app-input {
+    c2c-input {
       overflow: hidden;
       width: 100%;
     }
@@ -105,7 +105,7 @@ $spacing: 15px;
       display: flex;
       margin: 0 auto;
 
-      app-input {
+      c2c-input {
         margin-right: auto;
         width: 70%;
       }
