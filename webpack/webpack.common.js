@@ -1,14 +1,8 @@
-// Here's a good overview of how to use Webpack with Angular
-// https://angular.io/docs/ts/latest/guide/webpack.html
-//
-// and a good video series on youtube
-// https://www.youtube.com/playlist?list=PL55RiY5tL51rcCnrOrZixuOsZhAHHy6os
-
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
-const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin")
+const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
 
 const utils = require('./utils.js');
 
@@ -22,12 +16,12 @@ module.exports = (options) => {
             extensions: ['.ts', '.js'],
             modules: ['node_modules']
         },
+        stats: {
+            children: false
+        },
         module: {
             rules: [
-                {
-                    test: /bootstrap\/dist\/js\/umd\//,
-                    loader: 'imports-loader?jQuery=jquery'
-                },
+                { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports-loader?jQuery=jquery' },
                 {
                     test: /\.html$/,
                     loader: 'html-loader',
@@ -39,33 +33,6 @@ module.exports = (options) => {
                         minifyCSS: false
                     },
                     exclude: ['./src/main/webapp/index.html']
-                },
-                {
-                    test: /\.scss$/,
-                    use: [
-                        'to-string-loader', // creates a string array for Angular to consume via the styles property
-                        'css-loader',
-                        'sass-loader'
-                    ],
-                    exclude: /(vendor\.scss|global\.scss)/
-                },
-                {
-                    test: /(vendor\.scss|global\.scss)/,
-                    use: [
-                        'style-loader', // add <style> tag to the DOM
-                        'css-loader',   // make javascript out of css
-                        'postcss-loader',
-                        'sass-loader'   // uses node-sass to compile scss to css
-                    ]
-                },
-                {
-                    test: /\.css$/,
-                    loaders: ['to-string-loader', 'css-loader'],
-                    exclude: /(vendor\.css|global\.css)/
-                },
-                {
-                    test: /(vendor\.css|global\.css)/,
-                    loaders: ['style-loader', 'css-loader']
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,
@@ -122,7 +89,11 @@ module.exports = (options) => {
             ),
             new CopyWebpackPlugin([
                 { from: './node_modules/core-js/client/shim.min.js', to: 'core-js-shim.min.js' },
-                { from: './node_modules/swagger-ui/dist', to: 'swagger-ui/dist' },
+                // { from: './node_modules/swagger-ui/dist/css', to: 'swagger-ui/dist/css' },
+                // { from: './node_modules/swagger-ui/dist/lib', to: 'swagger-ui/dist/lib' },
+                // { from: './node_modules/swagger-ui/dist/swagger-ui.min.js', to: 'swagger-ui/dist/swagger-ui.min.js' },
+                { from: './node_modules/swagger-ui/dist/swagger-ui.css', to: 'swagger-ui/dist/swagger-ui.css' },
+                { from: './node_modules/swagger-ui/dist/swagger-ui.js', to: 'swagger-ui/dist/swagger-ui.js' },
                 { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui' },
                 { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
                 { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },

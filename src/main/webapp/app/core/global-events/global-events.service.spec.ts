@@ -18,7 +18,7 @@ describe('Service: GlobalEvents', () => {
 
     beforeEach(async(() => {
         TestBed.compileComponents();
-        spyOn(global, 'requestAnimationFrame').and.callFake((callback) => {
+        spyOn(global, <any>'requestAnimationFrame').and.callFake((callback) => {  //TODO: remove this any. It started with @types/jasmine 2.5.53
             setTimeout(() => {
                 callback();
             }, 50);

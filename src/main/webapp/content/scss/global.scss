@@ -1,6 +1,5 @@
-// @import '../../app/theme/sass/conf/conf';
-@import '../../app/theme/theme';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'conf/conf';
+// @import '../../app/theme/theme';
 
 /* ==============================================================
 Bootstrap tweaks
@@ -80,7 +79,7 @@ a:hover {
   cursor: pointer;
 }
 
-.hand {
+.hand, [jhisortby] {
     cursor: pointer;
 }
 

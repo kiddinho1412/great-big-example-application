@@ -6,7 +6,7 @@ import { JhiLanguageHelper, StateStorageService } from '../../shared';
 @Component({
     selector: 'jhi-standard-layout',
     templateUrl: './standard-layout.component.html',
-    // styleUrls: ['./standard-layout.component.scss', './globalz.scss', './vendorz.scss'],
+    styleUrls: ['./standard-layout.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class StandardLayoutComponent implements OnInit {

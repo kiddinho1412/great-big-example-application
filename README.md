@@ -12,43 +12,55 @@ The main goal of this project is to make available source code for a state-of-th
 the likes of which only exist as intellectual property visible exclusively to employed experts who have 
 signed non-disclosure agreements and can't let you see it or learn how they made everything work together.
 
-    You should not have to get hired before learning how to do a thing the right way
+    You should not have to get hired before learning how professionals do a thing
 
-The other goal is to assemble enough functionality into one free example application that people 
+The other goal is to assemble enough functionality into one excellent, free example application that people 
 think twice before starting another one-feature, no edge-case, example and exacerbating the already 
 overwhelming starting point option overload. Hopefully this will persuade a few people to direct
-that energy instead into improving what already exists and creating new marketplace modules that
-just work with it. To this end I have made, over the course of the past 4 years, 
-[the world's biggest, most detailed database of web technology selling points](https://docs.google.com/spreadsheets/d/1nMv8TqUx3gUoC3M6BRPB4E4FMTSYGT_OLERguXGjePc/edit#gid=1404564369)
+that energy instead into improving what already exists. To this end I have made, over the course of the past 4 years, 
+[the world's biggest, most detailed database of web technology selling points](https://goo.gl/yp2YgJ)
 so things could be compared easily in broad daylight without the hype and selective disclosure of
 a typical product/project sales page. Use it to determine what's best. Then help make it better. See 
 [below](https://github.com/dancancro/great-big-example-application#demonstrations-features-and-selling-points) 
 for a sample slice of it.
 
-Contributions wanted!
+See the project's [to do list](https://github.com/dancancro/great-big-example-application/projects/1) for opportunities to contribute.
 
 # But why one great big app?
 
-"There are already lots of little example apps!!" (written in all different styles) 
-"Software development is _always_ taught using lots of inconsistent simple examples!!"
-"Every real app is different" (so teaching with none of them is better than with any?)
-"Approaches are a matter of personal preference and shouldn't be imposed" (on beginners who just
-want to make something that totally works, don't want to waste time learning the wrong way to do things,
-and don't have any preferences yet)
+"There are already lots of little example apps" (written in all different styles). 
+
+"Software development has _always_ been taught using lots of inconsistent simple examples". 
+
+"Every real app is different" (so teaching with none of them is better than with any?).
+
+"Big (real) artifacts of the craft are too complex and overwhelming for students of web development" 
+(but not for students of every other line of work under the sun?).
+
+"Approaches are a matter of personal preference and shouldn't be imposed" (on beginners who just want 
+to make something that totally works, don't want to waste time learning an approach that the pros don't 
+use, and don't have any preferences yet). 
+
+"If _all_ you want to do is be a code monkey then sure, study real examples, but _real_ computer 
+scientists are above that and only engage in abstract thought of conceptual, unreal demos" (and exposure 
+to code used to conduct real business is somehow a detriment to learning abstract concepts?).
+
+"Demo/blog creators don't have time to provide the material of lessons in the context of a finished product" 
+(like what they have readily at hand because they do this every day for a living).
 
 "Bloated!!"
 
-There's a strange resistance to using big examples to educate in addition to small ones. Should you learn
-automechanics using only go-karts? Construction using only bird houses? I don't really understand the resistance. 
-The case seems pretty plain to me but for clarity, here are some reasons why I think software development 
-should be taught using big examples:
+There's a strange resistance to using big, commercial-grade examples as the _primary_ instrument of web development
+education or even at all. Would you teach automotive engineering using go-karts? Home construction using just windows? 
+I don't understand the resistance, not even a little. The case seems pretty plain to me but for to settle the
+matter, here are some reasons why I think web development should be taught using big examples:
 
     1. Real code answers every question, not just what the authors of tutorials choose to answer through
     their choices of simplifications.
     
     2. To make something new as an expert would do it, it's much easier to copy and modify a thing
     made by experts, no matter how complex, than to synthesize the missing details removed for the 
-    sake of simplicity, out of nothing, no matter how simple. To do the latter requires full 
+    sake of "simplicity", out of nothing, no matter how simple. To do the latter requires full 
     comprehension of a menagerie of inconsistent learning materials in inconsistent contexts, all but
     one of which approaches you will ultimately reject. I did that to make this; it's not fun. To do 
     the former you copy, find/replace, modify, and compare what you're making with what works until 
@@ -89,8 +101,8 @@ unemployed me. No NDA needed to see it.
 
 # How did this great big app happen?
 
-This application has been constructed by combining small open source demos into one big application. It's 
-basically a structure that would have been had all the tutorial experts worked together instead of separately.
+This application is being constructed by combining small open source demos into one big application. It's 
+basically the application that would have been had all the tutorial experts worked together instead of separately.
 Coming from different demos, the features of the app are not related to each other and it won't make any sense
 to have them together but the point is just to demonstrate how things should work technically, so that's okay.
 I took these projects and integrated/restructured/restyled their code according to the following prioritization. 
@@ -104,9 +116,9 @@ lower authority yielding to the higher one:
 5. [JHipster Example - Blog](https://github.com/mraible/jhipster4-demo) by [@mraible](https://github.com/mraible)
 6. [JHipster Example - Chat](https://github.com/ruddell/jhipster-chat-example) by [@ruddell](https://github.com/ruddell)
 7. [ng2-admin - Admin App](https://github.com/akveo/ng2-admin) by [@nnxiaa](https://github.com/nnixaa) and community
-8. [scalable-architecture-demo - P2P Typing Game](https://github.com/mgechev/scalable-architecture-demo) by [@mgechev](https://github.com/mgechev)
-9. [ngrx example app - book collection](https://github.com/ngrx/example-app) by [@MikeRyan52](https://github.com/MikeRyan52)
-10. [angular-seed-advanced](https://github.com/NathanWalker/angular-seed-advanced) by [@mgechev](https://github.com/mgechev) + [@NathanWalker](https://github.com/NathanWalker) + community
+8. [ngrx State Management - Rate/Watch talks](https://blog.nrwl.io/using-ngrx-4-to-manage-state-in-angular-applications-64e7a1f84b7b) by [@vsavkin](https://github.com/vsavkin)
+9. [scalable-architecture-demo - P2P Typing Game](https://github.com/mgechev/scalable-architecture-demo) by [@mgechev](https://github.com/mgechev)
+10. [ngrx example app - book collection](https://github.com/ngrx/example-app) by [@MikeRyan52](https://github.com/MikeRyan52)
 11. [ng2-state-talk - drag/editable notes](https://github.com/JavascriptMick/ng2-state-talk) by [@JavascriptMick](https://github.com/JavascriptMick) 
 12. [rangle-starter Angular 2 with TypeScript and Redux version - counter](https://www.npmjs.com/package/rangle-starter) by [@SethDavenport](https://github.com/SethDavenport)
 
@@ -138,6 +150,8 @@ A huge thanks to those who created the example demos from which I put together t
 ![Image](./docs/images/heroes_dashboard.png?raw=true)
 ### Tour of Heroes List
 ![Image](./docs/images/heroes_list.png?raw=true)
+### Tech Talks
+![Image](./docs/images/talks.png?raw=true)
 ### Drag, Drop and Edit Notes
 ![Image](./docs/images/notes.png?raw=true)
 ### Dashboard
@@ -252,7 +266,7 @@ Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
 import 'leaflet/dist/leaflet.js';
 ~~~
 
-Edit [src/main/webapp/content/css/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
+Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
 ~~~
 @import '~leaflet/dist/leaflet';
 ~~~
@@ -457,10 +471,12 @@ In-memory server-side database|[X.](http:// "H2")|[X.](http:// "Redis")| | | |
 [Production build, generate docs (?)](https://github.com/yeoman/yeoman/issues/152 "By reading comments in your code or maintaining separate docs:  https://github.com/millermedeiros/mdoc    examples:  ngDoc  YUIdoc")| |[X.](http://typedoc.org/ "typedoc")|[X.](http://typedoc.org/ "typedoc")| | |
 [Production build, safe pre-minification (?)](https://medium.com/@MikeRyan52/angular-2-first-app-post-mortem-b2b2b3618828#.xik5mk7bd "uses grunt-ngmin or ng-annotate or gulp ng-gulp-annotate.so you don't have to use the Angular injection syntax for safe minification (i.e. you dont need $inject or (\['$scope','$http',....    ngmin does not produce minsafe code for things that are not main level elements like controller, services, providers, etc.      ng-annotate is an improvement/alternative to ng-min.  ng-min is deprecated    ng-annotate no longer requires that the following comment be written before each service declaration:    /**   * @ngInject   */")|[X.](https://medium.com/@MikeRyan52/angular-2-first-app-post-mortem-b2b2b3618828#.xik5mk7bd "Angular, ng-annotate")|[X.](https://medium.com/@MikeRyan52/angular-2-first-app-post-mortem-b2b2b3618828#.xik5mk7bd "Angular")|[X.](https://medium.com/@MikeRyan52/angular-2-first-app-post-mortem-b2b2b3618828#.xik5mk7bd "Angular")| |[X.](https://medium.com/@MikeRyan52/angular-2-first-app-post-mortem-b2b2b3618828#.xik5mk7bd "Angular")|
 [Renders markup on the server (universal) (?)](https://github.com/qdouble/angular-webpack2-starter/tree/bootstrap-and-universal "With a single-page app, the final markup used by browser to display what a user sees is produced on the client side by javascript that runs on the client-side.  Server-side rendering does this on the server-side and sends the output to the client browser which renders it without running any javascript.")| | | | |[UNIQUE](https://github.com/qdouble/angular-webpack2-starter/tree/bootstrap-and-universal)|
+[Save generator project settings for automated re-run](http://yeoman.io/authoring/storage.html "")|[UNIQUE.](http://yeoman.io/authoring/storage.html "Yeoman")| | | | |
 [Separate route configuration files for each module](https://medium.com/@iDuuck/more-structured-organisation-of-routes-in-angular-js-a348c31c2063 "")|[UNIQUE](https://github.com/dancancro/great-big-angular2-example/blob/master/src/main/webapp/app/features/bernie/bernie.routing.ts)| | | | |
 [Separation of smart containers and dumb components (?)](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.vkyyo356c "Such components typically do the following things: subscribe to data, fetch data from those subscriptions, and fetch global client-side state from stores.  Ideally, once a smart component has assembled such a set of data, it passes it off to a reusable component child to render with. Smart components usually don’t render anything apart from one or more reusable children. This makes it easy to separate rendering and data loading in your tests.")|[UNIQUE](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/features/bernie/bernie.page.ts)| | | | |
 [Server-side integration & unit tests](http://www.letscodejavascript.com/v3/episodes/live/1 "")|[X.](http:// "Mocha, JUnit, Mockito")|[X.](http:// "Mocha")| |[X.](http:// "Mocha")| |
 [Shared Module (client side)](https://angular.io/guide/styleguide#core-feature-module "")|[X](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/shared/shared.module.ts)|[X](https://github.com/born2net/Angular-kitchen-sink/blob/8cc88024f22156f397f2aa95dc142460f720f50f/src/comps/app1/lazyone/SharedModule.ts)| | | |
+[Single source of truth, central state management, Server, Persistent, URL, (Transient) Client, Local UI](https://github.com/dancancro/great-big-example-application/tree/master/src/main/webapp/app/features/talks "")|[UNIQUE](https://github.com/dancancro/great-big-example-application/tree/master/src/main/webapp/app/features/talks)| | | | |
 [Single source of truth, central state management, without lots of boilerplate (?)](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/core/store/entity "Usually with Redux implementations your app will have lots of similar code in action, reducer and effect files for each slice of the store.    To avoid this, takes imposing some conventions and creating utility functions.")|[UNIQUE](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/core/store/entity)| | | | |
 [Style guide for code (?)](https://github.com/johnpapa/angularjs-styleguide "Provides consistency and best practices")|[X.](https://angular.io/docs/ts/latest/guide/style-guide.html "Angular Style Guide")| |[X.](https://angular.io/docs/ts/latest/guide/style-guide.html "Angular Style Guide")| | |
 [Supports database layer triggers (?)](https://docs.feathersjs.com/api/hooks.html "Events attached to data objects that allow you to add custom business logic upon creation, modification or deletion of data.")|[X.](http:// "JHipster")| | |[X.](https://docs.feathersjs.com/api/hooks.html "Feathers.js")| |
@@ -495,6 +511,7 @@ In-memory server-side database|[X.](http:// "H2")|[X.](http:// "Redis")| | | |
 [Full-stack CRUD, with Create, Update and Delete, whole data structures](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/core/services/rest.service.ts "")|[UNIQUE](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/core/services/rest.service.ts)| | | | |
 [Full-stack CRUD, with db-persisted seed data](https://github.com/dancancro/great-big-example-application/blob/master/src/main/resources/config/liquibase "")|[UNIQUE](https://github.com/dancancro/great-big-example-application/blob/master/src/main/resources/config/liquibase)| | | | |
 [Full-stack CRUD, with Read](https://github.com/dancancro/great-big-example-application/blob/master/src/main/resources/config/liquibase "")|[X](https://github.com/dancancro/great-big-example-application/blob/master/src/main/resources/config/liquibase)|[X](https://github.com/born2net/Angular-kitchen-sink/tree/65b01608a769578a94850bc39254d7e81f82d239/src/comps/app1/todos)| | | |
+[Full-stack CRUD, with Read, with filtering](https://github.com/dancancro/great-big-example-application/tree/master/src/main/webapp/app/features/talks/filters "")|[UNIQUE](https://github.com/dancancro/great-big-example-application/tree/master/src/main/webapp/app/features/talks/filters)| | | | |
 [Grid, Editable](https://github.com/dancancro/great-big-example-application/tree/master/src/main/webapp/app/features/messages "")|[UNIQUE](https://github.com/dancancro/great-big-example-application/tree/master/src/main/webapp/app/features/messages)| | | | |
 [i18n, localization (?)](https://github.com/dancancro/great-big-example-application/blob/master/src/main/resources/i18n "Internationalization or localization    Text for different languages are stored in separate places and used to fill in placeholders in the view depending on the user's preferences")|[X](https://github.com/dancancro/great-big-example-application/blob/master/src/main/resources/i18n)| |[X](https://github.com/NathanWalker/angular-seed-advanced/tree/master/src/client/app/shared/i18n)| | |
 [Many-to-many data](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/core/store/index.ts#L265 "")|[UNIQUE](https://github.com/dancancro/great-big-example-application/blob/master/src/main/webapp/app/core/store/index.ts#L265)| | | | |

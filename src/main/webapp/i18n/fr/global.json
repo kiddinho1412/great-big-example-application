@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "Great Big Example Application",
+        "title": "GreatBigExampleApplication",
         "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
         "menu": {
             "home": "Accueil",
@@ -15,9 +15,10 @@
                 "rebuttal": "Rebuttal",
                 "claimRebuttal": "Claim Rebuttal",
                 "blog": "Blog",
-                "entry": "Entry",
                 "tag": "Tag",
+                "entry": "Entry",
                 "message": "Message",
+                "talk": "Talk",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "features": {
@@ -36,6 +37,7 @@
                 "meals": "Repas",
                 "message": "Messages",
                 "notes": "Remarques",
+                "talks": "Discourses",
                 "todo": "Choses à faire",
                 "user": "Utilisateur",
                 "wiki": "Rechercher Wikipedia"
@@ -114,7 +116,8 @@
         },
         "ribbon": {
             "dev": "Développement"
-        }
+        },
+        "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
     },
     "entity": {
         "action": {

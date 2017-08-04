@@ -13,6 +13,7 @@ import { GreatBigExampleApplicationSharedModule } from '../../shared/shared.modu
 import { ContactPage } from './contact.page';
 import { CoreModule } from '../../core/core.module';
 import { customHttpProvider } from '../../core/interceptor/http.provider';
+import { reducers, metaReducers, developmentReducerFactory } from '../../core/store';
 
 describe('ContactPage', () => {
     let component: ContactPage;
@@ -26,7 +27,7 @@ describe('ContactPage', () => {
                 GreatBigExampleApplicationTestModule,
                 GreatBigExampleApplicationSharedModule,
                 CoreModule,
-                StoreModule.provideStore(fromRoot.reducer),
+                StoreModule.forRoot(reducers, { metaReducers }),
                 RouterTestingModule,
                 ReactiveFormsModule
             ],

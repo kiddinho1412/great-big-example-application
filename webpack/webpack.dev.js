@@ -2,16 +2,13 @@ const webpack = require('webpack');
 const writeFilePlugin = require('write-file-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const WebpackNotifierPlugin = require('webpack-notifier');
-const execSync = require('child_process').execSync;
-const fs = require('fs');
 const path = require('path');
 
 const utils = require('./utils.js');
 const commonConfig = require('./webpack.common.js');
 
-const ENV = 'dev';
+const ENV = 'development';
 
 module.exports = webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'inline-source-map',
@@ -61,6 +58,24 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                 'angular-router-loader'    // enables lazy loading routes
             ],
             exclude: ['node_modules/generator-jhipster']
+        },
+        {
+            test: /\.scss$/,
+            loaders: ['to-string-loader', 'css-loader', 'sass-loader'],
+            exclude: /(vendor\.scss|global\.scss)/
+        },
+        {
+            test: /(vendor\.scss|global\.scss)/,
+            loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+        },
+        {
+            test: /\.css$/,
+            loaders: ['to-string-loader', 'css-loader'],
+            exclude: /(vendor\.css|global\.css)/
+        },
+        {
+            test: /(vendor\.css|global\.css)/,
+            loaders: ['style-loader', 'css-loader']
         }]
     },
     plugins: [
@@ -68,13 +83,12 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
             host: 'localhost',
             port: 9010,
             proxy: {
-                target: 'http://localhost:9060',
+                target: 'http://localhost:9070',
                 ws: true
             }
         }, {
                 reload: false
             }),
-        new ExtractTextPlugin('styles.css'),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.NamedModulesPlugin(),
         new writeFilePlugin(),

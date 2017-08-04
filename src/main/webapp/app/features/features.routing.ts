@@ -37,6 +37,7 @@ const routes: Routes = [
             // { path: 'meals', loadChildren: './meals/meals.module#MealsModule' },
             { path: 'messages', loadChildren: './messages/messages.module#MessagesModule' },
             { path: 'notes', loadChildren: './notes/notes.module#NotesModule' },
+            { path: 'talks', loadChildren: './talks/talks.module#TalksModule' },
             { path: 'wiki', loadChildren: './wiki/wiki.module#WikiModule' }
         ]
     },

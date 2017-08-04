@@ -10,3 +10,4 @@ export * from './profiles/profile-info.model';
 export * from './meals-layout/meals-layout.component';
 export * from './standard-layout/standard-layout.component';
 export * from './status-bar/status-bar.component';
+export * from './status-bar/status-bar-aware.directive';

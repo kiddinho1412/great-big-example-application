@@ -1,7 +1,7 @@
 // Global Styles - all other components use encapsulation
 // @see https://angular.io/docs/ts/latest/guide/component-styles.html#!#view-encapsulation
 
-@import '../../theme/sass/conf/variables';
+@import '../../../content/scss/conf/variables';
 // Fonts
 @font-face {
   font-family: $title-font;

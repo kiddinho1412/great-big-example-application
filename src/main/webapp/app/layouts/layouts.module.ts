@@ -13,7 +13,8 @@ import {
     ErrorComponent,
     MealsLayoutComponent,
     StandardLayoutComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    StatusBarAwareDirective
 } from './';
 import { MealsModule } from '../features/meals/meals.module';
 
@@ -26,7 +27,8 @@ export const components = [
     ErrorComponent,
     MealsLayoutComponent,
     StandardLayoutComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    StatusBarAwareDirective
 ];
 
 @NgModule({

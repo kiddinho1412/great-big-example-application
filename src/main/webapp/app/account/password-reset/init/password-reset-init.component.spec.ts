@@ -7,7 +7,7 @@ import { PasswordResetInitService } from './password-reset-init.service';
 
 describe('Component Tests', () => {
 
-    describe('PasswordResetInitComponent', function() {
+    describe('PasswordResetInitComponent', function () {
         let fixture: ComponentFixture<PasswordResetInitComponent>;
         let comp: PasswordResetInitComponent;
 
@@ -34,7 +34,7 @@ describe('Component Tests', () => {
             comp.ngOnInit();
         });
 
-        it('should define its initial state', function() {
+        it('should define its initial state', () => {
             expect(comp.success).toBeUndefined();
             expect(comp.error).toBeUndefined();
             expect(comp.errorEmailNotExists).toBeUndefined();

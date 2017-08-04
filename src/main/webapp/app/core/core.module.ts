@@ -3,7 +3,6 @@ import { NgModule, ApplicationRef, Optional, SkipSelf } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
@@ -14,8 +13,7 @@ import { TranslateHttpLoader, } from '@ngx-translate/http-loader';
 import { translatePartialLoader, missingTranslationHandler } from 'ng-jhipster';
 import { Http } from '@angular/http';
 
-import { NgaModule } from '../theme/nga.module';
-import { reducer } from './store';
+import { NgaModule } from '../shared/nga.module';
 
 import { ModuleWithProviders } from '@angular/core';
 import { PushNotificationsModule } from 'angular2-notifications';
@@ -24,18 +22,13 @@ import { AngularFireModule } from 'angularfire2';
 /**
  * Import ngrx
  */
-import { compose } from '@ngrx/core/compose';
-import { Store, StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
-import { RouterStoreModule } from '@ngrx/router-store';
-import { DBModule } from '@ngrx/db';
+import { Store, ActionReducer, combineReducers } from '@ngrx/store';
+// import { RouterStoreModule } from '@ngrx/router-store';
 
 /**
  * Import toplevel component/providers/directives/pipes
  */
 import { GreatBigExampleApplicationSharedModule } from '../shared/shared.module';
-import { schema } from './store/db';
 import { RESTService } from './services/rest.service';
 import { SocketService } from './services/socket.service';
 import { UserService } from './services/user.service';
@@ -58,27 +51,25 @@ import { SkipNavComponent } from '../layouts/skip-nav/skip-nav.component';
 //     GlobalState
 // ];
 // Reset the root state for HMR
-function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
-    return function (state, action) {
-        if (action.type === 'SET_ROOT_STATE') {
-            return action.payload;
-        }
-        return reducer(state, action);
-    };
-}
+// function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
+//     return function (state, action) {
+//         if (action.type === 'SET_ROOT_STATE') {
+//             return action.payload;
+//         }
+//         return reducer(state, action);
+//     };
+// }
 
-const rootReducer = compose(stateSetter, combineReducers)({
-    reducer
-});
+// const rootReducer = compose(stateSetter, combineReducers)({
+//     reducer
+// });
 // AoT requires an exported function for factories
 // export function HttpLoaderFactory(http: Http) {
 //     return new TranslateHttpLoader(http);
 // }
 const imports = [
-    // BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    // HttpModule,
     CommonModule,
     RouterModule,
     GreatBigExampleApplicationSharedModule,
@@ -87,41 +78,6 @@ const imports = [
     NgbModule.forRoot(),
     FlexLayoutModule,
 
-    // StoreLogMonitorModule,
-
-    /**
-     * StoreModule.provideStore is imported once in the root module, accepting a reducer
-     * function or object map of reducer functions. If passed an object of
-     * reducers, combineReducers will be run creating your application
-     * meta-reducer. This returns all providers for an @ngrx/store
-     * based application.
-     */
-    StoreModule.provideStore(reducer),
-
-    /**
-     * @ngrx/router-store keeps router state up-to-date in the store and uses
-     * the store as the single source of truth for the router's state.
-     */
-    RouterStoreModule.connectRouter(),
-
-    /**
-     * Store devtools instrument the store retaining past versions of state
-     * and recalculating new states. This enables powerful time-travel
-     * debugging.
-     *
-     * To use the debugger, install the Redux Devtools extension for either
-     * Chrome or Firefox
-     *
-     * See: https://github.com/zalmoxisus/redux-devtools-extension
-     */
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
-
-    /**
-     * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
-     * service available.
-     */
-    DBModule.provideDB(schema),
-
     /**
      * from meals
      */
@@ -129,22 +85,7 @@ const imports = [
     CommonModule,
     PushNotificationsModule,
     RouterModule,
-    GreatBigExampleApplicationSharedModule
-
 ];
-
-// Enable HMR and ngrx/devtools in hot reload mode
-if (process.env.NODE_ENV === 'dev') {
-    imports.push(...[
-        StoreDevtoolsModule.instrumentStore({
-            monitor: useLogMonitor({
-                visible: false,
-                position: 'right'
-            })
-        }),
-        StoreLogMonitorModule,
-    ]);
-}
 
 @NgModule({
     imports,

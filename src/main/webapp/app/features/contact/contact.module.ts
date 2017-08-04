@@ -10,19 +10,19 @@ import { ContactEffects } from '../../core/store/contact/contact.effects';
 import { customHttpProvider } from '../../core/interceptor/http.provider';
 
 @NgModule({
-  imports: [
-    GreatBigExampleApplicationSharedModule,
-    ContactRouting,
-    EffectsModule.run(ContactEffects),
-    ReactiveFormsModule
-  ],
-  declarations: [
-    ContactPage
-  ],
-  providers: [
-    customHttpProvider(),
-    RESTService
-  ]
+    imports: [
+        GreatBigExampleApplicationSharedModule,
+        ContactRouting,
+        EffectsModule.forRoot([ContactEffects]),
+        ReactiveFormsModule
+    ],
+    declarations: [
+        ContactPage
+    ],
+    providers: [
+        customHttpProvider(),
+        RESTService
+    ]
 })
 export class ContactModule { }
 

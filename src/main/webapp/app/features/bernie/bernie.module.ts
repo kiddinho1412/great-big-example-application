@@ -18,25 +18,23 @@ import { ClaimRebuttalEffects } from '../../core/store/claim-rebuttal/claim-rebu
 import { customHttpProvider } from '../../core/interceptor/http.provider';
 
 @NgModule({
-  imports: [
-    SortablejsModule,
-    GreatBigExampleApplicationSharedModule,
-    BernieRouting,
-    ReactiveFormsModule,
-    MaterialModule,
-    EffectsModule.run(ClaimEffects),
-    EffectsModule.run(RebuttalEffects),
-    EffectsModule.run(ClaimRebuttalEffects),
-    NgPipesModule
-  ],
-  declarations: [
-    BerniePage,
-    ClaimComponent,
-    RebuttalComponent
-  ],
-  providers: [
-    customHttpProvider(),
-    RESTService
-  ]
+    imports: [
+        SortablejsModule,
+        GreatBigExampleApplicationSharedModule,
+        BernieRouting,
+        ReactiveFormsModule,
+        MaterialModule,
+        EffectsModule.forRoot([ClaimEffects, RebuttalEffects, ClaimRebuttalEffects]),
+        NgPipesModule
+    ],
+    declarations: [
+        BerniePage,
+        ClaimComponent,
+        RebuttalComponent
+    ],
+    providers: [
+        customHttpProvider(),
+        RESTService
+    ]
 })
 export class BernieModule { }

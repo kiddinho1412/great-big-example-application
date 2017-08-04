@@ -9,6 +9,7 @@ import * as fromRoot from '../../core/store';
 import { GreatBigExampleApplicationSharedModule } from '../../shared/shared.module';
 import { CollectionPage } from './collection.page';
 import { GreatBigExampleApplicationTestModule } from '../../../mocks/test.module';
+import { reducers, metaReducers, developmentReducerFactory } from '../../core/store';
 
 describe('CollectionPage', () => {
     let component: CollectionPage;
@@ -22,7 +23,7 @@ describe('CollectionPage', () => {
             imports: [
                 GreatBigExampleApplicationTestModule,
                 GreatBigExampleApplicationSharedModule,
-                StoreModule.provideStore(fromRoot.reducer),
+                StoreModule.forRoot(reducers, { metaReducers }),
                 RouterTestingModule
             ],
             declarations: [CollectionPage],
