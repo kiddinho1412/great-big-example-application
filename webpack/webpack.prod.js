@@ -35,7 +35,7 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                         configFileName: 'tsconfig-aot.json'
                     },
                 },
-                'angular-router-loader'    // enables lazy loading routes
+                { loader: 'angular-router-loader?aot=true&genDir=target/aot' }    // enables lazy loading routes
             ],
             exclude: ['node_modules/generator-jhipster']
         },

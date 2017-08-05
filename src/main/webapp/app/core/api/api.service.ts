@@ -7,7 +7,7 @@ import {
     AfoListObservable,
     AfoObjectObservable
 } from 'angularfire2-offline';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 /**
  * @whatItDoes Reponsible for returning data from an API.
  * @consumers {@link HomeComponent}, {@link RecipeComponent}, {@link RecipeAdComponent}

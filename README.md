@@ -304,6 +304,8 @@ Then navigate to [http://localhost:8090](http://localhost:8090) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 
+To inspect the bundle use [source-map-explorer](https://angular.io/guide/aot-compiler#inspect-the-bundle)
+
 ## Testing
 
 To launch your application's tests, run:

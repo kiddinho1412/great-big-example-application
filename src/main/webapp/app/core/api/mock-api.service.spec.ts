@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { Subject, ReplaySubject } from 'rxjs/Rx';
 
 import { Recipe } from './api-interfaces';
