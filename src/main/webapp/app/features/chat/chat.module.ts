@@ -9,21 +9,20 @@ import { ChatService } from './services/chat.service';
 import { customHttpProvider } from '../../core/interceptor/http.provider';
 
 @NgModule({
-  imports: [
-    GreatBigExampleApplicationSharedModule,
-    ChatRouting
-  ],
-  declarations: [
-    ChatPage,
-  ],
-  entryComponents: [
-  ],
-  providers: [
-    { provide: Window, useValue: window },
-    { provide: Document, useValue: document },
-    customHttpProvider(),
-    ChatService
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    imports: [
+        GreatBigExampleApplicationSharedModule,
+        ChatRouting
+    ],
+    declarations: [
+        ChatPage,
+    ],
+    entryComponents: [
+    ],
+    providers: [
+        // { provide: Window, useValue: window },
+        customHttpProvider(),
+        ChatService
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ChatModule { }

@@ -12,6 +12,8 @@ import { Message } from '../../../core/store/message/message.model';
 import * as EntityActions from '../../../core/store/entity/entity.actions';
 import { slices } from '../../../core/store/util';
 
+let document: any;
+
 @Injectable()
 export class ChatService {
     stompClient = null;
@@ -26,8 +28,7 @@ export class ChatService {
     constructor(
         private router: Router,
         private authServerProvider: AuthServerProvider,
-        private $document: Document,
-        private $window: Window,
+        // private $window: Window,
         private csrfService: CSRFService,
         private store: Store<Message>
     ) {
@@ -40,7 +41,8 @@ export class ChatService {
             this.connection = this.createConnection();
         }
         // building absolute path so that websocket doesnt fail when deploying with a context path
-        const loc = this.$window.location;
+        // const loc = this.$window.location;
+        const loc = document.window.location;
         let url = '//' + loc.host + loc.pathname + 'websocket/chat';
         const authToken = this.authServerProvider.getToken();
         if (authToken) {

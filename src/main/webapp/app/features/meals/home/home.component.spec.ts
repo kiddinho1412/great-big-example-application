@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Subject, Observable } from 'rxjs/Rx';
-import { StoreModule, Store, StateObservable } from '@ngrx/store';
+import { StoreModule, Store, StateObservable, combineReducers } from '@ngrx/store';
 
 import { HomeComponent } from './home.component';
 import { HomeModule } from './home.module';
@@ -17,6 +17,7 @@ import { StatusBarService } from '../../../layouts/status-bar/status-bar.service
 import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
 import { MockDocumentService } from '../../../../mocks/mock-document.service.spec';
 import { MockWindowService } from '../../../../mocks/mock-window.service.spec';
+import * as fromRoot from '../../../core/store';
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -32,6 +33,9 @@ describe('HomeComponent', () => {
         mockWindowService = new MockWindowService();
         TestBed.configureTestingModule({
             imports: [
+                StoreModule.forRoot({
+                    ...fromRoot.reducers
+                }),
                 CoreModule,
                 HomeModule,
                 StoreModule,

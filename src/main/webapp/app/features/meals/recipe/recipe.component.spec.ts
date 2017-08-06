@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MomentModule } from 'angular2-moment';
 import { Subject, Observable } from 'rxjs/Rx';
+import { StoreModule, Store, StateObservable, combineReducers } from '@ngrx/store';
 
 import { RecipeComponent } from './recipe.component';
 import { TimerButtonComponent } from '../recipe/timer-button/timer-button.component';
@@ -13,6 +14,7 @@ import { MockApiService } from '../../../core/api/mock-api.service.spec';
 import { GreatBigExampleApplicationSharedModule } from '../../../shared/shared.module';
 import { MealsSharedModule } from '../shared/shared.module';
 import { MockRouter } from '../../../../mocks/mock-router.spec';
+import * as fromRoot from '../../../core/store';
 
 @Injectable()
 class MockActivatedRoute {
@@ -33,6 +35,9 @@ describe('RecipeComponent', () => {
         mockRouter = new MockRouter();
         TestBed.configureTestingModule({
             imports: [
+                StoreModule.forRoot(
+                    fromRoot.reducers
+                ),
                 MomentModule,
                 GreatBigExampleApplicationSharedModule,
                 MealsSharedModule

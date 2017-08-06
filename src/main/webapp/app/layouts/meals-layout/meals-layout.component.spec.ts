@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Subject } from 'rxjs/Rx';
+import { StoreModule, Store, StateObservable, combineReducers } from '@ngrx/store';
 
 import { MealsLayoutComponent } from './meals-layout.component';
 import { CoreModule } from '../../core/core.module';
@@ -18,6 +19,7 @@ import { ApiService } from '../../core/api/api.service';
 import { MockApiService } from '../../core/api/mock-api.service.spec';
 import { StatusBarService } from '../status-bar/status-bar.service';
 import { MockDocumentService } from '../../../mocks/mock-document.service.spec';
+import * as fromRoot from '../../core/store';
 
 describe('MealsLayoutComponent', () => {
     const config: Route[] = [
@@ -33,6 +35,9 @@ describe('MealsLayoutComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
+                StoreModule.forRoot({
+                    ...fromRoot.reducers
+                }),
                 CoreModule,
                 GreatBigExampleApplicationHomeModule,
                 RouterTestingModule.withRoutes(config)

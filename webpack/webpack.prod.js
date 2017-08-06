@@ -4,6 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Visualizer = require('webpack-visualizer-plugin');
 const ngcWebpack = require('ngc-webpack');
 const path = require('path');
+const ngtoolsWebpack = require('@ngtools/webpack');
 
 const utils = require('./utils.js');
 const commonConfig = require('./webpack.common.js');
@@ -35,7 +36,8 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                         configFileName: 'tsconfig-aot.json'
                     },
                 },
-                { loader: 'angular-router-loader?aot=true&genDir=target/aot' }    // enables lazy loading routes
+                // { loader: 'angular-router-loader?aot=true&genDir=target/aot' }    // enables lazy loading routes
+                { loader: '@ngtools/webpack' }    // enables lazy loading routes
             ],
             exclude: ['node_modules/generator-jhipster']
         },
@@ -84,14 +86,18 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                 screw_i8: true
             }
         }),
-        new ngcWebpack.NgcWebpackPlugin({
-            disabled: false,
-            tsConfig: utils.root('tsconfig-aot.json'),
-            resourceOverride: ''
-        }),
+        // new ngcWebpack.NgcWebpackPlugin({
+        //     disabled: false,
+        //     tsConfig: utils.root('tsconfig-aot.json'),
+        //     resourceOverride: ''
+        // }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
+        }),
+        new ngtoolsWebpack.AotPlugin({
+            tsConfigPath: 'tsconfig-aot.json',
+            entryModule: 'src/webapp/app.module#AppModule'
         })
     ]
 });

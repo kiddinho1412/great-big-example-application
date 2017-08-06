@@ -87,6 +87,7 @@
     "@angular/compiler-cli": "4.3.1",
     "@angularclass/hmr": "2.1.2",
     "@ngrx/store-devtools": "4.0.0",
+    "@ngtools/webpack": "1.5.5",
     "@types/fullcalendar": "2.7.44",
     "@types/hammerjs": "2.0.34",
     "@types/jasmine": "2.5.53",
