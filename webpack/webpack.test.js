@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
-const utils = require('./utils.js');
+const helpers = require('./helpers.js');
 
 module.exports = (WATCH) => ({
     resolve: {
@@ -49,7 +49,7 @@ module.exports = (WATCH) => ({
         new webpack.ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            utils.root('./src') // location of your src
+            helpers.root('./src') // location of your src
         ),
         new LoaderOptionsPlugin({
             options: {

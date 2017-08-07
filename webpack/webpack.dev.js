@@ -1,103 +1,284 @@
-const webpack = require('webpack');
-const writeFilePlugin = require('write-file-webpack-plugin');
-const webpackMerge = require('webpack-merge');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
-const path = require('path');
+/**
+ * @author: @AngularClass
+ */
 
-const utils = require('./utils.js');
-const commonConfig = require('./webpack.common.js');
+const helpers = require('./helpers');
+const webpackMerge = require('webpack-merge'); // used to merge webpack configs
+// const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
+const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 
-const ENV = 'development';
+/**
+ * Webpack Plugins
+ */
 
-module.exports = webpackMerge(commonConfig({ env: ENV }), {
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './target/www',
-        proxy: [{
-            context: [
-                /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
-                '/api',
-                '/management',
-                '/swagger-resources',
-                '/v2/api-docs',
-                '/h2-console'
-            ],
-            target: 'http://127.0.0.1:8090',
-            secure: false
-        }, {
-            context: [
-                '/websocket'
-            ],
-            target: 'ws://127.0.0.1:8090',
-            ws: true
-        }]
-    },
-    entry: {
-        polyfills: './src/main/webapp/app/polyfills',
-        global: './src/main/webapp/content/scss/global.scss',
-        main: './src/main/webapp/app/app.main'
-    },
-    output: {
-        path: utils.root('target/www'),
-        filename: 'app/[name].bundle.js',
-        chunkFilename: 'app/[id].chunk.js'
-    },
-    module: {
-        rules: [{
-            test: /\.ts$/,
-            enforce: 'pre',
-            // loaders: 'tslint-loader',
-            exclude: ['node_modules', new RegExp('reflect-metadata\\' + path.sep + 'Reflect\\.ts')]
-        },
-        {
-            test: /\.ts$/,
-            loaders: [
-                'angular2-template-loader',
-                'awesome-typescript-loader',
-                'angular-router-loader'    // enables lazy loading routes
-            ],
-            exclude: ['node_modules/generator-jhipster']
-        },
-        {
-            test: /\.scss$/,
-            loaders: ['to-string-loader', 'css-loader', 'sass-loader'],
-            exclude: /(vendor\.scss|global\.scss)/
-        },
-        {
-            test: /(vendor\.scss|global\.scss)/,
-            loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-        },
-        {
-            test: /\.css$/,
-            loaders: ['to-string-loader', 'css-loader'],
-            exclude: /(vendor\.css|global\.css)/
-        },
-        {
-            test: /(vendor\.css|global\.css)/,
-            loaders: ['style-loader', 'css-loader']
-        }]
-    },
-    plugins: [
-        new BrowserSyncPlugin({
-            host: 'localhost',
-            port: 9010,
-            proxy: {
-                target: 'http://localhost:9070',
-                ws: true
-            }
-        }, {
-                reload: false
-            }),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.NamedModulesPlugin(),
-        new writeFilePlugin(),
-        new webpack.WatchIgnorePlugin([
-            utils.root('src/test'),
-        ]),
-        new WebpackNotifierPlugin({
-            title: 'JHipster',
-            contentImage: path.join(__dirname, 'logo-jhipster.png')
-        })
-    ]
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
+const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+
+/**
+ * Webpack Constants
+ */
+
+const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 9010;
+const PUBLIC = process.env.PUBLIC || undefined;
+const HMR = helpers.hasProcessFlag('hot');
+const METADATA = webpackMerge(commonConfig({ env: ENV }).metadata, {
+    host: HOST,
+    port: PORT,
+    public: PUBLIC,
+    ENV: ENV,
+    HMR: HMR
 });
+
+// const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
+
+/**
+ * Webpack configuration
+ *
+ * See: http://webpack.github.io/docs/configuration.html#cli
+ */
+module.exports = function(options) {
+    return webpackMerge(commonConfig({ env: ENV }), {
+
+        /**
+         * Developer tool to enhance debugging
+         *
+         * See: http://webpack.github.io/docs/configuration.html#devtool
+         * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
+         */
+        devtool: 'inline-source-map',
+        devServer: {
+            contentBase: './target/www',
+            proxy: [{
+                context: [
+                    /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
+                    '/api',
+                    '/management',
+                    '/swagger-resources',
+                    '/v2/api-docs',
+                    '/h2-console'
+                ],
+                target: 'http://127.0.0.1:8090',
+                secure: false
+            }, {
+                context: [
+                    '/websocket'
+                ],
+                target: 'ws://127.0.0.1:8090',
+                ws: true
+            }]
+        },
+
+        /**
+         * Options affecting the output of the compilation.
+         *
+         * See: http://webpack.github.io/docs/configuration.html#output
+         */
+        output: {
+
+            /**
+             * The output directory as absolute path (required).
+             *
+             * See: http://webpack.github.io/docs/configuration.html#output-path
+             */
+            path: helpers.root('target/www'),
+
+            /**
+             * Specifies the name of each output file on disk.
+             * IMPORTANT: You must not specify an absolute path here!
+             *
+             * See: http://webpack.github.io/docs/configuration.html#output-filename
+             */
+            filename: 'app/[name].bundle.js',
+
+            /**
+             * The filename of the SourceMaps for the JavaScript files.
+             * They are inside the output.path directory.
+             *
+             * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
+             */
+            sourceMapFilename: '[file].map',
+
+            /** The filename of non-entry chunks as relative path
+             * inside the output.path directory.
+             *
+             * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+             */
+            chunkFilename: 'app/[id].chunk.js',
+
+            library: 'ac_[name]',
+            libraryTarget: 'var',
+        },
+
+        module: {
+
+            rules: [
+
+
+
+                /**
+                 * Sass loader support for *.scss files (styles directory only)
+                 * Loads external sass styles into the DOM, supports HMR
+                 *
+                 */
+                {
+                    test: /\.scss$/,
+                    use: ['style-loader', 'css-loader', 'sass-loader'],
+                    include: [helpers.root('src/main/webapp/content', 'scss')]
+                },
+                /**
+                 * Css loader support for *.css files (styles directory only)
+                 * Loads external css styles into the DOM, supports HMR
+                 *
+                 */
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader'],
+                    include: [helpers.root('src/main/webapp/content', 'css')]
+                }
+            ]
+
+        },
+
+        plugins: [
+
+            /**
+             * Plugin: DefinePlugin
+             * Description: Define free variables.
+             * Useful for having development builds with debug logging or adding global constants.
+             *
+             * Environment helpers
+             *
+             * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+             *
+             * NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
+             */
+            new DefinePlugin({
+                'ENV': JSON.stringify(METADATA.ENV),
+                'HMR': METADATA.HMR,
+                'process.env': {
+                    'ENV': JSON.stringify(METADATA.ENV),
+                    'NODE_ENV': JSON.stringify(METADATA.ENV),
+                    'HMR': METADATA.HMR,
+                }
+            }),
+
+            // new DllBundlesPlugin({
+            //   bundles: {
+            //     polyfills: [
+            //       'core-js',
+            //       {
+            //         name: 'zone.js',
+            //         path: 'zone.js/dist/zone.js'
+            //       },
+            //       {
+            //         name: 'zone.js',
+            //         path: 'zone.js/dist/long-stack-trace-zone.js'
+            //       },
+            //     ],
+            //     vendor: [
+            //       '@angular/platform-browser',
+            //       '@angular/platform-browser-dynamic',
+            //       '@angular/core',
+            //       '@angular/common',
+            //       '@angular/forms',
+            //       '@angular/http',
+            //       '@angular/router',
+            //       '@angularclass/hmr',
+            //       'rxjs',
+            //     ]
+            //   },
+            //   dllDir: helpers.root('dll'),
+            //   webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
+            //     devtool: 'cheap-module-source-map',
+            //     plugins: []
+            //   })
+            // }),
+
+            /**
+             * Plugin: AddAssetHtmlPlugin
+             * Description: Adds the given JS or CSS file to the files
+             * Webpack knows about, and put it into the list of assets
+             * html-webpack-plugin injects into the generated html.
+             *
+             * See: https://github.com/SimenB/add-asset-html-webpack-plugin
+             */
+            // new AddAssetHtmlPlugin([
+            //   { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
+            //   { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
+            // ]),
+
+            /**
+             * Plugin: NamedModulesPlugin (experimental)
+             * Description: Uses file names as module name.
+             *
+             * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
+             */
+            // new NamedModulesPlugin(),
+
+            /**
+             * Plugin LoaderOptionsPlugin (experimental)
+             *
+             * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+             */
+            new LoaderOptionsPlugin({
+                debug: true,
+                options: {
+
+                }
+            }),
+
+        ],
+
+        /**
+         * Webpack Development Server configuration
+         * Description: The webpack-dev-server is a little node.js Express server.
+         * The server emits information about the compilation state to the client,
+         * which reacts to those events.
+         *
+         * See: https://webpack.github.io/docs/webpack-dev-server.html
+         */
+        devServer: {
+            port: METADATA.port,
+            host: METADATA.host,
+            public: METADATA.public,
+            historyApiFallback: true,
+            watchOptions: {
+                // if you're using Docker you may need this
+                // aggregateTimeout: 300,
+                // poll: 1000,
+                ignored: /node_modules/
+            },
+            /**
+            * Here you can access the Express app object and add your own custom middleware to it.
+            *
+            * See: https://webpack.github.io/docs/webpack-dev-server.html
+            */
+            setup: function(app) {
+                // For example, to define custom handlers for some paths:
+                // app.get('/some/path', function(req, res) {
+                //   res.json({ custom: 'response' });
+                // });
+            }
+        },
+
+        /**
+         * Include polyfills or mocks for various node stuff
+         * Description: Node configuration
+         *
+         * See: https://webpack.github.io/docs/configuration.html#node
+         */
+        node: {
+            global: true,
+            crypto: 'empty',
+            process: true,
+            module: false,
+            clearImmediate: false,
+            setImmediate: false
+        }
+
+    });
+}

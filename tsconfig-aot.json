@@ -3,45 +3,49 @@
         "target": "es5",
         "module": "es2015",
         "moduleResolution": "node",
-        "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "removeComments": false,
-        "noImplicitAny": false,
-        "suppressImplicitAnyIndexErrors": true,
-        "outDir": "target/www/app",
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "noEmit": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "strictNullChecks": false,
         "lib": [
-            "es2016",
+            "es2015",
             "dom"
         ],
+        "baseUrl": ".",
+        "paths": {
+            "@angular/*": [
+                "node_modules/@angular/*"
+            ]
+        },
         "typeRoots": [
             "node_modules/@types"
+        ],
+        "types": [
+            "hammerjs",
+            "node"
         ]
     },
-    "files": [
-        "src/main/webapp/app/app.module.ts",
-        "src/main/webapp/app/app.main-aot.ts",
-        "src/main/webapp/app/features/about/about.module.ts",
-        "src/main/webapp/app/features/legal/legal.module.ts",
-        "src/main/webapp/app/features/bernie/bernie.module.ts",
-        "src/main/webapp/app/features/books/books.module.ts",
-        "src/main/webapp/app/features/chat/chat.module.ts",
-        "src/main/webapp/app/features/contact/contact.module.ts",
-        "src/main/webapp/app/features/counter/counter.module.ts",
-        "src/main/webapp/app/features/game/game.module.ts",
-        "src/main/webapp/app/features/heroes/heroes.module.ts",
-        "src/main/webapp/app/features/messages/messages.module.ts",
-        "src/main/webapp/app/features/notes/notes.module.ts",
-        "src/main/webapp/app/features/talks/talks.module.ts",
-        "src/main/webapp/app/features/wiki/wiki.module.ts",
-        "src/main/webapp/app/features/meals/home/home.module.ts",
-        "src/main/webapp/app/features/meals/recipe/recipe.module.ts"
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/**/*.spec.ts",
+        "src/**/*.e2e.ts"
     ],
-    "include": [
-        "typings.d.ts"
-    ],
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "useWebpackText": true
+    },
     "angularCompilerOptions": {
         "genDir": "target/aot",
         "skipMetadataEmit": true
+    },
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "atom": {
+        "rewriteTsconfig": false
     }
 }

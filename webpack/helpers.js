@@ -1,11 +1,28 @@
-const fs = require('fs');
-const path = require('path');
+/**
+ * @author: @AngularClass
+ */
+var path = require('path');
 
-module.exports = {
-    parseVersion,
-    root,
-    isExternalLib
-};
+const EVENT = process.env.npm_lifecycle_event || '';
+
+/**
+ * Helper functions.
+ */
+var ROOT = path.resolve(__dirname, '..');
+
+function hasProcessFlag(flag) {
+    return process.argv.join('').indexOf(flag) > -1;
+}
+
+function hasNpmFlag(flag) {
+    return EVENT.includes(flag);
+}
+
+function isWebpackDevServer() {
+    return process.argv[1] && !!(/webpack-dev-server/.exec(process.argv[1]));
+}
+
+var root = path.join.bind(path, ROOT);
 
 const parseString = require('xml2js').parseString;
 // return the version number from `pom.xml` file
@@ -25,17 +42,8 @@ function parseVersion() {
     return version;
 }
 
-const _root = path.resolve(__dirname, '..');
-
-function root(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return path.join.apply(path, [_root].concat(args));
-}
-
-function isExternalLib(module, check = /node_modules/) {
-    const req = module.userRequest;
-    if(typeof req !== 'string') {
-        return false;
-    }
-    return req.search(check) >= 0;
-}
+exports.hasProcessFlag = hasProcessFlag;
+exports.hasNpmFlag = hasNpmFlag;
+exports.isWebpackDevServer = isWebpackDevServer;
+exports.root = root;
+exports.parseVersion = parseVersion;
