@@ -1,4 +1,4 @@
-/// <reference path="./node_modules/firebase/firebase.d.ts" />
+/// <reference path="../../../node_modules/firebase/firebase.d.ts" />
 
 /* SystemJS module definition */
 declare var module: NodeModule;
@@ -130,7 +130,7 @@ interface ErrorStackTraceLimit {
 }
 
 // Extend typings
-interface NodeRequire extends WebpackRequire { }
+// interface NodeRequire extends WebpackRequire { }
 interface ErrorConstructor extends ErrorStackTraceLimit { }
 interface NodeRequireFunction extends Es6PromiseLoader { }
 // interface NodeModule extends WebpackModule { }

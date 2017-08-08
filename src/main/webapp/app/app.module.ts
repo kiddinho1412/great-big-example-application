@@ -86,18 +86,6 @@ const imports = [
   TranslateModule.forRoot(),
   MealsModule,
   LayoutsModule,
-  /**
-   * StoreModule.forRoot is imported once in the root module, accepting a reducer
-   * function or object map of reducer functions. If passed an object of
-   * reducers, combineReducers will be run creating your application
-   * meta-reducer. This returns all providers for an @ngrx/store
-   * based application.
-   */
-  StoreModule.forRoot(reducers, { metaReducers }),
-  // StoreModule.provideStore(reducer), //  <-- old way
-  // StoreModule.forRoot(reducers, {
-  //     reducerFactory: (process.env.NODE_ENV === 'dev') ? developmentReducerFactory : undefined
-  // }),
 
   /**
    * StoreModule.forRoot is imported once in the root module, accepting a reducer
