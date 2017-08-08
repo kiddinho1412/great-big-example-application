@@ -8,3 +8,4 @@ This project includes the following third-party components:
 6. [feathers-starter-react-redux-login-roles - Feathers back end with auth](https://github.com/eddyystop/feathers-starter-react-redux-login-roles) is Copyright (c) Eddyystop by an MIT license
 7. [rangle-starter Angular 2 with TypeScript and Redux version - counter](https://www.npmjs.com/package/rangle-starter) is Copyright (c) rangle.io by an MIT license
 8. [ng2-admin](https://github.com/akveo/ng2-admin) is Copyright (c) 2017 akveo.com by an MIT license
+9. [angular-starter](https://github.com/AngularClass/angular-starter) is Copyright (c) 2015-2017 AngularClass LLC by an MIT license
