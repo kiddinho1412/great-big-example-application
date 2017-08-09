@@ -21,6 +21,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
 const ngcWebpack = require('ngc-webpack');
 //const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
@@ -85,7 +86,7 @@ module.exports = function(options) {
       /**
        * An array of directory names to be resolved to the current directory
        */
-      modules: [helpers.root('src'), helpers.root('node_modules')],
+      modules: [helpers.root('src/main/webapp'), helpers.root('node_modules')],
 
     },
 
@@ -160,7 +161,7 @@ module.exports = function(options) {
         {
           test: /\.css$/,
           use: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('src/main/webapp', 'styles')]
         },
 
         /**
@@ -171,7 +172,7 @@ module.exports = function(options) {
         {
           test: /\.scss$/,
           use: ['to-string-loader', 'css-loader', 'sass-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('src/main/webapp', 'styles')]
         },
 
         /**
@@ -268,7 +269,7 @@ module.exports = function(options) {
          * The (\\|\/) piece accounts for path separators in *nix and Windows
          */
         /angular(\\|\/)core(\\|\/)@angular/,
-        helpers.root('src'), // location of your src
+        helpers.root('src/main/webapp'), // location of your src
         {
           /**
            * Your Angular Async Route paths relative to this root directory
@@ -285,7 +286,7 @@ module.exports = function(options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        { from: 'src/main/webapp/assets', to: 'assets' },
+        { from: 'src/main/webapp/content', to: 'assets' },
         { from: 'src/main/webapp/meta' }
       ],
         isProd ? { ignore: ['mock-data/**/*'] } : undefined
@@ -322,6 +323,17 @@ module.exports = function(options) {
         defaultAttribute: 'async',
         preload: [/polyfill|vendor|main/],
         prefetch: [/chunk/]
+      }),
+      new MergeJsonWebpackPlugin({
+        output: {
+          groupBy: [
+            { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./i18n/en.json" },
+            { pattern: "./src/main/webapp/i18n/fr/*.json", fileName: "./i18n/fr.json" },
+            { pattern: "./src/main/webapp/i18n/de/*.json", fileName: "./i18n/de.json" },
+            { pattern: "./src/main/webapp/i18n/es/*.json", fileName: "./i18n/es.json" }
+            // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
+          ]
+        }
       }),
 
       /*

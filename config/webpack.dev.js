@@ -4,6 +4,7 @@
 
 const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 // const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 
@@ -55,6 +56,27 @@ module.exports = function(options) {
      *
      * See: http://webpack.github.io/docs/configuration.html#output
      */
+    devServer: {
+      contentBase: './target/www',
+      proxy: [{
+        context: [
+          /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
+          '/api',
+          '/management',
+          '/swagger-resources',
+          '/v2/api-docs',
+          '/h2-console'
+        ],
+        target: 'http://127.0.0.1:8090',
+        secure: false
+      }, {
+        context: [
+          '/websocket'
+        ],
+        target: 'ws://127.0.0.1:8090',
+        ws: true
+      }]
+    },
     output: {
 
       /**
@@ -103,7 +125,9 @@ module.exports = function(options) {
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
-          include: [helpers.root('src', 'styles')]
+          include: [
+            helpers.root('src/main/webapp', 'styles'),
+          ]
         },
 
         /**
@@ -114,7 +138,7 @@ module.exports = function(options) {
         {
           test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('src/main/webapp', 'styles')]
         },
 
       ]
@@ -122,6 +146,16 @@ module.exports = function(options) {
     },
 
     plugins: [
+      // new BrowserSyncPlugin({
+      //   host: 'localhost',
+      //   port: 9010,
+      //   proxy: {
+      //     target: 'http://localhost:9070',
+      //     ws: true
+      //   }
+      // }, {
+      //     reload: false
+      //   }),
 
       /**
        * Plugin: DefinePlugin

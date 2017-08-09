@@ -28,6 +28,7 @@
   "exclude": [
     "node_modules",
     "dist",
+    "target",
     "src/main/webapp/**/*.spec.ts",
     "src/main/webapp/**/*.e2e.ts"
   ],

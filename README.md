@@ -267,7 +267,7 @@ Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
 import 'leaflet/dist/leaflet.js';
 ~~~
 
-Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
+Edit [src/main/webapp/styles/vendor.scss](src/main/webapp/styles/vendor.scss) file:
 ~~~
 @import '~leaflet/dist/leaflet';
 ~~~

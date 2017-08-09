@@ -1,5 +1,3 @@
-import './vendor';
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
@@ -69,6 +67,7 @@ import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import '../styles/vendor.scss';
 
 const imports = [
   BrowserModule,
