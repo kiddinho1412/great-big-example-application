@@ -3,20 +3,20 @@ import { DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import {
-    AccountService,
-    AuthServerProvider,
-    CSRFService,
-    GreatBigExampleApplicationSharedLibsModule,
-    GreatBigExampleApplicationSharedCommonModule,
-    HasAnyAuthorityDirective,
-    JhiLoginModalComponent,
-    JhiSocialComponent,
-    JhiTrackerService,
-    LoginModalService,
-    LoginService,
-    Principal,
-    SocialService,
-    StateStorageService
+  AccountService,
+  AuthServerProvider,
+  CSRFService,
+  GreatBigExampleApplicationSharedLibsModule,
+  GreatBigExampleApplicationSharedCommonModule,
+  HasAnyAuthorityDirective,
+  JhiLoginModalComponent,
+  JhiSocialComponent,
+  JhiTrackerService,
+  LoginModalService,
+  LoginService,
+  Principal,
+  SocialService,
+  StateStorageService
 } from './';
 
 import { DraggableDirective } from './draggable/draggable.directive';
@@ -31,8 +31,8 @@ import { ContainerComponent } from './container/container.component';
 import { AwesomePipe } from './awesome/awesome.pipe';
 // import { HighlightDirective } from './highlight/highlight.directive';
 // import { TitleCasePipe } from './title-case/title-case.pipe';
-// import { TwainComponent } from './twain/twain.component';
-// import { TwainService } from './twain/twain.service';
+import { TwainComponent } from './twain/twain.component';
+import { TwainService } from './twain/twain.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 // import { GameComponent } from '../features/game/game.component';
 // import { TimerComponent } from '../features/game/timer/timer.component';
@@ -45,75 +45,76 @@ import { MealsLayoutComponent } from '../layouts/meals-layout/meals-layout.compo
 import { ImageCoverComponent } from './image-cover/image-cover.component';
 
 export const components = [
-    DraggableDirective,
-    // RioAlertComponent,
-    ButtonComponent,
-    ContainerComponent,
-    // RioInputComponent,
-    // RioFormComponent,
-    // RioFormErrorComponent,
-    // RioFormGroupComponent,
-    // RioLabelComponent,
-    AwesomePipe,
-    // HighlightDirective,
-    // TitleCasePipe,
-    // TwainComponent,
-    WelcomeComponent,
-    // GameComponent,
-    // TimerComponent,
-    NavComponent,
-    SkipNavComponent,
-    // MealsLayoutComponent,
-    ImageCoverComponent
+  DraggableDirective,
+  // RioAlertComponent,
+  ButtonComponent,
+  ContainerComponent,
+  // RioInputComponent,
+  // RioFormComponent,
+  // RioFormErrorComponent,
+  // RioFormGroupComponent,
+  // RioLabelComponent,
+  AwesomePipe,
+  // HighlightDirective,
+  // TitleCasePipe,
+  TwainComponent,
+  WelcomeComponent,
+  // GameComponent,
+  // TimerComponent,
+  NavComponent,
+  SkipNavComponent,
+  // MealsLayoutComponent,
+  ImageCoverComponent
 ];
 
 @NgModule({
-    imports: [
-        GreatBigExampleApplicationSharedLibsModule,
-        GreatBigExampleApplicationSharedCommonModule,
-        UiModule,
-        // LayoutsModule,
-        RouterModule
-    ],
-    declarations: [
-        JhiSocialComponent,
-        JhiLoginModalComponent,
-        HasAnyAuthorityDirective,
-        ...components
-    ],
-    providers: [
-        LoginService,
-        LoginModalService,
-        AccountService,
-        StateStorageService,
-        Principal,
-        CSRFService,
-        JhiTrackerService,
-        AuthServerProvider,
-        SocialService,
-        DatePipe
-    ],
-    entryComponents: [JhiLoginModalComponent],
-    exports: [
-        // GreatBigExampleApplicationSharedLibsModule,
-        GreatBigExampleApplicationSharedCommonModule,
-        UiModule,
-        JhiSocialComponent,
-        JhiLoginModalComponent,
-        HasAnyAuthorityDirective,
-        DatePipe,
-        // LayoutsModule,
-        ...components
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [
+    GreatBigExampleApplicationSharedLibsModule,
+    GreatBigExampleApplicationSharedCommonModule,
+    UiModule,
+    // LayoutsModule,
+    RouterModule
+  ],
+  declarations: [
+    JhiSocialComponent,
+    JhiLoginModalComponent,
+    HasAnyAuthorityDirective,
+    ...components
+  ],
+  providers: [
+    LoginService,
+    LoginModalService,
+    AccountService,
+    StateStorageService,
+    Principal,
+    CSRFService,
+    JhiTrackerService,
+    AuthServerProvider,
+    SocialService,
+    DatePipe,
+    TwainService
+  ],
+  entryComponents: [JhiLoginModalComponent],
+  exports: [
+    // GreatBigExampleApplicationSharedLibsModule,
+    GreatBigExampleApplicationSharedCommonModule,
+    UiModule,
+    JhiSocialComponent,
+    JhiLoginModalComponent,
+    HasAnyAuthorityDirective,
+    DatePipe,
+    // LayoutsModule,
+    ...components
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class GreatBigExampleApplicationSharedModule {
 
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: GreatBigExampleApplicationSharedModule
-        };
-    }
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: GreatBigExampleApplicationSharedModule
+    };
+  }
 
 }
