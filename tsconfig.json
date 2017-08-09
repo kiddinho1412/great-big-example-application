@@ -28,7 +28,7 @@
   "include": [
     "src/main/webapp/app",
     "src/test/javascript/",
-    "typings.d.ts"
+    "src/main/webapp/custom-typings.d.ts"
   ],
   "exclude": [
     "node_modules",
