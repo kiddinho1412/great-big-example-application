@@ -42,6 +42,7 @@
     ],
     "angularCompilerOptions": {
         "genDir": "target/aot",
+        "entryModule": "src/main/webapp/app/app.module#GreatBigExampleApplicationAppModule",
         "skipMetadataEmit": true
     }
 }

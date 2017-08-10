@@ -31,8 +31,8 @@ import { ContainerComponent } from './container/container.component';
 import { AwesomePipe } from './awesome/awesome.pipe';
 // import { HighlightDirective } from './highlight/highlight.directive';
 // import { TitleCasePipe } from './title-case/title-case.pipe';
-// import { TwainComponent } from './twain/twain.component';
-// import { TwainService } from './twain/twain.service';
+import { TwainComponent } from './twain/twain.component';
+import { TwainService } from './twain/twain.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 // import { GameComponent } from '../features/game/game.component';
 // import { TimerComponent } from '../features/game/timer/timer.component';
@@ -57,7 +57,7 @@ export const components = [
     AwesomePipe,
     // HighlightDirective,
     // TitleCasePipe,
-    // TwainComponent,
+    TwainComponent,
     WelcomeComponent,
     // GameComponent,
     // TimerComponent,
@@ -91,7 +91,8 @@ export const components = [
         JhiTrackerService,
         AuthServerProvider,
         SocialService,
-        DatePipe
+        DatePipe,
+        TwainService
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
