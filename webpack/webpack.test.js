@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
-const utils = require('./utils.js');
+const root = __path => path.join(__dirname, __path);
 
 module.exports = (WATCH) => ({
     resolve: {
@@ -10,18 +10,16 @@ module.exports = (WATCH) => ({
     },
     module: {
         rules: [
-            // {
-            //     test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader', exclude: /node_modules/
-            // },
             {
-                test: /\.ts$/,
-                // removing keepUrl=true fixed error "This test module uses the component StatusBarComponent which is using a "templateUrl" or "styleUrls", but they were never compiled. Please call "TestBed.compileComponents" before your test."
-                // loaders: ['awesome-typescript-loader', 'angular2-template-loader?keepUrl=true'],
-                loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
-                // exclude: /node_modules/
+                test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader', exclude: /node_modules/
             },
             {
-                test: /\.(html|css)$/, enforce: 'post',
+                test: /\.ts$/,
+                loaders: ['awesome-typescript-loader', 'angular2-template-loader?keepUrl=true'],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(html|css)$/,
                 loader: 'raw-loader',
                 exclude: /\.async\.(html|css)$/
             },
@@ -30,7 +28,7 @@ module.exports = (WATCH) => ({
                 loaders: ['file?name=[name].[hash].[ext]', 'extract']
             },
             {
-                test: /\.scss$/, enforce: 'post',
+                test: /\.scss$/,
                 loaders: ['to-string-loader', 'css-loader', 'sass-loader']
             },
             {
@@ -49,7 +47,7 @@ module.exports = (WATCH) => ({
         new webpack.ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            utils.root('./src') // location of your src
+            root('./src') // location of your src
         ),
         new LoaderOptionsPlugin({
             options: {

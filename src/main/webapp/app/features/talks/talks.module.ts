@@ -24,17 +24,6 @@ import { TalksRouting } from './talks.routing';
 import { customHttpProvider } from '../../core/interceptor/http.provider';
 
 @NgModule({
-    declarations: [
-        TalksPage,
-        WatchButtonComponent,
-        TalksAndFiltersPage,
-        TalksComponent,
-        TalkDetailsComponent,
-        TalkComponent,
-        RateButtonComponent,
-        FormatRatingPipe,
-        FiltersComponent
-    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -52,6 +41,18 @@ import { customHttpProvider } from '../../core/interceptor/http.provider';
             LayoutEffects
         ])
     ],
+    declarations: [
+        TalksPage,
+        WatchButtonComponent,
+        TalksAndFiltersPage,
+        TalksComponent,
+        TalkDetailsComponent,
+        TalkComponent,
+        RateButtonComponent,
+        FormatRatingPipe,
+        FiltersComponent
+    ],
+
     providers: [
         customHttpProvider(),
         WatchService,

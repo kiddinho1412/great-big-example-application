@@ -42,7 +42,7 @@ export class ChatService {
         }
         // building absolute path so that websocket doesnt fail when deploying with a context path
         // const loc = this.$window.location;
-        const loc = document.window.location;
+        const loc = window.location;
         let url = '//' + loc.host + loc.pathname + 'websocket/chat';
         const authToken = this.authServerProvider.getToken();
         if (authToken) {

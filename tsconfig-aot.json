@@ -11,7 +11,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "outDir": "target/www/app",
         "lib": [
-            "es2016",
+            "es2015",
             "dom"
         ],
         "typeRoots": [
@@ -19,8 +19,8 @@
         ]
     },
     "files": [
-        "src/main/webapp/app/app.module.ts",
-        "src/main/webapp/app/app.main-aot.ts",
+        "./src/main/webapp/app/app.module.ts",
+        "./src/main/webapp/app/app.main-aot.ts",
         "src/main/webapp/app/features/about/about.module.ts",
         "src/main/webapp/app/features/legal/legal.module.ts",
         "src/main/webapp/app/features/bernie/bernie.module.ts",
@@ -37,12 +37,9 @@
         "src/main/webapp/app/features/meals/home/home.module.ts",
         "src/main/webapp/app/features/meals/recipe/recipe.module.ts"
     ],
-    "include": [
-        "typings.d.ts"
-    ],
     "angularCompilerOptions": {
         "genDir": "target/aot",
-        "entryModule": "src/main/webapp/app/app.module#GreatBigExampleApplicationAppModule",
+        "entryModule": "src/main/webapp/app/app.module#Jh4TestAppModule",
         "skipMetadataEmit": true
     }
 }
